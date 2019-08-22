@@ -1,4 +1,4 @@
-package com.shuojie.netty2;
+package com.shuojie.nettyService;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
