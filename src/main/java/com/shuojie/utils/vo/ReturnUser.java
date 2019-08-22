@@ -1,17 +1,10 @@
-/*
-*
-* User.java
-* 
-* @date 2019-08-17
-*/
-package com.shuojie.domain;
+package com.shuojie.utils.vo;
 
-public class User {
+public class ReturnUser extends Result{
+
     private Integer id;
 
     private String mobile;
-
-    private String password;
 
     private Integer firmId;
 
@@ -25,7 +18,9 @@ public class User {
 
     private String areaname;
 
-    private Integer roleId;
+    public ReturnUser(int code, String message) {
+        super(code, message);
+    }
 
     public Integer getId() {
         return id;
@@ -41,14 +36,6 @@ public class User {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Integer getFirmId() {
@@ -97,13 +84,5 @@ public class User {
 
     public void setAreaname(String areaname) {
         this.areaname = areaname;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 }

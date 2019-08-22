@@ -1,9 +1,10 @@
 package com.shuojie.controller;
 
-import com.shuojie.domain.Result;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
-import org.springframework.ui.Model;
+import com.shuojie.utils.vo.ReturnUser;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,25 +29,24 @@ public class UserController {
  //注册
  @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String register(@RequestBody User user){
+     String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+     user.setPassword(md5Password);
      userServer.register(user);
      return "user/regSucess";
  }
 
   //登录
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index",method = RequestMethod.POST)
     public String index(){
      return "login";
     }
-    @RequestMapping("success")
+    @RequestMapping(value = "success",method = RequestMethod.POST)
     public String successs(){
      return "success";
     }
-    @RequestMapping("/login")
-    public Result login(User user, Model model){
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public Result login(@RequestBody User user){
         Result result = userServer.toLogin(user);
-        if(result.getCode() == 200)
-            model.addAttribute("user",user);
         return result;
-    }
-
+ }
 }

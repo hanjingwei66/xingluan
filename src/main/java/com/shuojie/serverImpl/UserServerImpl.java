@@ -1,10 +1,12 @@
 package com.shuojie.serverImpl;
 
 import com.shuojie.dao.UserMapper;
-import com.shuojie.domain.Result;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
+import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,34 +30,27 @@ public class UserServerImpl implements IUserServer {
         userMapper.register(user);
     }
 
+    //登录
     @Override
     public Result toLogin(User user) {
+        String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+        user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null){
-            result = new Result(200,"登录成功");
+            ReturnUser result =new ReturnUser(200,"登录成功");
+            result.setId(login.getId());
+            result.setMobile(login.getMobile());
+            result.setFirmId(login.getFirmId());
+            result.setUsername(login.getUsername());
+            result.setIdNumber(login.getIdNumber());
+            result.setAffiliationFirm(login.getAffiliationFirm());
+            result.setPosition(login.getPosition());
+            result.setAreaname(login.getAreaname());
         }else {
             result = new Result(201,"用户或密码错误");
         }
         return result;
     }
 
-    //登录
- /*   public Result toLogin(User user){
-        User login = userMapper.toLogin(user);
-        if (login != null){
-            result = new Result(200,"登录成功");
-        }else {
-            result = new Result(201,"用户或密码错误");
-        }
-        return result;
-    }*/
-/*    @Override
-    public Integer toLogin(String mobile, String password) {
-        User user = new User();
-        user.setPassword(password);
-        user.setMobile(mobile);
-        Integer userLogin = userMapper.toLogin(user);
-        return userLogin;
-    }*/
 
 }

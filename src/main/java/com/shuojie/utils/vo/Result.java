@@ -1,8 +1,8 @@
-package com.shuojie.domain;
+package com.shuojie.utils.vo;
 
 public class Result {
-    private int code;
-    private String message;
+    public int code;
+    public String message;
 
     public Result(int code, String message) {
         this.code = code;
