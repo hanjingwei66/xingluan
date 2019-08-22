@@ -22,6 +22,7 @@ public class ReturnUser extends Result{
         super(code, message);
     }
 
+
     public Integer getId() {
         return id;
     }

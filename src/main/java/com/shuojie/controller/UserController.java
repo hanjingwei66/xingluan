@@ -1,6 +1,6 @@
 package com.shuojie.controller;
 
-import com.shuojie.utils.vo.Result;
+
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
 import com.shuojie.utils.vo.ReturnUser;
@@ -45,8 +45,8 @@ public class UserController {
      return "success";
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Result login(@RequestBody User user){
-        Result result = userServer.toLogin(user);
+    public ReturnUser login(@RequestBody User user){
+        ReturnUser result = userServer.toLogin(user);
         return result;
  }
 }

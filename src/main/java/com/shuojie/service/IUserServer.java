@@ -2,6 +2,7 @@ package com.shuojie.service;
 
 import com.shuojie.utils.vo.Result;
 import com.shuojie.domain.User;
+import com.shuojie.utils.vo.ReturnUser;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface IUserServer {
      void register(User user);
 
      //登录
-      Result toLogin(User user);
+     ReturnUser toLogin(User user);
 
 }

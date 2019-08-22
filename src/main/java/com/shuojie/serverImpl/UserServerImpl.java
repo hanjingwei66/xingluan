@@ -1,7 +1,6 @@
 package com.shuojie.serverImpl;
 
 import com.shuojie.dao.UserMapper;
-import com.shuojie.utils.vo.Result;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
 import com.shuojie.utils.vo.ReturnUser;
@@ -17,7 +16,7 @@ public class UserServerImpl implements IUserServer {
     @Resource
     private UserMapper userMapper;
 
-    private Result result;
+        private ReturnUser result;
 
     @Override
     public List<User> selectUser(User user) {
@@ -32,12 +31,12 @@ public class UserServerImpl implements IUserServer {
 
     //登录
     @Override
-    public Result toLogin(User user) {
+    public ReturnUser toLogin(User user) {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null){
-            ReturnUser result =new ReturnUser(200,"登录成功");
+           ReturnUser result =new ReturnUser(200,"登录成功");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
             result.setFirmId(login.getFirmId());
@@ -46,10 +45,11 @@ public class UserServerImpl implements IUserServer {
             result.setAffiliationFirm(login.getAffiliationFirm());
             result.setPosition(login.getPosition());
             result.setAreaname(login.getAreaname());
+            return result;
         }else {
-            result = new Result(201,"用户或密码错误");
+            result = new ReturnUser(201,"帐号或密码输入错误！");
         }
-        return result;
+       return result;
     }
 
 
