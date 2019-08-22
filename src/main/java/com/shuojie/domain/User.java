@@ -27,7 +27,7 @@ public class User {
      */
     private Integer firmId;
 
-    /**
+    /**idi
      * 
      */
     private String username;
@@ -57,162 +57,82 @@ public class User {
      */
     private Integer roleId;
 
-    /**
-     * 
-     * @return id 
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * 
-     * @param id 
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * 
-     * @return mobile 
-     */
     public String getMobile() {
         return mobile;
     }
 
-    /**
-     * 
-     * @param mobile 
-     */
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
-    /**
-     * 
-     * @return password 
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * 
-     * @param password 
-     */
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
-    /**
-     * 
-     * @return firm_id 
-     */
     public Integer getFirmId() {
         return firmId;
     }
 
-    /**
-     * 
-     * @param firmId 
-     */
     public void setFirmId(Integer firmId) {
         this.firmId = firmId;
     }
 
-    /**
-     * 
-     * @return username 
-     */
     public String getUsername() {
         return username;
     }
 
-    /**
-     * 
-     * @param username 
-     */
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
-    /**
-     * 
-     * @return id_number 
-     */
     public String getIdNumber() {
         return idNumber;
     }
 
-    /**
-     * 
-     * @param idNumber 
-     */
     public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber == null ? null : idNumber.trim();
+        this.idNumber = idNumber;
     }
 
-    /**
-     * 
-     * @return affiliation_firm 
-     */
     public String getAffiliationFirm() {
         return affiliationFirm;
     }
 
-    /**
-     * 
-     * @param affiliationFirm 
-     */
     public void setAffiliationFirm(String affiliationFirm) {
-        this.affiliationFirm = affiliationFirm == null ? null : affiliationFirm.trim();
+        this.affiliationFirm = affiliationFirm;
     }
 
-    /**
-     * 
-     * @return position 
-     */
     public String getPosition() {
         return position;
     }
 
-    /**
-     * 
-     * @param position 
-     */
     public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
+        this.position = position;
     }
 
-    /**
-     * 
-     * @return areaname 
-     */
     public String getAreaname() {
         return areaname;
     }
 
-    /**
-     * 
-     * @param areaname 
-     */
     public void setAreaname(String areaname) {
-        this.areaname = areaname == null ? null : areaname.trim();
+        this.areaname = areaname;
     }
 
-    /**
-     * 
-     * @return role_id 
-     */
     public Integer getRoleId() {
         return roleId;
     }
 
-    /**
-     * 
-     * @param roleId 
-     */
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }

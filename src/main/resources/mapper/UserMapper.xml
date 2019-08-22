@@ -3,7 +3,7 @@
 <mapper namespace="com.shuojie.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.shuojie.domain.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="firm_id" property="firmId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -18,14 +18,19 @@
     role_id
   </sql>
 
+  <!--登录-->
+  <select id="toLogin" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
+    select * from user where mobile = #{mobile} and password = #{password}
+  </select>
+  <!--注册-->
+  <insert id="register" parameterType="com.shuojie.domain.User">
+    insert into user (mobile,password,firm_id,username,id_number,affiliation_firm,position,areaname)
+    values (#{mobile},#{password},#{firmId},#{username},#{idNumber},#{affiliationFirm},#{position},#{areaname})
+  </insert>
   <select id="queryInfoByUsername" parameterType="java.lang.String" resultType="java.util.Map">
         SELECT id, username, password FROM user_t WHERE username = #{username,jdbcType=VARCHAR}
     </select>
 
-  <insert id="insertData"  parameterType="java.util.Map">
-        INSERT INTO user_t ( id, username,password )
-        VALUES ( #{id, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR});
-    </insert>
   <select id="selectUser" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
     select * from user
   </select>
