@@ -1,4 +1,4 @@
-package com.shuojie.netty2;
+package com.shuojie.nettyService;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -11,8 +11,9 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.InetSocketAddress;
 
 //websocket长连接示例
+//@Component
 public class MyServer {
-    public static void main(String[] args) throws Exception{
+    public  MyServer() throws Exception{
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup wokerGroup = new NioEventLoopGroup();
 
@@ -21,8 +22,7 @@ public class MyServer {
             serverBootstrap.group(bossGroup,wokerGroup).channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new WebSocketChannelInitializer());
-
-            ChannelFuture channelFuture = serverBootstrap.bind(new InetSocketAddress(8899)).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(new InetSocketAddress(8082)).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
             bossGroup.shutdownGracefully();
@@ -30,4 +30,5 @@ public class MyServer {
         }
 
     }
+
 }
