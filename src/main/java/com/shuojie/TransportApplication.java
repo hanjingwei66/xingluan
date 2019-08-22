@@ -1,9 +1,9 @@
 package com.shuojie;
 
+import com.shuojie.nettyService.MyServer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.shuojie.nettyService.MyServer;
 @SpringBootApplication
 public class TransportApplication implements CommandLineRunner {
     public static void main(String[] args) {

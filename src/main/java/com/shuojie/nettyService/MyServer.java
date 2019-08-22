@@ -7,12 +7,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
 //websocket长连接示例
-@Component
+//@Component
 public class MyServer {
     public  MyServer() throws Exception{
         EventLoopGroup bossGroup = new NioEventLoopGroup();

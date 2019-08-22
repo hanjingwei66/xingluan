@@ -3,7 +3,6 @@ package com.shuojie.controller;
 import com.shuojie.domain.Result;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,11 +40,11 @@ public class UserController {
     public String successs(){
      return "success";
     }
-    @RequestMapping("/login")
-    public Result login(User user, Model model){
+    @RequestMapping(value = "/login" ,method = RequestMethod.POST)
+    public Result login(@RequestBody  User user){
         Result result = userServer.toLogin(user);
-        if(result.getCode() == 200)
-            model.addAttribute("user",user);
+//        if(result.getCode() == 200)
+//            model.addAttribute("user",user);
         return result;
     }
 
