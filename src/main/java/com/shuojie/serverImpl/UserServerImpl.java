@@ -3,7 +3,10 @@ package com.shuojie.serverImpl;
 import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
+import com.shuojie.service.RedisService;
 import com.shuojie.utils.vo.ReturnUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -17,6 +20,13 @@ public class UserServerImpl implements IUserServer {
     private UserMapper userMapper;
 
         private ReturnUser result;
+    @Autowired
+    private RedisService redisService;
+    /****
+     * 注入配置文件数据
+     */
+    @Value("${redis.key.prefix.authCode}")
+    private String REDIS_KEY_PREFIX_AUTH_CODE;
 
     @Override
     public List<User> selectUser(User user) {
@@ -26,6 +36,7 @@ public class UserServerImpl implements IUserServer {
     //注册
     @Override
     public void register(User user) {
+
         userMapper.register(user);
     }
 
