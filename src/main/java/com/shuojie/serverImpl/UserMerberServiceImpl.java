@@ -4,6 +4,7 @@ package com.shuojie.serverImpl;
 import com.shuojie.service.RedisService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.sms.MessageUtil;
+import com.shuojie.utils.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -46,8 +47,8 @@ public class UserMerberServiceImpl implements UserMerberService {
 
 
     @Override
-    public String sendMsg(String PhoneNumbers) {
-       String msg= messageUitl.SendMessage(PhoneNumbers);
+    public Result sendMsg(String PhoneNumbers) {
+        Result msg= messageUitl.SendMessage(PhoneNumbers);
         return msg;
     }
 

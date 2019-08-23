@@ -4,7 +4,10 @@ import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
 import com.shuojie.utils.vo.Result;
+import com.shuojie.service.RedisService;
 import com.shuojie.utils.vo.ReturnUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -19,6 +22,15 @@ public class UserServerImpl implements IUserServer {
 
      private ReturnUser result;
 
+    @Autowired
+    private RedisService redisService;
+    /****
+     * 注入配置文件数据
+     */
+    @Value("${redis.key.prefix.authCode}")
+    private String REDIS_KEY_PREFIX_AUTH_CODE;
+
+
     @Override
     public List<User> selectUser(User user) {
         return userMapper.selectUser(user);
@@ -28,18 +40,18 @@ public class UserServerImpl implements IUserServer {
     @Override
     public Result register(User user) {
         try {
-            Result res = new Result(200,"注册成功");
-            if (true){
+            Result res = new Result(200, "注册成功");
+            if (true) {
                 userMapper.register(user);
                 return res;
-            }else {
+            } else {
                 res.setCode(401);
                 res.setMessage("注册失败");
             }
-            return  res;
+            return res;
         } catch (Exception e) {
             e.printStackTrace();
-           return new Result(201,"手机号已被注册！");
+            return new Result(201, "手机号已被注册！");
         }
     }
 
@@ -50,7 +62,7 @@ public class UserServerImpl implements IUserServer {
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null){
-           ReturnUser result =new ReturnUser(200,"登录成功");
+            ReturnUser result =new ReturnUser(200,"登录成功");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
             result.setFirmId(login.getFirmId());
@@ -63,8 +75,6 @@ public class UserServerImpl implements IUserServer {
         }else {
             result = new ReturnUser(201,"帐号或密码输入错误！");
         }
-       return result;
+        return result;
     }
-
-
 }

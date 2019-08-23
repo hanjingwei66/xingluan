@@ -11,6 +11,7 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.shuojie.service.RedisService;
+import com.shuojie.utils.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,12 +39,12 @@ public class MessageUtil {
 //    DefaultProfile profile = DefaultProfile.getProfile("default", "LTAI41s7UdycZniy", "HngXYiuYNWWPfBjCbHNQZuwhqtwDjQ");
     DefaultProfile profile = DefaultProfile.getProfile("default", "LTAIbKdu2rgAi7It", "2CYGQ7FjYzyzmb1BVeelzGrQq4PoJu");
     IAcsClient client = new DefaultAcsClient(profile);
-
-    public String SendMessage(String PhoneNumbers) {
+    Result res;
+    public Result SendMessage(String PhoneNumbers) {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for(int i=0;i<6;i++){
-            sb.append(random.nextInt(10));
+            sb.append(1+random.nextInt(9));
         }
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
@@ -67,7 +68,8 @@ public class MessageUtil {
             redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + PhoneNumbers, sb.toString());
             redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + PhoneNumbers, AUTH_CODE_EXPIRE_SECONDS);
           }
-            return returnjsonstr.getString("Message");
+           res= new Result(200,returnjsonstr.getString("Message"));
+            return res;
 //          return aaa;
         } catch (ServerException e) {
             e.printStackTrace();
@@ -76,8 +78,9 @@ public class MessageUtil {
             e.printStackTrace();
 
         }
-
-        return "系统故障期";
+            res.setCode(400);
+            res.setMessage("系统故障");
+        return res;
     };
 
 

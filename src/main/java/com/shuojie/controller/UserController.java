@@ -3,8 +3,10 @@ package com.shuojie.controller;
 
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
+import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ import java.util.List;
 public class UserController {
     @Resource(name = "userServiceImpl")
     private IUserServer userServer;
+    @Autowired
+    private UserMerberService usermerberservice;
+
  @RequestMapping(value = "/findAll" ,method = RequestMethod.GET)
     public List<User> findAll(@RequestParam User user){
      return userServer.selectUser(user);
@@ -50,4 +55,10 @@ public class UserController {
         ReturnUser result = userServer.toLogin(user);
         return result;
  }
+ //发送短信
+    @RequestMapping(value = "/sendMsg",method = RequestMethod.GET)
+    public Result sendMsg(@RequestParam String telephone){
+        Result result =usermerberservice.sendMsg(telephone);
+        return result;
+    }
 }
