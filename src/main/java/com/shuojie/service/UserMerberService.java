@@ -1,7 +1,8 @@
 package com.shuojie.service;
 
 
+import com.shuojie.utils.vo.Result;
 
 public interface UserMerberService {
-    String sendMsg(String PhoneNumbers);
+    Result sendMsg(String PhoneNumbers);
 }
