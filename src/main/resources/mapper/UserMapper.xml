@@ -23,7 +23,7 @@
     select * from user where mobile = #{mobile} and password = #{password}
   </select>
   <!--注册-->
-  <insert id="register" parameterType="com.shuojie.domain.User">
+  <insert id="register" parameterType="com.shuojie.domain.User" >
     insert into user (mobile,password,firm_id,username,id_number,affiliation_firm,position,areaname)
     values (#{mobile},#{password},#{firmId},#{username},#{idNumber},#{affiliationFirm},#{position},#{areaname})
   </insert>

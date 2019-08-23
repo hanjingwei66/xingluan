@@ -25,6 +25,9 @@ public class User {
 
     private String areaname;
 
+    private String yzm;
+
+
     private Integer roleId;
 
     public Integer getId() {
@@ -105,5 +108,13 @@ public class User {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public String getYzm() {
+        return yzm;
+    }
+
+    public void setYzm(String yzm) {
+        this.yzm = yzm;
     }
 }

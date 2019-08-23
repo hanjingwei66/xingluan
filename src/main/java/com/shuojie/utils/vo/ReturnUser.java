@@ -2,21 +2,21 @@ package com.shuojie.utils.vo;
 
 public class ReturnUser extends Result{
 
-    private Integer id;
+    private Integer id;//id
 
-    private String mobile;
+    private String mobile;//手机号
 
-    private Integer firmId;
+    private Integer firmId;//公司id
 
-    private String username;
+    private String username;//姓名
 
-    private String idNumber;
+    private String idNumber;//身份证号
 
-    private String affiliationFirm;
+    private String affiliationFirm;//所属企业
 
-    private String position;
+    private String position;//职位
 
-    private String areaname;
+    private String areaname;//所属地区
 
     public ReturnUser(int code, String message) {
         super(code, message);

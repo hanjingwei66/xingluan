@@ -3,6 +3,7 @@ package com.shuojie.serverImpl;
 import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -16,7 +17,7 @@ public class UserServerImpl implements IUserServer {
     @Resource
     private UserMapper userMapper;
 
-        private ReturnUser result;
+     private ReturnUser result;
 
     @Override
     public List<User> selectUser(User user) {
@@ -25,8 +26,21 @@ public class UserServerImpl implements IUserServer {
 
     //注册
     @Override
-    public void register(User user) {
-        userMapper.register(user);
+    public Result register(User user) {
+        try {
+            Result res = new Result(200,"注册成功");
+            if (true){
+                userMapper.register(user);
+                return res;
+            }else {
+                res.setCode(401);
+                res.setMessage("注册失败");
+            }
+            return  res;
+        } catch (Exception e) {
+            e.printStackTrace();
+           return new Result(201,"手机号已被注册！");
+        }
     }
 
     //登录
