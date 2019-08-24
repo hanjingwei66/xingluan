@@ -31,10 +31,9 @@ public class UserServerImpl implements IUserServer {
     @Value("${redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
 
-
     @Override
-    public List<User> selectUser(User user) {
-        return userMapper.selectUser(user);
+    public List<User> selectUser() {
+        return userMapper.selectUser();
     }
 
     //注册
@@ -98,5 +97,16 @@ public class UserServerImpl implements IUserServer {
         }
         return baseResult;
     }
+
+    //查询用户信息
+    public ReturnUser findUserById(User user){
+        ReturnUser res= new ReturnUser(200,"查询成功");
+        User user1 = userMapper.findUserById(user);
+       res.setUsername(user1.getUsername());
+        res.setMobile(user1.getMobile());
+        return res;
+    }
+
+
 
 }

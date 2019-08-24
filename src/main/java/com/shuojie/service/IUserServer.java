@@ -7,7 +7,7 @@ import com.shuojie.utils.vo.ReturnUser;
 import java.util.List;
 
 public interface IUserServer {
-     List<User> selectUser(User user);
+     List<User> selectUser();
 
      //注册
      Result register(User user);
@@ -18,6 +18,9 @@ public interface IUserServer {
      //忘记密码
      //根据手机号查询
 //     Result getUserByMobile(User user);
-
+     //修改密码
      Result updateUserPassworld(User user);
+
+     //查询用户信息
+     ReturnUser findUserById(User user);
 }

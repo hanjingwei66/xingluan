@@ -22,9 +22,10 @@ public class UserController {
     private UserMerberService usermerberservice;
 
  @RequestMapping(value = "/findAll" ,method = RequestMethod.GET)
-    public List<User> findAll(@RequestParam User user){
-     return userServer.selectUser(user);
+    public List<User> find(){
+     return userServer.selectUser();
  }
+
     @RequestMapping(value = "/find" ,method = RequestMethod.GET)
     public String findAll(){
         return "123";
@@ -71,5 +72,12 @@ public class UserController {
     @RequestMapping(value = "/updatePassword",method = RequestMethod.POST)
     public Result updatePassword(@RequestBody User user){
         return  userServer.updateUserPassworld(user);
+    }
+
+    //用户信息查询
+    @RequestMapping(value = "/findUserById",method = RequestMethod.POST)
+    public ReturnUser findUserById(@RequestBody User user){
+        ReturnUser returnUser = userServer.findUserById(user);
+        return returnUser;
     }
 }
