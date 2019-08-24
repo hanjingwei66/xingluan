@@ -1,7 +1,10 @@
 package com.shuojie.nettyService;
 
+import com.alibaba.fastjson.JSONObject;
+import com.shuojie.domain.User;
 import com.shuojie.service.IUserServer;
 import com.shuojie.service.UserMerberService;
+import com.shuojie.utils.vo.ReturnUser;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -27,15 +30,33 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-//        JSONObject accessTokenJsonObject = JSONObject.parseObject(msg.text().toString());
-//        String command = accessTokenJsonObject.getString("command");
-//        switch (command){
-//            case "login":
-//                System.out.println("loging");
-//                User user = new JSONObject().parseObject(msg.text(), User.class);
-//                ReturnUser result = userServer.toLogin(user);
-//                return;
-//        }
+        JSONObject json = JSONObject.parseObject(msg.text().toString());
+        String command = json.getString("command");
+        switch (command){
+            case "login":
+                System.out.println("loging");
+                User user =new User();
+                user.setMobile(json.getString("mobile"));
+                user.setPassword(json.getString("password"));
+                System.out.println(user.toString());
+                ReturnUser result = userServer.toLogin(user);
+                if(result!=null){
+                    channels.add(ctx.channel());//登陆成功加入管道
+                }else{
+                    ctx.channel().writeAndFlush("{msg:}");
+                }
+
+                break;
+            case "register" :
+                System.out.println("register");
+                break;
+            case "sendMsg" :
+                System.out.println("sendMsg");
+                break;
+            case "updatePassword" :
+                System.out.println("updatePassword");
+                break;
+        }
 
 //        if(command.equals("login")){
 //
@@ -89,7 +110,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println("异常发生");
-        ctx.close();
+//        ctx.close();
 //        ctx.channel().close();
     }
 }

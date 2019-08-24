@@ -6,11 +6,13 @@
 */
 package com.shuojie.domain;
 
-//@Data
+import lombok.Data;
+
+@Data
 public class User {
     private Integer id;
-//    private String number;
-//    private String command;
+    private String number;
+    private String command;
     private String mobile;
 
     private String password;
@@ -118,5 +120,24 @@ public class User {
 
     public void setYzm(String yzm) {
         this.yzm = yzm;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", command='" + command + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", password='" + password + '\'' +
+                ", firmId=" + firmId +
+                ", username='" + username + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", affiliationFirm='" + affiliationFirm + '\'' +
+                ", position='" + position + '\'' +
+                ", areaname='" + areaname + '\'' +
+                ", yzm='" + yzm + '\'' +
+                ", roleId=" + roleId +
+                '}';
     }
 }
