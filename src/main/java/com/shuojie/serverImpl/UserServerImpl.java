@@ -22,6 +22,7 @@ public class UserServerImpl implements IUserServer {
 
      private ReturnUser result;
 
+     private Result baseResult;
     @Autowired
     private RedisService redisService;
     /****
@@ -40,8 +41,9 @@ public class UserServerImpl implements IUserServer {
     @Override
     public Result register(User user) {
         try {
+            String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
             Result res = new Result(200, "注册成功");
-            if (true) {
+            if (user.getYzm().equals(code)) {
                 userMapper.register(user);
                 return res;
             } else {
@@ -77,4 +79,24 @@ public class UserServerImpl implements IUserServer {
         }
         return result;
     }
+
+    //忘记密码
+    //根据手机号查用户信息
+    @Override
+    public Result updateUserPassworld(User newUser) {
+        User oldUser = userMapper.getUserByMobile(newUser);//老的用户
+        String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
+        String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
+        if(newUser.getYzm().equals(code)){
+//            newUser.getPassword();//前台传过来
+            oldUser.setPassword(md5Password);//用户数据库里的密码
+              userMapper.updateUserPassworld(oldUser);
+            baseResult = new Result(200,"修改成功！");
+            return baseResult;
+        }else {
+            baseResult = new Result(201,"修改失败！");
+        }
+        return baseResult;
+    }
+
 }

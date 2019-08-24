@@ -15,4 +15,9 @@ public interface IUserServer {
      //登录
      ReturnUser toLogin(User user);
 
+     //忘记密码
+     //根据手机号查询
+//     Result getUserByMobile(User user);
+
+     Result updateUserPassworld(User user);
 }

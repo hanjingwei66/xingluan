@@ -25,6 +25,10 @@ public class UserController {
     public List<User> findAll(@RequestParam User user){
      return userServer.selectUser(user);
  }
+    @RequestMapping(value = "/find" ,method = RequestMethod.GET)
+    public String findAll(){
+        return "123";
+    }
 
  @RequestMapping(value = "/regist",method = RequestMethod.POST)
     public String Regist(@RequestBody String request){
@@ -60,5 +64,12 @@ public class UserController {
     public Result sendMsg(@RequestParam String telephone){
         Result result =usermerberservice.sendMsg(telephone);
         return result;
+    }
+
+    //忘记密码
+    //根据手机号查询
+    @RequestMapping(value = "/updatePassword",method = RequestMethod.POST)
+    public Result updatePassword(@RequestBody User user){
+        return  userServer.updateUserPassworld(user);
     }
 }
