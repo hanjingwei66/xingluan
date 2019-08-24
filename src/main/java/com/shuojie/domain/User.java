@@ -6,9 +6,11 @@
 */
 package com.shuojie.domain;
 
+//@Data
 public class User {
     private Integer id;
-
+//    private String number;
+//    private String command;
     private String mobile;
 
     private String password;

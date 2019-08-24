@@ -1,5 +1,7 @@
 package com.shuojie.nettyService;
 
+import com.shuojie.service.IUserServer;
+import com.shuojie.service.UserMerberService;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -8,20 +10,43 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
 @Slf4j
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+    @Resource(name = "userServiceImpl")
+    private IUserServer userServer;
+    @Autowired
+    private UserMerberService usermerberservice;
     //保存所有客户端连接
     private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
+//        JSONObject accessTokenJsonObject = JSONObject.parseObject(msg.text().toString());
+//        String command = accessTokenJsonObject.getString("command");
+//        switch (command){
+//            case "login":
+//                System.out.println("loging");
+//                User user = new JSONObject().parseObject(msg.text(), User.class);
+//                ReturnUser result = userServer.toLogin(user);
+//                return;
+//        }
+
+//        if(command.equals("login")){
+//
+//            ReturnUser result = userServer.toLogin(user);
+//        }
         for (Channel channel  : channels) {
             //将消息发送到所有客户端
-            channel.writeAndFlush(new TextWebSocketFrame(msg.text()));
-        }
+//            channel.writeAndFlush(new TextWebSocketFrame(msg.text()));
+            channel.writeAndFlush("发送所有建立连接设备");
+    }
+
 
         /**
          * writeAndFlush接收的参数类型是Object类型，但是一般我们都是要传入管道中传输数据的类型，比如我们当前的demo
@@ -65,6 +90,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println("异常发生");
         ctx.close();
-        ctx.channel().close();
+//        ctx.channel().close();
     }
 }

@@ -27,6 +27,7 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
         //websocket定义了传递数据的6中frame类型
         pipeline.addLast(new TextWebSocketFrameHandler());
+//        new StringDecoder();
         //测试git
 
     }
