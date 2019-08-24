@@ -7,13 +7,14 @@
 package com.shuojie.dao;
 
 import com.shuojie.domain.User;
-import com.shuojie.utils.vo.Result;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    List<User> selectUser(User user);
+    List<User> selectUser();
 
     //注册
     void register(User user);
@@ -26,5 +27,8 @@ public interface UserMapper {
     User getUserByMobile(User user);
 
     //修改密码
-   void updateUserPassworld(User newUser);
+    void updateUserPassworld(User newUser);
+
+    //个人信息
+    User findUserById(User user);
 }
