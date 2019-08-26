@@ -11,9 +11,14 @@ import lombok.Data;
 @Data
 public class User {
     private Integer id;
+
     private String number;
+
     private String command;
+
     private String mobile;
+
+    private String oldPassword;
 
     private String password;
 
@@ -31,8 +36,8 @@ public class User {
 
     private String yzm;
 
+    private String sex;
 
-    private Integer roleId;
 
     public Integer getId() {
         return id;
@@ -42,12 +47,36 @@ public class User {
         this.id = id;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public String getPassword() {
@@ -106,14 +135,6 @@ public class User {
         this.areaname = areaname;
     }
 
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
     public String getYzm() {
         return yzm;
     }
@@ -122,22 +143,11 @@ public class User {
         this.yzm = yzm;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", command='" + command + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", password='" + password + '\'' +
-                ", firmId=" + firmId +
-                ", username='" + username + '\'' +
-                ", idNumber='" + idNumber + '\'' +
-                ", affiliationFirm='" + affiliationFirm + '\'' +
-                ", position='" + position + '\'' +
-                ", areaname='" + areaname + '\'' +
-                ", yzm='" + yzm + '\'' +
-                ", roleId=" + roleId +
-                '}';
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

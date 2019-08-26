@@ -23,4 +23,7 @@ public interface IUserServer {
 
      //查询用户信息
      ReturnUser findUserById(User user);
+
+     //修改密码
+     Result xiugaiUserPassworld(User user);
 }

@@ -8,7 +8,6 @@ package com.shuojie.dao;
 
 import com.shuojie.domain.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,10 +24,13 @@ public interface UserMapper {
     //忘记密码
     //根据手机号查询
     User getUserByMobile(User user);
-
-    //修改密码
     void updateUserPassworld(User newUser);
 
     //个人信息
     User findUserById(User user);
+
+    //修改密码
+    User xiugaiGetUserByid(User user);
+    void xiugaiUserPassworld(User newUser);
+
 }
