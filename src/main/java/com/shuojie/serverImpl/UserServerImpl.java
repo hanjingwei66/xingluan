@@ -102,11 +102,27 @@ public class UserServerImpl implements IUserServer {
     public ReturnUser findUserById(User user){
         ReturnUser res= new ReturnUser(200,"查询成功");
         User user1 = userMapper.findUserById(user);
-       res.setUsername(user1.getUsername());
+        res.setUsername(user1.getUsername());
         res.setMobile(user1.getMobile());
+        res.setFirmId(user1.getFirmId());
+        res.setAffiliationFirm(user.getAffiliationFirm());
+        res.setAreaname(user1.getAreaname());
+        res.setSex(user1.getSex());
         return res;
     }
 
-
-
+    //修改密码
+    @Override
+    public Result xiugaiUserPassworld(User newUser) {
+        User oldUser = userMapper.xiugaiGetUserByid(newUser);
+        String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
+        if (!newUser.getOldPassword().equals(md5Password)){
+            newUser.setPassword(md5Password);
+            userMapper.xiugaiUserPassworld(newUser);
+             baseResult = new Result(200,"修改成功！");
+        }else {
+             baseResult = new Result(201,"修改成功！");
+        }
+        return baseResult;
+    }
 }

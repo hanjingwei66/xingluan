@@ -12,18 +12,9 @@
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="areaname" property="areaname" jdbcType="VARCHAR" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMap" type="com.shuojie.domain.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="firm_id" property="firmId" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="id_number" property="idNumber" jdbcType="CHAR" />
-    <result column="affiliation_firm" property="affiliationFirm" jdbcType="VARCHAR" />
-    <result column="position" property="position" jdbcType="VARCHAR" />
-    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
-  </resultMap>
+
   <sql id="Base_Column_List" >
     id, mobile, password, firm_id, username, id_number, affiliation_firm, position, areaname, 
     role_id
@@ -53,5 +44,11 @@
   <select id="findUserById"  resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
     select * from user where id = #{id}
   </select>
-
+  <!--修改密码-->
+  <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
+      update user set password = #{password} where id = #{ id}
+  </update>
+  <select id="xiugaiGetUserByid" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
+      select * from user where id = #{id}
+  </select>
 </mapper>

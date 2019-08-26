@@ -80,4 +80,10 @@ public class UserController {
         ReturnUser returnUser = userServer.findUserById(user);
         return returnUser;
     }
+
+    //修改密码
+    @RequestMapping(value = "/xiugaiPassword",method = RequestMethod.POST)
+    public Result xiugaiPassword(@RequestBody User user){
+     return userServer.xiugaiUserPassworld(user);
+    }
 }

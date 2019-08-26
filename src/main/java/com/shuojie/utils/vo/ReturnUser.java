@@ -18,6 +18,8 @@ public class ReturnUser extends Result{
 
     private String areaname;//所属地区
 
+    private String sex;//性别
+
     public ReturnUser(int code, String message) {
         super(code, message);
     }
@@ -84,5 +86,13 @@ public class ReturnUser extends Result{
 
     public void setAreaname(String areaname) {
         this.areaname = areaname;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }
