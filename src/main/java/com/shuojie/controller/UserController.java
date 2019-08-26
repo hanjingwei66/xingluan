@@ -7,7 +7,6 @@ import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -40,8 +39,7 @@ public class UserController {
  //注册
  @RequestMapping(value = "/register",method = RequestMethod.POST)
     public Result register(@RequestBody User user){
-     String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-     user.setPassword(md5Password);
+
      Result result =userServer.register(user);
      return result;
  }

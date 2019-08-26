@@ -1,7 +1,8 @@
 package com.shuojie.utils.vo;
 public  class Result {
-    public int code;
-    public String message;
+    private int code;
+    private String message;
+    private String command;
 
     public Result(int code, String message) {
         this.code = code;
@@ -22,5 +23,13 @@ public  class Result {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 }
