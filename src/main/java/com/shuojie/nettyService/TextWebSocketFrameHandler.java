@@ -84,9 +84,22 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 }
                 break;
             case "updatePassword" :
+                user.setMobile(json.getString("mobile"));
+                user.setPassword(json.getString("password"));
+                user.setYzm(json.getString("yzm"));
                 Result res = userServer.updateUserPassworld(user);
                 String updatePasswordReponse = JSONObject.toJSONString(res);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(updatePasswordReponse));
+                System.out.println("updatePassword");
+                break;
+            case "xiugaiPassword" :
+                user.setMobile(json.getString("mobile"));
+                user.setPassword(json.getString("password"));
+                user.setPassword(json.getString("oldpassword"));
+                user.setYzm(json.getString("yzm"));
+                Result response = userServer.xiugaiUserPassworld(user);
+                String xiugaiPasswordReponse = JSONObject.toJSONString(response);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
                 System.out.println("updatePassword");
                 break;
         }

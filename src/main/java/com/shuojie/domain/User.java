@@ -38,6 +38,7 @@ public class User {
 
     private String sex;
 
+    private String roleId;
 
     public Integer getId() {
         return id;
@@ -149,5 +150,13 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }
