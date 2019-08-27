@@ -13,6 +13,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,8 +35,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-        JSONObject json = JSONObject.parseObject(msg.text().toString());
+        if(msg instanceof WebSocketFrame){
+            System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
+        }else{
+            ctx.fireChannelRead(msg);
+        }
+        JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
         switch (command){
@@ -46,7 +51,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 System.out.println(user.toString());
                 ReturnUser result = userServer.toLogin(user);
                 result.setCommand("login");
-                String loginRespone = JSONObject.toJSONString(result);
+                String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if(result.getCode()==200){
                     channels.add(ctx.channel());//登陆成功加入管道
@@ -143,6 +148,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         channels.remove(ctx.channel());
         System.out.println("handlerRemoved：" + ctx.channel().id().asLongText());
     }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+    }
+
     /**
      * 活跃的通道  也可以当作用户连接上客户端进行使用
      * @param ctx
@@ -150,7 +161,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//        log.info("【channelActive】=====>"+ctx.channel());
+        log.info("【channelActive】=====>"+ctx.channel());
     }
 
 //    @Override
