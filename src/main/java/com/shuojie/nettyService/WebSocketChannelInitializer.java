@@ -6,6 +6,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import io.netty.handler.codec.mqtt.MqttDecoder;
+import io.netty.handler.codec.mqtt.MqttEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
@@ -16,6 +18,9 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 
         //websocket协议本身是基于http协议的，所以这边也要使用http解编码器
         pipeline.addLast(new HttpServerCodec());
+        //mqtt 协议的编码解码器
+        pipeline.addLast(new MqttDecoder());
+        pipeline.addLast(MqttEncoder.INSTANCE);
         //以块的方式来写的处理器
         pipeline.addLast(new ChunkedWriteHandler());
         //netty是基于分段请求的，HttpObjectAggregator的作用是将请求分段再聚合,参数是聚合字节的最大长度
@@ -27,6 +32,7 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
         //websocket定义了传递数据的6中frame类型
         pipeline.addLast(new TextWebSocketFrameHandler());
+        pipeline.addLast(new MqttHandler());
 //        new StringDecoder();
         //测试git
 

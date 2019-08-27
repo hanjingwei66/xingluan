@@ -43,29 +43,32 @@ public class UserServerImpl implements IUserServer {
     @Override
     public Result register(User user) {
         try {
+            String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+            user.setPassword(md5Password);
             String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
-            Result res = new Result(200, "注册成功");
+            Result res = new Result(200, "registerSuccess");
             if (user.getYzm().equals(code)) {
                 userMapper.register(user);
                 return res;
             } else {
                 res.setCode(401);
-                res.setMessage("注册失败");
+                res.setMessage("registerError");
             }
             return res;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(201, "手机号已被注册！");
+            return new Result(201, "hasRegister");
         }
     }
     //登录
     @Override
     public ReturnUser toLogin(User user) {
+        try {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null){
-            ReturnUser result =new ReturnUser(200,"登录成功");
+            ReturnUser result =new ReturnUser(200,"LoginSuccess");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
             result.setFirmId(login.getFirmId());
@@ -75,9 +78,12 @@ public class UserServerImpl implements IUserServer {
             result.setUserFirm(login.getUserFirm());
             return result;
         }else {
-            result = new ReturnUser(201,"帐号或密码输入错误！");
+            result = new ReturnUser(201,"passwordError");
         }
-        return result;
+        return result;}catch (Exception e) {
+                e.printStackTrace();
+            return result;
+            }
     }
 
     //忘记密码
@@ -90,10 +96,10 @@ public class UserServerImpl implements IUserServer {
         if(newUser.getYzm().equals(code)){
             oldUser.setPassword(md5Password);//用户数据库里的密码
               userMapper.updateUserPassworld(oldUser);
-            baseResult = new Result(200,"修改成功！");
+            baseResult = new Result(200,"updateSuccess");
             return baseResult;
         }else {
-            baseResult = new Result(201,"修改失败！");
+            baseResult = new Result(201,"updateError");
         }
         return baseResult;
     }

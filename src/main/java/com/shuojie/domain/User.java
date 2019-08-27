@@ -2,7 +2,7 @@ package com.shuojie.domain;
 
 import lombok.Data;
 
-import java.util.List;
+
 @Data
 public class User {
     private Integer id;
@@ -29,7 +29,7 @@ public class User {
     private String areaname;//所属地区
 
     private String sex;//性别
-    
+
     private String yzm;//验证码
 
     private String contact;//联系我们内容

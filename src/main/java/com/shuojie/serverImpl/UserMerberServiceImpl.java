@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("UserMerberServiceImpl")
 public class UserMerberServiceImpl implements UserMerberService {
     /***
      * 注入redis模版
@@ -49,6 +49,7 @@ public class UserMerberServiceImpl implements UserMerberService {
     @Override
     public Result sendMsg(String PhoneNumbers) {
         Result msg= messageUitl.SendMessage(PhoneNumbers);
+        System.out.println(PhoneNumbers);
         return msg;
     }
 

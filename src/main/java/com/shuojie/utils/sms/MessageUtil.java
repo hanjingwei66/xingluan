@@ -41,6 +41,7 @@ public class MessageUtil {
     IAcsClient client = new DefaultAcsClient(profile);
     Result res;
     public Result SendMessage(String PhoneNumbers) {
+        System.out.println(PhoneNumbers);
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for(int i=0;i<6;i++){
