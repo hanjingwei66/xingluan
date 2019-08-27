@@ -1,153 +1,40 @@
-/*
-*
-* User.java
-* 
-* @date 2019-08-17
-*/
 package com.shuojie.domain;
 
 import lombok.Data;
 
+import java.util.List;
 @Data
 public class User {
     private Integer id;
 
-    private String number;
+    private String mobile;//手机号
 
-    private String command;
+    private String number;//版本
 
-    private String mobile;
+    private String command;//用于前台指令标识
 
-    private String oldPassword;
-
+    private String oldPassword;//前台传过来的密码
     private String password;
 
-    private Integer firmId;
+    private Integer firmId;//企业id
 
-    private String username;
+    private String username;//姓名
 
-    private String idNumber;
+    private String idNumber;//身份证号
 
-    private String affiliationFirm;
+    private String affiliationFirm;//归属企业
 
-    private String position;
+    private String position;//职位
 
-    private String areaname;
+    private String areaname;//所属地区
 
-    private String yzm;
+    private String sex;//性别
+    
+    private String yzm;//验证码
 
-    private String sex;
+    private String contact;//联系我们内容
+
+    private UserFirm userFirm;//企业关联表
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public void setCommand(String command) {
-        this.command = command;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getFirmId() {
-        return firmId;
-    }
-
-    public void setFirmId(Integer firmId) {
-        this.firmId = firmId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public String getAffiliationFirm() {
-        return affiliationFirm;
-    }
-
-    public void setAffiliationFirm(String affiliationFirm) {
-        this.affiliationFirm = affiliationFirm;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getAreaname() {
-        return areaname;
-    }
-
-    public void setAreaname(String areaname) {
-        this.areaname = areaname;
-    }
-
-    public String getYzm() {
-        return yzm;
-    }
-
-    public void setYzm(String yzm) {
-        this.yzm = yzm;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 }

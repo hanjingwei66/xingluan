@@ -86,4 +86,9 @@ public class UserController {
     public Result xiugaiPassword(@RequestBody User user){
      return userServer.xiugaiUserPassworld(user);
     }
+
+/*    @RequestMapping(value = "/getUserFirm",method = RequestMethod.POST)
+    public List<UserFirm> getUserFirm(Integer id){
+     return userServer.getUserFirm(id);
+    }*/
 }

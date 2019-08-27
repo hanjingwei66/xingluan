@@ -7,8 +7,8 @@
 package com.shuojie.dao;
 
 import com.shuojie.domain.User;
+import com.shuojie.domain.UserFirm;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,5 +33,9 @@ public interface UserMapper {
     //修改密码
     User xiugaiGetUserByid(User user);
     void xiugaiUserPassworld(User newUser);
+
+/*    //联系我们
+    //根据用户id 查询企业信息
+    List<UserFirm> getUserFirm(Integer id);*/
 
 }

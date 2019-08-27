@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shuojie.dao.UpdateLogMapper" >
+  <resultMap id="BaseResultMap" type="com.shuojie.domain.UpdateLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_text" property="updateText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, update_name, update_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from update_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from update_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shuojie.domain.UpdateLog" >
+    insert into update_log (id, update_name, update_text
+      )
+    values (#{id,jdbcType=INTEGER}, #{updateName,jdbcType=VARCHAR}, #{updateText,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shuojie.domain.UpdateLog" >
+    insert into update_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateText != null" >
+        update_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateText != null" >
+        #{updateText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shuojie.domain.UpdateLog" >
+    update update_log
+    <set >
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateText != null" >
+        update_text = #{updateText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shuojie.domain.UpdateLog" >
+    update update_log
+    set update_name = #{updateName,jdbcType=VARCHAR},
+      update_text = #{updateText,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.shuojie.service;
 
 import com.shuojie.domain.User;
+import com.shuojie.domain.UserFirm;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 
@@ -26,4 +27,8 @@ public interface IUserServer {
 
      //修改密码
      Result xiugaiUserPassworld(User user);
+
+/*     //联系我们
+     //根据用户id 查询企业信息
+     List<UserFirm> getUserFirm(Integer id);*/
 }

@@ -1,5 +1,7 @@
 package com.shuojie.utils.vo;
 
+import com.shuojie.domain.UserFirm;
+
 public class ReturnUser extends Result{
 
     private Integer id;//id
@@ -19,6 +21,21 @@ public class ReturnUser extends Result{
     private String areaname;//所属地区
 
     private String sex;//性别
+
+    private UserFirm userFirm;//企业关联表
+
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public UserFirm getUserFirm() {
+        return userFirm;
+    }
+
+    public void setUserFirm(UserFirm userFirm) {
+        this.userFirm = userFirm;
+    }
 
     public ReturnUser(int code, String message) {
         super(code, message);

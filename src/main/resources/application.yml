@@ -17,7 +17,7 @@ redis:
       authCode: "portal:authCode:"
       orderId: "portal:orderId:"
     expire:
-      authCode: 360 # 验证码超期时间
+      authCode: 36000 # 验证码超期时间
       host: localhost # Redis服务器地址
       database: 0 # Redis数据库索引（默认为0）
       port: 6379 # Redis服务器连接端口

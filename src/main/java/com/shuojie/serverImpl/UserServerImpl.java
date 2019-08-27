@@ -2,6 +2,7 @@ package com.shuojie.serverImpl;
 
 import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
+import com.shuojie.domain.UserFirm;
 import com.shuojie.service.IUserServer;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.service.RedisService;
@@ -23,6 +24,8 @@ public class UserServerImpl implements IUserServer {
      private ReturnUser result;
 
      private Result baseResult;
+
+     private UserFirm userFirm;
     @Autowired
     private RedisService redisService;
     /****
@@ -55,7 +58,6 @@ public class UserServerImpl implements IUserServer {
             return new Result(201, "手机号已被注册！");
         }
     }
-
     //登录
     @Override
     public ReturnUser toLogin(User user) {
@@ -69,9 +71,8 @@ public class UserServerImpl implements IUserServer {
             result.setFirmId(login.getFirmId());
             result.setUsername(login.getUsername());
             result.setIdNumber(login.getIdNumber());
-            result.setAffiliationFirm(login.getAffiliationFirm());
             result.setPosition(login.getPosition());
-            result.setAreaname(login.getAreaname());
+            result.setUserFirm(login.getUserFirm());
             return result;
         }else {
             result = new ReturnUser(201,"帐号或密码输入错误！");
@@ -87,7 +88,6 @@ public class UserServerImpl implements IUserServer {
         String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
         String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
         if(newUser.getYzm().equals(code)){
-//            newUser.getPassword();//前台传过来
             oldUser.setPassword(md5Password);//用户数据库里的密码
               userMapper.updateUserPassworld(oldUser);
             baseResult = new Result(200,"修改成功！");
@@ -116,13 +116,23 @@ public class UserServerImpl implements IUserServer {
     public Result xiugaiUserPassworld(User newUser) {
         User oldUser = userMapper.xiugaiGetUserByid(newUser);
         String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
-        if (!newUser.getOldPassword().equals(md5Password)){
-            newUser.setPassword(md5Password);
-            userMapper.xiugaiUserPassworld(newUser);
-             baseResult = new Result(200,"修改成功！");
+        String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
+        if (newUser.getYzm().equals(code)){
+            if (!newUser.getOldPassword().equals(md5Password)){
+                newUser.setPassword(md5Password);
+                userMapper.xiugaiUserPassworld(newUser);
+                 baseResult = new Result(200,"xiugaiSuccess");
+            }else {
+                 baseResult = new Result(201,"xiugaiSuccess");
+            }
         }else {
-             baseResult = new Result(201,"修改成功！");
+            baseResult = new Result(401,"yzmError");
         }
         return baseResult;
     }
+
+   /* @Override
+    public List<UserFirm> getUserFirm(Integer id) {
+        return userMapper.getUserFirm(id);
+    }*/
 }
