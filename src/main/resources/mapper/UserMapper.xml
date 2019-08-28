@@ -10,11 +10,11 @@
     <result column="id_number" property="idNumber" jdbcType="CHAR" />
     <result column="affiliation_firm" property="affiliationFirm" jdbcType="VARCHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
-    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
   </resultMap>
 
-  <!--联系我们-->
+
   <resultMap id="BaseFirm" type="com.shuojie.domain.User" extends="BaseResultMap">
       <id column="id" property="id" jdbcType="INTEGER" />
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
@@ -22,7 +22,7 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
         <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
         <result column="position" property="position" jdbcType="VARCHAR" />
-        <result column="contact" property="contact" jdbcType="VARCHAR"/>
+        <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
 
         <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
           <id property="fid" column="fid" jdbcType="INTEGER"/>
@@ -33,7 +33,7 @@
 
   <sql id="Base_Column_List" >
     id, mobile, password, firm_id, username, id_number, affiliation_firm, position,
-    areaname,sex
+    areaname,sex,firmUserId
   </sql>
   <!--查询全部-->
   <select id="selectUser" resultMap="BaseResultMap" >
@@ -52,8 +52,8 @@
   </select>
   <!--注册-->
   <insert id="register" parameterType="com.shuojie.domain.User">
-    insert into user (mobile,password,firm_id,username,id_number,affiliation_firm,position,areaname)
-    values (#{mobile},#{password},#{firmId},#{username},#{idNumber},#{affiliationFirm},#{position},#{areaname})
+    insert into user (id,mobile,password,firm_id,username,id_number,firmUserId)
+    values (#{id},#{mobile},#{password},#{firmId},#{username},#{idNumber},#{firmUserId})
   </insert>
   <!--查询用户信息-->
   <select id="findUserById"  resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
@@ -67,9 +67,4 @@
       select * from user where id = #{id}
   </select>
 
-
-<!--  &lt;!&ndash;根据user id 查询关联企业信息&ndash;&gt;
-  <select id="BaseResultMap" resultMap="BaseFirm" parameterType="int">
-    SELECT *  FROM  user u  LEFT JOIN user_firm f on(u.firm_id=f.fid) where u.id = #{id}
-  </select>-->
 </mapper>

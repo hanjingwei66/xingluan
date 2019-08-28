@@ -2,6 +2,7 @@ package com.shuojie.utils.vo;
 
 import com.shuojie.domain.UserFirm;
 
+
 public class ReturnUser extends Result{
 
     private Integer id;//id
@@ -24,6 +25,15 @@ public class ReturnUser extends Result{
 
     private UserFirm userFirm;//企业关联表
 
+    private Integer firmUserId;//企业用户id
+
+    public Integer getFirmUserId() {
+        return firmUserId;
+    }
+
+    public void setFirmUserId(Integer firmUserId) {
+        this.firmUserId = firmUserId;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -37,8 +47,8 @@ public class ReturnUser extends Result{
         this.userFirm = userFirm;
     }
 
-    public ReturnUser(int code, String message) {
-        super(code, message);
+    public ReturnUser(int code, String message,String command) {
+        super(code, message,command);
     }
 
     public Integer getId() {

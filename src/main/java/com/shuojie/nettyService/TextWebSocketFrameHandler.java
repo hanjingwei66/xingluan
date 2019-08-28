@@ -1,7 +1,9 @@
 package com.shuojie.nettyService;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shuojie.domain.Contact;
 import com.shuojie.domain.User;
+import com.shuojie.service.ContactServer;
 import com.shuojie.service.IUserServer;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
@@ -22,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private static UserMerberService usermerberservice;
     private static IUserServer userServer;
+    private static ContactServer contactServer;
     static {
         usermerberservice = SpringUtil.getBean(UserMerberService.class);
         userServer = SpringUtil.getBean(IUserServer.class);
@@ -43,12 +46,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
+        Contact contact = new Contact();
         switch (command){
+            //登录
             case "login":
-                System.out.println("loging");
+                //System.out.println("loging");
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
-                System.out.println(user.toString());
+               // System.out.println(user.toString());
                 ReturnUser result = userServer.toLogin(user);
                 result.setCommand("login");
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
@@ -59,8 +64,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 }else{
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
-
                 break;
+            //注册
             case "register" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -88,6 +93,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
                 }
                 break;
+            //忘记密码
             case "updatePassword" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -97,6 +103,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(updatePasswordReponse));
                 System.out.println("updatePassword");
                 break;
+            //修改密码
             case "xiugaiPassword" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -107,6 +114,15 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
                 System.out.println("updatePassword");
                 break;
+            //添加留言
+            case "insertContact" :
+                contact.setId(json.getInteger("id"));
+                contact.setContactText(json.getString("contact"));
+                Result con = contactServer.insertContact(contact);
+                String insertContactResponse = JSONObject.toJSONString(con);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
+
+
         }
 
 //        if(command.equals("login")){
@@ -170,4 +186,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //        ctx.close();
 //        ctx.channel().close();
 //    }
+
+
 }
