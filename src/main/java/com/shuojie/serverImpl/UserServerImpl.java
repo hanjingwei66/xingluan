@@ -46,18 +46,19 @@ public class UserServerImpl implements IUserServer {
             String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
             user.setPassword(md5Password);
             String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
-            Result res = new Result(200, "registerSuccess");
+            Result res = new Result(200, "registerSuccess","register");
             if (user.getYzm().equals(code)) {
                 userMapper.register(user);
                 return res;
             } else {
                 res.setCode(401);
                 res.setMessage("registerError");
+                res.setCommand("register");
             }
             return res;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(201, "hasRegister");
+            return new Result(201, "hasRegister","register");
         }
     }
     //登录
@@ -67,9 +68,9 @@ public class UserServerImpl implements IUserServer {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
+        if (login != null&& login.getLoginFlag()!="3"){
+            ReturnUser result =new ReturnUser(200,"loginSuccess","login");
 
-        if (login != null && login.getLoginFlag()!="3"){
-            ReturnUser result =new ReturnUser(200,"LoginSuccess");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
             result.setFirmId(login.getFirmId());
@@ -77,10 +78,11 @@ public class UserServerImpl implements IUserServer {
             result.setIdNumber(login.getIdNumber());
             result.setPosition(login.getPosition());
             result.setUserFirm(login.getUserFirm());
+            result.setFirmUserId(login.getFirmUserId());
             return result;
         }else {
+            result = new ReturnUser(201,"passwordError","login");
             userMapper.updateStuse(user);
-            result = new ReturnUser(201,"passwordError");
         }
         return result;}catch (Exception e) {
                 e.printStackTrace();
@@ -97,26 +99,13 @@ public class UserServerImpl implements IUserServer {
         String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
         if(newUser.getYzm().equals(code)){
             oldUser.setPassword(md5Password);//用户数据库里的密码
-              userMapper.updateUserPassworld(oldUser);
-            baseResult = new Result(200,"updateSuccess");
+            userMapper.updateUserPassworld(oldUser);
+            baseResult = new Result(200,"updateSuccess","updatePassword");
             return baseResult;
         }else {
-            baseResult = new Result(201,"updateError");
+            baseResult = new Result(201,"updateError","updatePassword");
         }
         return baseResult;
-    }
-
-    //查询用户信息
-    public ReturnUser findUserById(User user){
-        ReturnUser res= new ReturnUser(200,"查询成功");
-        User user1 = userMapper.findUserById(user);
-        res.setUsername(user1.getUsername());
-        res.setMobile(user1.getMobile());
-        res.setFirmId(user1.getFirmId());
-        res.setAffiliationFirm(user.getAffiliationFirm());
-        res.setAreaname(user1.getAreaname());
-        res.setSex(user1.getSex());
-        return res;
     }
 
     //修改密码
@@ -129,24 +118,27 @@ public class UserServerImpl implements IUserServer {
             if (!newUser.getOldPassword().equals(md5Password)){
                 newUser.setPassword(md5Password);
                 userMapper.xiugaiUserPassworld(newUser);
-                 baseResult = new Result(200,"xiugaiSuccess");
-
+                baseResult = new Result(200,"xiugaiSuccess","xiugaiPassword");
             }else {
-                 baseResult = new Result(201,"xiugaiSuccess");
+                baseResult = new Result(201,"xiugaiSuccess","xiugaiPassword");
             }
         }else {
-            baseResult = new Result(401,"yzmError");
+            baseResult = new Result(401,"yzmError","xiugaiPassword");
         }
         return baseResult;
     }
 
-//    @Override
-//    public void updateStuse(User user) {
-//
-//    }
+    //查询用户信息
+    public ReturnUser findUserById(User user){
+        ReturnUser res= new ReturnUser(200,"查询成功","");
+        User user1 = userMapper.findUserById(user);
+        res.setUsername(user1.getUsername());
+        res.setMobile(user1.getMobile());
+        res.setFirmId(user1.getFirmId());
+        res.setAffiliationFirm(user.getAffiliationFirm());
+        res.setAreaname(user1.getAreaname());
+        res.setSex(user1.getSex());
+        return res;
+    }
 
-   /* @Override
-    public List<UserFirm> getUserFirm(Integer id) {
-        return userMapper.getUserFirm(id);
-    }*/
 }

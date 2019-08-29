@@ -4,9 +4,10 @@ public  class Result {
     private String message;
     private String command;
 
-    public Result(int code, String message) {
+    public Result(int code, String message, String command) {
         this.code = code;
         this.message = message;
+        this.command = command;
     }
 
     public int getCode() {

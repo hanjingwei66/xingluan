@@ -38,4 +38,5 @@ public class User {
 
     private String  loginFlag ; //登陆标识
 
+    private Integer firmUserId;//企业用户id
 }
