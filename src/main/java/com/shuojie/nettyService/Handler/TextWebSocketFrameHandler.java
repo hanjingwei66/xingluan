@@ -44,9 +44,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
-        if(command.equals("allowAccess")){
-            ctx.fireChannelRead(msg);
-        }
+//        if(command.equals("allowAccess")){
+//            ctx.fireChannelRead(msg);
+//        }
         switch (command){
             case "login":
                 System.out.println("loging");
