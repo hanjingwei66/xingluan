@@ -36,5 +36,6 @@ public class User {
 
     private UserFirm userFirm;//企业关联表
 
+    private String  loginFlag ; //登陆标识
 
 }

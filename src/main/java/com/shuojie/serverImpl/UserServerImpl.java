@@ -4,8 +4,8 @@ import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.domain.UserFirm;
 import com.shuojie.service.IUserServer;
-import com.shuojie.utils.vo.Result;
 import com.shuojie.service.RedisService;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,7 +67,8 @@ public class UserServerImpl implements IUserServer {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
-        if (login != null){
+
+        if (login != null && login.getLoginFlag()!="3"){
             ReturnUser result =new ReturnUser(200,"LoginSuccess");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
@@ -78,6 +79,7 @@ public class UserServerImpl implements IUserServer {
             result.setUserFirm(login.getUserFirm());
             return result;
         }else {
+            userMapper.updateStuse(user);
             result = new ReturnUser(201,"passwordError");
         }
         return result;}catch (Exception e) {
@@ -128,6 +130,7 @@ public class UserServerImpl implements IUserServer {
                 newUser.setPassword(md5Password);
                 userMapper.xiugaiUserPassworld(newUser);
                  baseResult = new Result(200,"xiugaiSuccess");
+
             }else {
                  baseResult = new Result(201,"xiugaiSuccess");
             }
@@ -136,6 +139,11 @@ public class UserServerImpl implements IUserServer {
         }
         return baseResult;
     }
+
+//    @Override
+//    public void updateStuse(User user) {
+//
+//    }
 
    /* @Override
     public List<UserFirm> getUserFirm(Integer id) {

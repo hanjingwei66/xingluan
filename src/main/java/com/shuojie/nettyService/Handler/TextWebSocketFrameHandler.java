@@ -1,4 +1,4 @@
-package com.shuojie.nettyService;
+package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.User;
@@ -13,9 +13,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.net.InetSocketAddress;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
 @Slf4j
@@ -26,7 +27,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         usermerberservice = SpringUtil.getBean(UserMerberService.class);
         userServer = SpringUtil.getBean(IUserServer.class);
     }
-//    @Resource(name = "userServiceImpl")
+    //    @Resource(name = "userServiceImpl")
 //    private IUserServer userServer;
 //    @Resource(name = "UserMerberServiceImpl")
 //    private UserMerberService usermerberservice;
@@ -35,11 +36,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        if(msg instanceof WebSocketFrame){
-            System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-        }else{
-            ctx.fireChannelRead(msg);
-        }
+        InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
+        String ip = inetSocketAddress.getHostName();
+//        System.out.println("ip"+ip);
+//        String txtMsg = "[" + ip + "][" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "] ==> " + msg.text();
+//        ctx.channel().writeAndFlush(new TextWebSocketFrame(txtMsg));
+//
+        if(msg instanceof TextWebSocketFrame){
+            System.out.println("收到id为"+ctx.channel().id().asLongText()+"ip为"+ip+"发来的消息："+msg.text());
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
@@ -107,6 +111,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
                 System.out.println("updatePassword");
                 break;
+            case "upload" :
+                ctx.fireChannelRead(msg);
+                ctx.write(msg);
+        }
+        }else{
+            ctx.fireChannelRead(msg);
         }
 
 //        if(command.equals("login")){
@@ -117,7 +127,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             //将消息发送到所有客户端
 //            channel.writeAndFlush(new TextWebSocketFrame(msg.text()));
             channel.writeAndFlush("发送所有建立连接设备");
-    }
+        }
 
 
         /**

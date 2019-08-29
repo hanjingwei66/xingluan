@@ -12,6 +12,20 @@
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="areaname" property="areaname" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="login_flag" property="loginFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="Result" type="com.shuojie.utils.vo.Result" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="firm_id" property="firmId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="id_number" property="idNumber" jdbcType="CHAR" />
+    <result column="affiliation_firm" property="affiliationFirm" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="login_flag" property="loginFlag" jdbcType="VARCHAR" />
   </resultMap>
 
   <!--联系我们-->
@@ -23,7 +37,7 @@
         <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
         <result column="position" property="position" jdbcType="VARCHAR" />
         <result column="contact" property="contact" jdbcType="VARCHAR"/>
-
+    <result column="login_flag" property="loginFlag" jdbcType="VARCHAR" />
         <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
           <id property="fid" column="fid" jdbcType="INTEGER"/>
           <result property="firmName" column="firm_name" jdbcType="VARCHAR"/>
@@ -63,6 +77,11 @@
   <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
       update user set password = #{password} where id = #{ id}
   </update>
+
+  <update id="updateStuse"  parameterType="com.shuojie.domain.User" >
+      update user set loginFlag = #{loginFlag} where id = #{ id}
+  </update>
+
   <select id="xiugaiGetUserByid" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
       select * from user where id = #{id}
   </select>
