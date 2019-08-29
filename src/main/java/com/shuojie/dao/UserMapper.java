@@ -34,6 +34,9 @@ public interface UserMapper {
     void xiugaiUserPassworld(User newUser);
 
     void updateStuse(User user);
+    void updateReset(String telephone);
+
+    Integer selectBytelphone(String telephone);
 
 /*    //联系我们
     //根据用户id 查询企业信息

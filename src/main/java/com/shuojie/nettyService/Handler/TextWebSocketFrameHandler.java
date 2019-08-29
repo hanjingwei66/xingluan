@@ -1,4 +1,4 @@
-package com.shuojie.nettyService;
+package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.User;
@@ -37,12 +37,16 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         if(msg instanceof WebSocketFrame){
             System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
+
         }else{
             ctx.fireChannelRead(msg);
         }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
+        if(command.equals("allowAccess")){
+            ctx.fireChannelRead(msg);
+        }
         switch (command){
             case "login":
                 System.out.println("loging");

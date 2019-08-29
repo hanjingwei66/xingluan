@@ -1,8 +1,9 @@
 package com.shuojie.utils.vo;
 
 import com.shuojie.domain.UserFirm;
+import lombok.Data;
 
-
+@Data
 public class ReturnUser extends Result{
 
     private Integer id;//id
@@ -26,6 +27,16 @@ public class ReturnUser extends Result{
     private UserFirm userFirm;//企业关联表
 
     private Integer firmUserId;//企业用户id
+
+    private Integer loginFlag;//登陆状态
+
+    public Integer getLoginFlag() {
+        return loginFlag;
+    }
+
+    public void setLoginFlag(Integer loginFlag) {
+        this.loginFlag = loginFlag;
+    }
 
     public Integer getFirmUserId() {
         return firmUserId;

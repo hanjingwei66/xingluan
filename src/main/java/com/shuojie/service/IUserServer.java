@@ -27,7 +27,7 @@ public interface IUserServer {
      //修改密码
      Result xiugaiUserPassworld(User user);
 
-//     void updateStuse(User user);
+//     Result updateStuse(User user);
 
 /*     //联系我们
      //根据用户id 查询企业信息
