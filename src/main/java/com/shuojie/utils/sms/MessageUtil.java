@@ -69,7 +69,7 @@ public class MessageUtil {
             redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + PhoneNumbers, sb.toString());
             redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + PhoneNumbers, AUTH_CODE_EXPIRE_SECONDS);
           }
-           res= new Result(200,returnjsonstr.getString("Message"));
+           res= new Result(200,returnjsonstr.getString("Message"),"");
             return res;
 //          return aaa;
         } catch (ServerException e) {
