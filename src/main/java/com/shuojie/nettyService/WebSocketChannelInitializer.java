@@ -31,7 +31,9 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         //参数指的是contex_path
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
         //websocket定义了传递数据的6中frame类型
-        pipeline.addLast(new TextWebSocketFrameHandler());
+//        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
+        pipeline.addLast(new com.shuojie.nettyService.Handler.TextWebSocketFrameHandler());
+        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
 //        pipeline.addLast(new MqttHandler());
 //        new StringDecoder();
         //测试git

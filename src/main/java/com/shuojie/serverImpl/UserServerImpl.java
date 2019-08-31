@@ -4,8 +4,8 @@ import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.domain.UserFirm;
 import com.shuojie.service.IUserServer;
-import com.shuojie.utils.vo.Result;
 import com.shuojie.service.RedisService;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,7 +68,7 @@ public class UserServerImpl implements IUserServer {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
-        if (login != null){
+        if (login != null&& login.getLoginFlag() <= 3){
             ReturnUser result =new ReturnUser(200,"loginSuccess","login");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
@@ -78,9 +78,13 @@ public class UserServerImpl implements IUserServer {
             result.setPosition(login.getPosition());
             result.setUserFirm(login.getUserFirm());
             result.setFirmUserId(login.getFirmUserId());
+            userMapper.updateReset(login.getMobile());//重置
             return result;
         }else {
             result = new ReturnUser(201,"passwordError","login");
+            userMapper.updateStuse(user);
+            Integer logflag =userMapper.selectBytelphone(user.getMobile());
+            this.result.setLoginFlag(logflag);
         }
         return result;}catch (Exception e) {
                 e.printStackTrace();
@@ -98,6 +102,7 @@ public class UserServerImpl implements IUserServer {
         if(newUser.getYzm().equals(code)){
             oldUser.setPassword(md5Password);//用户数据库里的密码
             userMapper.updateUserPassworld(oldUser);
+            userMapper.updateReset(newUser.getMobile());//重置
             baseResult = new Result(200,"updateSuccess","updatePassword");
             return baseResult;
         }else {

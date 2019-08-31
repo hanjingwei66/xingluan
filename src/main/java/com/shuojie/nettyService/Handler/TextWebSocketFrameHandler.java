@@ -1,7 +1,7 @@
-package com.shuojie.nettyService;
+package com.shuojie.nettyService.Handler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.Contact;
+import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.User;
 import com.shuojie.service.ContactServer;
 import com.shuojie.service.IUserServer;
@@ -40,6 +40,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         if(msg instanceof WebSocketFrame){
             System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
+
         }else{
             ctx.fireChannelRead(msg);
         }
@@ -47,13 +48,15 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         String command = json.getString("command");
         User user =new User();
         Contact contact = new Contact();
+//        if(command.equals("allowAccess")){
+//            ctx.fireChannelRead(msg);
+//        }
         switch (command){
-            //登录
             case "login":
-                //System.out.println("loging");
+                System.out.println("loging");
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
-               // System.out.println(user.toString());
+                System.out.println(user.toString());
                 ReturnUser result = userServer.toLogin(user);
                 result.setCommand("login");
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
@@ -64,6 +67,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 }else{
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
+
                 break;
             //注册
             case "register" :
@@ -184,6 +188,4 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //        ctx.close();
 //        ctx.channel().close();
 //    }
-
-
 }

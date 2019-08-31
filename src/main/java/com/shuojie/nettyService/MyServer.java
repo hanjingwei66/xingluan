@@ -21,11 +21,12 @@ public class MyServer {
         try{
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup,wokerGroup)
-                    .channel(NioServerSocketChannel.class)
+
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .option(ChannelOption.TCP_NODELAY, true)
-//                    .option(ChannelOption.SO_BACKLOG,soBacklog)
-                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .option(ChannelOption.SO_KEEPALIVE,true)
+                    .handler(new LoggingHandler(LogLevel.TRACE))//TRACE
+                    .channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketChannelInitializer());
             ChannelFuture channelFuture = serverBootstrap
                     .bind(new InetSocketAddress(8082)).sync();

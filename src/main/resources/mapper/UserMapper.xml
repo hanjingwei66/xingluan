@@ -12,6 +12,7 @@
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
+    <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
   </resultMap>
 
 
@@ -23,7 +24,7 @@
         <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
         <result column="position" property="position" jdbcType="VARCHAR" />
         <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
-
+        <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
         <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
           <id property="fid" column="fid" jdbcType="INTEGER"/>
           <result property="firmName" column="firm_name" jdbcType="VARCHAR"/>
@@ -63,6 +64,18 @@
   <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
       update user set password = #{password} where id = #{ id}
   </update>
+  <!--登陆状态-->
+  <update id="updateStuse"  parameterType="com.shuojie.domain.User" >
+      update user set login_flag = login_flag + 1 where mobile = #{ mobile}
+  </update>
+  <!--重置登陆状态-->
+  <update id="updateReset"  parameterType="String" >
+      update user set login_flag = 0 where mobile = #{ mobile}
+  </update>
+  <!--查看登陆状态-->
+  <select id="selectBytelphone" resultType="Integer" parameterType="String">
+      select login_flag from user where mobile = #{mobile}
+  </select>
   <select id="xiugaiGetUserByid" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
       select * from user where id = #{id}
   </select>
