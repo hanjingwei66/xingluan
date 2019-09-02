@@ -1,11 +1,15 @@
 package com.shuojie.nettyService;
 
+import com.shuojie.nettyService.Handler.SensorHandler;
+import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketFrameAggregator;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
@@ -25,16 +29,19 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast(new ChunkedWriteHandler());
         //netty是基于分段请求的，HttpObjectAggregator的作用是将请求分段再聚合,参数是聚合字节的最大长度
         pipeline.addLast(new HttpObjectAggregator(8192));
-
+        // webSocket 数据压缩扩展，当添加这个的时候WebSocketServerProtocolHandler
+        pipeline.addLast(new WebSocketServerCompressionHandler());
+        pipeline.addLast(new WebSocketFrameAggregator(10 * 1024 * 1024));
         //ws://server:port/context_path
         //ws://localhost:9999/ws
         //参数指的是contex_path
-        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+        pipeline.addLast(new WebSocketServerProtocolHandler("/ws", null, true, 10485760));
+
         //websocket定义了传递数据的6中frame类型
 //        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
-        pipeline.addLast(new com.shuojie.nettyService.Handler.TextWebSocketFrameHandler());
-        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
-//        pipeline.addLast(new MqttHandler());
+        pipeline.addLast(new TextWebSocketFrameHandler());
+        pipeline.addLast(new SensorHandler());
+//        pipeline.addLast(new BinaryWebSocketFrameHandler());
 //        new StringDecoder();
         //测试git
 
