@@ -125,6 +125,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
+            //事件经纬度存储
         }
 
 //        if(command.equals("login")){

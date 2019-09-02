@@ -16,6 +16,6 @@ public class TransportApplication implements CommandLineRunner  {
 
     @Override
     public void run (String ...args)throws Exception{
-        new MyServer();
+                    new MyServer();
     }
 }
