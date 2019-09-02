@@ -7,6 +7,7 @@ import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
 @Slf4j
+//@ChannelHandler.Sharable
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private static UserMerberService usermerberservice;
     private static IUserServer userServer;
@@ -35,18 +37,24 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
+        ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
+//        buf.retain();//引用计数器加 1
+//        buf.refCnt();//引用计数剪1
+//        assert buf.refCnt() == 1;//判断计数器
         if(msg instanceof WebSocketFrame){
             System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-
         }else{
+            buf.retain();//检查引用计数器是否是 1
             ctx.fireChannelRead(msg);
         }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
-//        if(command.equals("allowAccess")){
-//            ctx.fireChannelRead(msg);
-//        }
+        System.out.print(command.substring(0,4));
+        if(command.substring(0,4).equals("sens")){
+            buf.retain();//检查引用计数器是否是 1
+            ctx.fireChannelRead(msg);
+        }
         switch (command){
             case "login":
                 System.out.println("loging");
@@ -167,7 +175,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("【channelActive】=====>"+ctx.channel());
     }
-
+//
 //    @Override
 //    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 //        System.out.println("异常发生");
