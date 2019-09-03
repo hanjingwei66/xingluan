@@ -6,7 +6,7 @@ import com.shuojie.utils.vo.ReturnOrigin;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface OriginServer {
+public interface OriginService {
 
     //根据orName查询经纬度
     ReturnOrigin getByName(Origin origin);

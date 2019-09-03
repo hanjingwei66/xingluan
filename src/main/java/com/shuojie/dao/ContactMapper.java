@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ContactMapper {
-
+    //接收数据空间经纬点
     void insertContact(Contact contact);
 }

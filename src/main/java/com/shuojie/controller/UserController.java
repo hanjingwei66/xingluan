@@ -2,7 +2,7 @@ package com.shuojie.controller;
 
 
 import com.shuojie.domain.User;
-import com.shuojie.service.IUserServer;
+import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @Resource(name = "userServiceImpl")
-    private IUserServer userServer;
+    private IUserService userServer;
     @Autowired
     private UserMerberService usermerberservice;
 

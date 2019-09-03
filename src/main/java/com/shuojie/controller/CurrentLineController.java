@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
 import com.shuojie.domain.CurrentLine;
-import com.shuojie.service.CurrentLineServer;
+import com.shuojie.service.CurrentLineService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/currentLine")
 public class CurrentLineController {
-    @Resource(name = "currentLineServerImpl")
-    private CurrentLineServer currentLineServer;
+    @Resource(name = "currentLineServiceImpl")
+    private CurrentLineService currentLineServer;
 
     @RequestMapping(value  = "/insertCurrentLine", method = RequestMethod.POST)
     public Result insertCurrentLine(@RequestBody CurrentLine currentLine){

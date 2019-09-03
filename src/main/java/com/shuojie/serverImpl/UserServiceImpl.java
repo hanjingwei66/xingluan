@@ -3,7 +3,7 @@ package com.shuojie.serverImpl;
 import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.domain.UserFirm;
-import com.shuojie.service.IUserServer;
+import com.shuojie.service.IUserService;
 import com.shuojie.service.RedisService;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service("userServiceImpl")
-public class UserServerImpl implements IUserServer {
+public class UserServiceImpl implements IUserService {
 
     @Resource
     private UserMapper userMapper;

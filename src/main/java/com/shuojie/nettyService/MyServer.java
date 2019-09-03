@@ -30,7 +30,7 @@ public class MyServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketChannelInitializer());
             ChannelFuture channelFuture = serverBootstrap
-                    .bind(new InetSocketAddress(8082)).sync();
+                    .bind(new InetSocketAddress(8084)).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
             bossGroup.shutdownGracefully();

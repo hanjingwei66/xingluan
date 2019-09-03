@@ -11,11 +11,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class TransportApplication implements CommandLineRunner  {
     public static void main(String[] args) {
-        SpringApplication.run(TransportApplication.class, args);
+        SpringApplication.run(TransportApplication.class,args);
     }
 
     @Override
     public void run (String ...args)throws Exception{
-                    new MyServer();
+        new MyServer();
     }
 }

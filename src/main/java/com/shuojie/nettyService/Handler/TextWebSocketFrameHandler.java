@@ -3,8 +3,8 @@ package com.shuojie.nettyService.Handler;
 import com.shuojie.domain.Contact;
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.User;
-import com.shuojie.service.ContactServer;
-import com.shuojie.service.IUserServer;
+import com.shuojie.service.ContactService;
+import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
@@ -23,14 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private static UserMerberService usermerberservice;
-    private static IUserServer userServer;
-    private static ContactServer contactServer;
+    private static IUserService userServer;
+    private static ContactService contactServer;
     static {
         usermerberservice = SpringUtil.getBean(UserMerberService.class);
-        userServer = SpringUtil.getBean(IUserServer.class);
+        userServer = SpringUtil.getBean(IUserService.class);
     }
 //    @Resource(name = "userServiceImpl")
-//    private IUserServer userServer;
+//    private IUserService userServer;
 //    @Resource(name = "UserMerberServiceImpl")
 //    private UserMerberService usermerberservice;
     //保存所有客户端连接

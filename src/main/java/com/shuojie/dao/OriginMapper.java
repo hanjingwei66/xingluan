@@ -23,5 +23,6 @@ public interface OriginMapper {
     //查询orName
     ArrayList getOriginName();
 
+    //查询全部关联信息
     List<Origin> getOriginLine();
 }

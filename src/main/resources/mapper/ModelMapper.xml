@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shuojie.dao.ModelMapper" >
+  <resultMap id="BaseResultMap" type="com.shuojie.domain.Model" >
+    <id column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="mo_longitude" property="moLongitude" jdbcType="DECIMAL" />
+    <result column="mo_latitude" property="moLatitude" jdbcType="DECIMAL" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mid, model_name, mo_longitude, mo_latitude, direction
+  </sql>
+
+  <select id="insertModel" parameterType="com.shuojie.domain.Model">
+    insert into model
+    (model_name,mo_longitude,mo_latitude,direction)
+    values
+    (#{modelName},#{moLongitude},#{moLatitude},#{direction})
+  </select>
+</mapper>

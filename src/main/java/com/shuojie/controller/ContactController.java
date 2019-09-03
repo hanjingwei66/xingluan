@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
 import com.shuojie.domain.Contact;
-import com.shuojie.service.ContactServer;
+import com.shuojie.service.ContactService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
-    @Resource(name = "contactServerImpl")
-    private ContactServer contactServer;
+    @Resource(name = "contactServiceImpl")
+    private ContactService contactServer;
 
     @RequestMapping(value = "/insertContact",method = RequestMethod.POST)
     public Result insertContact(@RequestBody Contact contact){

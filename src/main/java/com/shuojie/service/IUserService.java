@@ -6,7 +6,7 @@ import com.shuojie.utils.vo.ReturnUser;
 
 import java.util.List;
 
-public interface IUserServer {
+public interface IUserService {
      List<User> selectUser();
 
      //注册

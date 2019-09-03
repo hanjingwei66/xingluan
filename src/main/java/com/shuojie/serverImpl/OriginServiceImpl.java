@@ -2,7 +2,7 @@ package com.shuojie.serverImpl;
 
 import com.shuojie.dao.OriginMapper;
 import com.shuojie.domain.Origin;
-import com.shuojie.service.OriginServer;
+import com.shuojie.service.OriginService;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("originServerImpl")
-public class OriginServerImpl implements OriginServer {
+@Service("originServiceImpl")
+public class OriginServiceImpl implements OriginService {
     @Resource
     private OriginMapper originMapper;
 
