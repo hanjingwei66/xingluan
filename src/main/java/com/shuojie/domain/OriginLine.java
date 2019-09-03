@@ -1,9 +1,3 @@
-/*
-*
-* OriginLine.java
-* 
-* @date 2019-08-28
-*/
 package com.shuojie.domain;
 
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
 import com.shuojie.domain.Origin;
-import com.shuojie.service.OriginServer;
+import com.shuojie.service.OriginService;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/origin")
 public class OriginController {
-    @Resource(name = "originServerImpl")
-    private OriginServer originServer;
+    @Resource(name = "originServiceImpl")
+    private OriginService originServer;
     //根据orName查询经纬度
     @RequestMapping(value = "/getByName",method = RequestMethod.POST)
     public ReturnOrigin getByName(@RequestBody Origin origin){

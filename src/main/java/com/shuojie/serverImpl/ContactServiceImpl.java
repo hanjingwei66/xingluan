@@ -2,14 +2,14 @@ package com.shuojie.serverImpl;
 
 import com.shuojie.dao.ContactMapper;
 import com.shuojie.domain.Contact;
-import com.shuojie.service.ContactServer;
+import com.shuojie.service.ContactService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service("contactServerImpl")
-public class ContactServerImpl implements ContactServer {
+@Service("contactServiceImpl")
+public class ContactServiceImpl implements ContactService {
 
     @Resource
     private ContactMapper contactMapper;
@@ -21,7 +21,6 @@ public class ContactServerImpl implements ContactServer {
         contactMapper.insertContact(contact);
         String contactText = contact.getContactText();
         if (contactText != null){
-            System.out.println(contactText);
             result = new Result(200,"contactSuccess","insertContact");
         }else {
             result = new Result(201,"contactError","insertContact");

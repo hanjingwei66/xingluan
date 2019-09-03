@@ -1,9 +1,3 @@
-/*
-*
-* UserMapper.java
-* 
-* @date 2019-08-17
-*/
 package com.shuojie.dao;
 
 import com.shuojie.domain.User;

@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
 import com.shuojie.domain.Current;
-import com.shuojie.service.CurrentServer;
+import com.shuojie.service.CurrentService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/current")
 public class CurrentController {
-    @Resource(name = "currentServerImpl")
-    private CurrentServer currentServer;
+    @Resource(name = "currentServiceImpl")
+    private CurrentService currentServer;
 
     //添加当前线路
     @RequestMapping(value = "/insertCurrent",method = RequestMethod.POST)

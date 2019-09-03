@@ -3,8 +3,8 @@ package com.shuojie.nettyService.Handler;
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.Contact;
 import com.shuojie.domain.User;
-import com.shuojie.service.ContactServer;
-import com.shuojie.service.IUserServer;
+import com.shuojie.service.ContactService;
+import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
@@ -24,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 //@ChannelHandler.Sharable
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private static UserMerberService usermerberservice;
-    private static IUserServer userServer;
-    private static ContactServer contactServer;
+    private static IUserService userServer;
+    private static ContactService contactServer;
     static {
         usermerberservice = SpringUtil.getBean(UserMerberService.class);
-        userServer = SpringUtil.getBean(IUserServer.class);
-        contactServer = SpringUtil.getBean(ContactServer.class);
+        userServer = SpringUtil.getBean(IUserService.class);
+        contactServer = SpringUtil.getBean(ContactService.class);
     }
 //    @Resource(name = "userServiceImpl")
 //    private IUserServer userServer;
@@ -135,6 +135,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
+            //事件经纬度存储
         }
 
 //        if(command.equals("login")){

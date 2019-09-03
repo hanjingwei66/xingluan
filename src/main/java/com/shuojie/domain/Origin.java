@@ -1,9 +1,3 @@
-/*
-*
-* Origin.java
-* 
-* @date 2019-08-28
-*/
 package com.shuojie.domain;
 
 
