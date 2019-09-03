@@ -19,7 +19,9 @@ public class ContactServerImpl implements ContactServer {
     @Override
     public Result insertContact(Contact contact) {
         contactMapper.insertContact(contact);
-        if (contact != null){
+        String contactText = contact.getContactText();
+        if (contactText != null){
+            System.out.println(contactText);
             result = new Result(200,"contactSuccess","insertContact");
         }else {
             result = new Result(201,"contactError","insertContact");

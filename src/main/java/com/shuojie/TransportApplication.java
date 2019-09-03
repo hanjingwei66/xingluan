@@ -1,13 +1,13 @@
 package com.shuojie;
 
+import com.shuojie.mqttClient.Mqttclien;
 import com.shuojie.nettyService.MyServer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@EnableJpaAuditing
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 public class TransportApplication implements CommandLineRunner  {
     public static void main(String[] args) {
@@ -17,5 +17,6 @@ public class TransportApplication implements CommandLineRunner  {
     @Override
     public void run (String ...args)throws Exception{
         new MyServer();
+        new Mqttclien();
     }
 }

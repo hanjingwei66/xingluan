@@ -21,7 +21,6 @@ public class MyServer {
         try{
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup,wokerGroup)
-
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .option(ChannelOption.TCP_NODELAY, true)
                     .option(ChannelOption.SO_KEEPALIVE,true)
@@ -29,7 +28,7 @@ public class MyServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketChannelInitializer());
             ChannelFuture channelFuture = serverBootstrap
-                    .bind(new InetSocketAddress(8082)).sync();
+                    .bind(new InetSocketAddress(8090)).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
             bossGroup.shutdownGracefully();

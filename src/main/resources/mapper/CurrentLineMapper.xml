@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shuojie.dao.CurrentLineMapper" >
+  <resultMap id="BaseResultMap" type="com.shuojie.domain.CurrentLine" >
+    <id column="clid" property="clid" jdbcType="INTEGER" />
+    <result column="cu_li_longitude" property="cuLiLongitude" jdbcType="DECIMAL" />
+    <result column="cu_li_latitude" property="cuLiLatitude" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+     clid, cu_li_longitude, cu_li_latitude
+  </sql>
+
+  <insert id="insertCurrentLine" parameterType="com.shuojie.domain.CurrentLine" >
+    insert into current_line (clid, cu_li_longitude,
+      cu_li_latitude)
+    values (#{clid,jdbcType=INTEGER}, #{cuLiLongitude,jdbcType=DECIMAL},
+      #{cuLiLatitude,jdbcType=DECIMAL})
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from current_line
+    where cu_liid = #{cuLiid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from current_line
+    where cu_liid = #{cuLiid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.shuojie.domain.CurrentLine" >
+    insert into current_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cuLiid != null" >
+        cu_liid,
+      </if>
+      <if test="clid != null" >
+        clid,
+      </if>
+      <if test="cuLiLongitude != null" >
+        cu_li_longitude,
+      </if>
+      <if test="cuLiLatitude != null" >
+        cu_li_latitude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cuLiid != null" >
+        #{cuLiid,jdbcType=INTEGER},
+      </if>
+      <if test="clid != null" >
+        #{clid,jdbcType=INTEGER},
+      </if>
+      <if test="cuLiLongitude != null" >
+        #{cuLiLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="cuLiLatitude != null" >
+        #{cuLiLatitude,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shuojie.domain.CurrentLine" >
+    update current_line
+    <set >
+      <if test="clid != null" >
+        clid = #{clid,jdbcType=INTEGER},
+      </if>
+      <if test="cuLiLongitude != null" >
+        cu_li_longitude = #{cuLiLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="cuLiLatitude != null" >
+        cu_li_latitude = #{cuLiLatitude,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where cu_liid = #{cuLiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shuojie.domain.CurrentLine" >
+    update current_line
+    set clid = #{clid,jdbcType=INTEGER},
+      cu_li_longitude = #{cuLiLongitude,jdbcType=DECIMAL},
+      cu_li_latitude = #{cuLiLatitude,jdbcType=DECIMAL}
+    where cu_liid = #{cuLiid,jdbcType=INTEGER}
+  </update>
+</mapper>

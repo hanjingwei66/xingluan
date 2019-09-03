@@ -1,7 +1,9 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shuojie.domain.Contact;
 import com.shuojie.domain.User;
+import com.shuojie.service.ContactServer;
 import com.shuojie.service.IUserServer;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
@@ -14,7 +16,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private static UserMerberService usermerberservice;
     private static IUserServer userServer;
+    private static ContactServer contactServer;
     static {
         usermerberservice = SpringUtil.getBean(UserMerberService.class);
         userServer = SpringUtil.getBean(IUserServer.class);
+        contactServer = SpringUtil.getBean(ContactServer.class);
     }
 //    @Resource(name = "userServiceImpl")
 //    private IUserServer userServer;
@@ -41,18 +44,21 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //        buf.retain();//引用计数器加 1
 //        buf.refCnt();//引用计数剪1
 //        assert buf.refCnt() == 1;//判断计数器
-        if(msg instanceof WebSocketFrame){
-            System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-        }else{
-            buf.retain();//检查引用计数器是否是 1
-            ctx.fireChannelRead(msg);
-        }
+        System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
+//        if(msg instanceof WebSocketFrame){
+//
+//        }else{
+////            buf.retain();//检查引用计数器是否是 1
+////            ctx.fireChannelRead(msg);
+//        }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
-        System.out.print(command.substring(0,4));
+        Contact contact = new Contact();
+
         if(command.substring(0,4).equals("sens")){
             buf.retain();//检查引用计数器是否是 1
+            msg.retain();
             ctx.fireChannelRead(msg);
         }
         switch (command){
@@ -66,13 +72,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if(result.getCode()==200){
-                    channels.add(ctx.channel());//登陆成功加入管道
+//                    channels.add(ctx.channel());//登陆成功加入管道
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }else{
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
 
                 break;
+            //注册
             case "register" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -100,6 +107,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
                 }
                 break;
+            //忘记密码
             case "updatePassword" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -109,6 +117,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(updatePasswordReponse));
                 System.out.println("updatePassword");
                 break;
+            //修改密码
             case "xiugaiPassword" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
@@ -119,6 +128,13 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
                 System.out.println("updatePassword");
                 break;
+            //添加留言
+            case "insertContact" :
+                contact.setId(Integer.valueOf(json.getString("id")));
+                contact.setContactText(new String(json.getString("contactText")));
+                Result con = contactServer.insertContact(contact);
+                String insertContactResponse = JSONObject.toJSONString(con);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
         }
 
 //        if(command.equals("login")){

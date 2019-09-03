@@ -52,13 +52,13 @@ public class UserServerImpl implements IUserServer {
                 return res;
             } else {
                 res.setCode(401);
-                res.setMessage("registerError");
+                res.setMessage("yzmError");
                 res.setCommand("register");
             }
             return res;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(201, "hasRegister","register");
+            return new Result(201, "registerError","register");
         }
     }
     //登录

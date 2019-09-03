@@ -39,11 +39,14 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 
         //websocket定义了传递数据的6中frame类型
 //        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
-        pipeline.addLast(new TextWebSocketFrameHandler());
-        pipeline.addLast(new SensorHandler());
+
+
+        pipeline.addLast("TextWebSocketFrameHandler",new TextWebSocketFrameHandler());
+        pipeline.addLast("SensorHandler",new SensorHandler());
 //        pipeline.addLast(new BinaryWebSocketFrameHandler());
 //        new StringDecoder();
         //测试git
 
     }
+
 }
