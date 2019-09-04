@@ -3,7 +3,7 @@ package com.shuojie.domain.sesorModle;
 import lombok.Data;
 
 @Data
-public class Sesor {
+public class BaseSesor extends BaseEntity{
     private Integer id;//传感器id
     private String sesorName;//传感器名字
     private Integer sesorType;//传感器类型 0 测角 1测距 2 激光 3十轴

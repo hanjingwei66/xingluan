@@ -10,12 +10,16 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketFrameAggregator;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
-import io.netty.handler.codec.mqtt.MqttDecoder;
-import io.netty.handler.codec.mqtt.MqttEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
-
+@Autowired
+private TextWebSocketFrameHandler textWebSocketFrameHandler;
+    @Autowired
+    private SensorHandler sensorHandler;
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -23,8 +27,8 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         //websocket协议本身是基于http协议的，所以这边也要使用http解编码器
         pipeline.addLast(new HttpServerCodec());
         //mqtt 协议的编码解码器
-        pipeline.addLast(new MqttDecoder());
-        pipeline.addLast(MqttEncoder.INSTANCE);
+//        pipeline.addLast(new MqttDecoder());
+//        pipeline.addLast(MqttEncoder.INSTANCE);
         //以块的方式来写的处理器
         pipeline.addLast(new ChunkedWriteHandler());
         //netty是基于分段请求的，HttpObjectAggregator的作用是将请求分段再聚合,参数是聚合字节的最大长度
@@ -41,8 +45,8 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 //        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
 
 
-        pipeline.addLast("TextWebSocketFrameHandler",new TextWebSocketFrameHandler());
-        pipeline.addLast("SensorHandler",new SensorHandler());
+        pipeline.addLast("TextWebSocketFrameHandler",textWebSocketFrameHandler);
+        pipeline.addLast("SensorHandler",sensorHandler);
 //        pipeline.addLast(new BinaryWebSocketFrameHandler());
 //        new StringDecoder();
         //测试git

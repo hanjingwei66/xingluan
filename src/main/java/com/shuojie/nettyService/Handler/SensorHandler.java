@@ -1,23 +1,26 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.shuojie.domain.sesorModle.Sesor;
-import com.shuojie.service.RedisService;
-import com.shuojie.utils.autowiredUtil.SpringUtil;
+import com.shuojie.domain.sesorModle.BaseSesor;
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 /*传感器handler*/
+@Component
+@ChannelHandler.Sharable
 public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-    private static RedisService redisService;
-    static {
-        redisService = SpringUtil.getBean(RedisService.class);
-    }
+//    private static RedisService redisService;
+//    static {
+//        redisService = SpringUtil.getBean(RedisService.class);
+//    }
+    private boolean flag;
 //    @Autowired
 //    private RedisService redisService;
     @Value("${redis.key.prefix.authCode}")
@@ -35,7 +38,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
         String command = json.getString("command");
         switch (command){
             case "sensor_check"://检测数量
-                List<Sesor> list =new ArrayList();
+                List<BaseSesor> list =new ArrayList();
                 for(int i=0; i<17;i++){
                     Integer id=(int)(Math.random()*100);
                     Integer sesorType=((int) (Math.random()*4));
@@ -44,7 +47,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
                     Integer signal =2+(int)(Math.random()*3);
                     String angle=(int)(Math.random()*15)+"";
                     Double distance =Math.random()*100;
-                    Sesor s= new Sesor();
+                    BaseSesor s= new BaseSesor();
                     s.setId(id);
                     s.setPower(power);
                     s.setSesorName("Sesor"+id);
@@ -64,19 +67,25 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
                 System.out.println("buf.refCnt()"+buf.refCnt());
                 return;
             case "sensor_allow"://检测
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(msg.text()));
-                String redisauthcode= redisService.get("portal:authCode:"+"demo/topics");//REDIS_KEY_PREFIX_AUTH_CODE
-                System.out.println("value"+redisauthcode);
+                if(flag){
+
+                }
+//                String redisauthcode= redisService.get("portal:authCode:"+"demo/topics");//REDIS_KEY_PREFIX_AUTH_CODE
+//                ctx.channel().writeAndFlush(new TextWebSocketFrame(redisauthcode));
+//                System.out.println("value"+redisauthcode);
                 break;
             case "sensor_start":
+                //REDIS_KEY_PREFIX_AUTH_CODE
+//                redisService.set( "portal:authCode:"+"123", ctx);
 
                 new Timer("testTimer").schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        ctx.channel().writeAndFlush(new TextWebSocketFrame("123"));
+//                        String rediscode= redisService.get("portal:authCode:"+"demo/topics");
+//                        ctx.channel().writeAndFlush(new TextWebSocketFrame(rediscode));
                         System.out.println("123");
                     }
-                }, 1000,2000);
+                }, 100,100);
 
 
                 break;

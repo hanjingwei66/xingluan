@@ -6,44 +6,71 @@ import com.shuojie.domain.User;
 import com.shuojie.service.ContactService;
 import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
-import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import io.netty.util.internal.PlatformDependent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.ConcurrentMap;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
 @Slf4j
-//@ChannelHandler.Sharable
+@Component
+@ChannelHandler.Sharable
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-    private static UserMerberService usermerberservice;
-    private static IUserService userServer;
-    private static ContactService contactServer;
-    static {
-        usermerberservice = SpringUtil.getBean(UserMerberService.class);
-        userServer = SpringUtil.getBean(IUserService.class);
-        contactServer = SpringUtil.getBean(ContactService.class);
+
+    public static TextWebSocketFrameHandler textWebSocketFrameHandler;
+
+    @Autowired
+    private UserMerberService usermerberservice;
+    @Autowired
+    private IUserService userServer;
+    @Autowired
+    private  ContactService contactServer;
+//    private static UserMerberService usermerberservice;
+//    private static IUserService userServer;
+//    private static ContactService contactServer;
+   public static ChannelGroup  channels= new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
+//    static {
+////        usermerberservice = SpringUtil.getBean(UserMerberService.class);
+////        userServer = SpringUtil.getBean(IUserService.class);
+////        contactServer = SpringUtil.getBean(ContactService.class);
+//
+//   }
+//    public TextWebSocketFrameHandler() { }
+//    @PostConstruct
+//    public void init() {
+//        textWebSocketFrameHandler = this;
+//        textWebSocketFrameHandler.usermerberservice = this.usermerberservice;
+//        textWebSocketFrameHandler.userServer = this.userServer;
+//
+//    }
+
+
+    public ConcurrentMap<Object, Channel> getServerChannels() {
+        return serverChannels;
     }
-//    @Resource(name = "userServiceImpl")
-//    private IUserServer userServer;
-//    @Resource(name = "UserMerberServiceImpl")
-//    private UserMerberService usermerberservice;
+
+    private ConcurrentMap<Object, Channel> serverChannels = PlatformDependent.newConcurrentHashMap();
     //保存所有客户端连接
-    private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+//private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
+        channels.add(ctx.channel());
         ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
-//        buf.retain();//引用计数器加 1
-//        buf.refCnt();//引用计数剪1
-//        assert buf.refCnt() == 1;//判断计数器
         System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
 //        if(msg instanceof WebSocketFrame){
 //
@@ -72,7 +99,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if(result.getCode()==200){
-//                    channels.add(ctx.channel());//登陆成功加入管道
+                  //登陆成功加入管道
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }else{
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
@@ -145,9 +172,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         for (Channel channel  : channels) {
             //将消息发送到所有客户端
 //            channel.writeAndFlush(new TextWebSocketFrame(msg.text()));
-            channel.writeAndFlush("发送所有建立连接设备");
-    }
 
+    }
+        channels.writeAndFlush("发送所有建立连接设备");
 
         /**
          * writeAndFlush接收的参数类型是Object类型，但是一般我们都是要传入管道中传输数据的类型，比如我们当前的demo
@@ -161,10 +188,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         //打印出channel唯一值，asLongText方法是channel的id的全名
         Channel incoming = ctx.channel();
+//        channels.add(ctx.channel());
         for (Channel channel : channels) {
-            channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 加入\n");
+            channel.writeAndFlush(new TextWebSocketFrame("[SERVER] - " + incoming.remoteAddress() + " 加入\n"));
+            System.out.println("123");
         }
-        channels.add(ctx.channel());
+
         System.out.println("handlerAdded："+ctx.channel().id().asLongText()+"你好世界");
     }
 
