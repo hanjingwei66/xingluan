@@ -37,7 +37,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Autowired
     private IUserService userServer;
     @Autowired
-    private  ContactService contactServer;
+    private ContactService contactServer;
 //    private static UserMerberService usermerberservice;
 //    private static IUserService userServer;
 //    private static ContactService contactServer;
@@ -113,7 +113,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setYzm(json.getString("yzm"));
                 user.setUsername(json.getString("username"));
                 user.setIdNumber(json.getString("idNumber"));
-                user.setAffiliationFirm(json.getString("firmId"));
 //                user.setPosition();//职位
 //                user.setAreaname(login.getAreaname());//所属地区
                 Result results =userServer.register(user);

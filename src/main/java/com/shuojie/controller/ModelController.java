@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/model")
@@ -16,8 +17,14 @@ public class ModelController {
     @Resource(name = "modelServiceImpl")
     private ModelService modelService;
 
-    @RequestMapping(value = "/insertModel",method = RequestMethod.POST)
-    public Result insertModel(@RequestBody Model model){
+    @RequestMapping(value = "/insertModel", method = RequestMethod.POST)
+    public Result insertModel(@RequestBody Model model) {
         return modelService.insertModel(model);
     }
+
+    @RequestMapping(value = "/getModel", method = RequestMethod.GET)
+    public List<Model> getModel() {
+        return modelService.getModel();
+    }
 }
+

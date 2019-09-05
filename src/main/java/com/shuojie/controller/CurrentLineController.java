@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
-import com.shuojie.domain.CurrentLine;
-import com.shuojie.service.CurrentLineService;
+import com.shuojie.domain.maps.CurrentLine;
+import com.shuojie.service.mapsService.CurrentLineService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

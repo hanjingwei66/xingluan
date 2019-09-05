@@ -1,6 +1,6 @@
-package com.shuojie.service;
+package com.shuojie.service.mapsService;
 
-import com.shuojie.domain.Origin;
+import com.shuojie.domain.maps.Origin;
 import com.shuojie.utils.vo.ReturnOrigin;
 
 import java.util.ArrayList;

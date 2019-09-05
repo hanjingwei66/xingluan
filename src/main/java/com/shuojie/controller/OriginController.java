@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
-import com.shuojie.domain.Origin;
-import com.shuojie.service.OriginService;
+import com.shuojie.domain.maps.Origin;
+import com.shuojie.service.mapsService.OriginService;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.web.bind.annotation.*;
 

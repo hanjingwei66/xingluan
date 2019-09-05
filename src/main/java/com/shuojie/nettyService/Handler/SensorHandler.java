@@ -1,7 +1,7 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.shuojie.domain.sesorModle.BaseSesor;
+import com.shuojie.domain.sensorModle.BaseSensor;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -38,7 +38,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
         String command = json.getString("command");
         switch (command){
             case "sensor_check"://检测数量
-                List<BaseSesor> list =new ArrayList();
+                List<BaseSensor> list =new ArrayList();
                 for(int i=0; i<17;i++){
                     Integer id=(int)(Math.random()*100);
                     Integer sesorType=((int) (Math.random()*4));
@@ -47,7 +47,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
                     Integer signal =2+(int)(Math.random()*3);
                     String angle=(int)(Math.random()*15)+"";
                     Double distance =Math.random()*100;
-                    BaseSesor s= new BaseSesor();
+                    BaseSensor s= new BaseSensor();
                     s.setId(id);
                     s.setPower(power);
                     s.setSesorName("Sesor"+id);

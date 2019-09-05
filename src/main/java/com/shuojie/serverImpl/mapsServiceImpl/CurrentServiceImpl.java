@@ -1,8 +1,8 @@
-package com.shuojie.serverImpl;
+package com.shuojie.serverImpl.mapsServiceImpl;
 
-import com.shuojie.dao.CurrentMapper;
-import com.shuojie.domain.Current;
-import com.shuojie.service.CurrentService;
+import com.shuojie.dao.mapsMapper.CurrentMapper;
+import com.shuojie.domain.maps.Current;
+import com.shuojie.service.mapsService.CurrentService;
 import com.shuojie.utils.vo.Result;
 import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.text.MessageFormat;
 
 @Slf4j
@@ -32,7 +31,7 @@ public class Mqttclien  {
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
 
-    @PostConstruct
+//    @PostConstruct
     public void start() throws Exception {
         String broker = "tcp://localhost:1883";
         String clientId = "JavaSample";

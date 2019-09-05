@@ -1,6 +1,6 @@
-package com.shuojie.dao;
+package com.shuojie.dao.mapsMapper;
 
-import com.shuojie.domain.CurrentLine;
+import com.shuojie.domain.maps.CurrentLine;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

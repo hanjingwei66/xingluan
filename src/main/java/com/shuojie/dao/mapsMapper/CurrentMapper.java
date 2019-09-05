@@ -1,7 +1,6 @@
-package com.shuojie.dao;
+package com.shuojie.dao.mapsMapper;
 
-import com.shuojie.domain.Current;
-import com.shuojie.utils.vo.Result;
+import com.shuojie.domain.maps.Current;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

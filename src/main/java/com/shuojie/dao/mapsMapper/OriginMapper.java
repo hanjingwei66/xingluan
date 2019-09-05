@@ -4,10 +4,10 @@
 * 
 * @date 2019-08-28
 */
-package com.shuojie.dao;
+package com.shuojie.dao.mapsMapper;
 
 
-import com.shuojie.domain.Origin;
+import com.shuojie.domain.maps.Origin;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.apache.ibatis.annotations.Mapper;
 

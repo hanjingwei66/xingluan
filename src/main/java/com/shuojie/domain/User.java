@@ -22,11 +22,7 @@ public class User {
 
     private String idNumber;//身份证号
 
-    private String affiliationFirm;//归属企业
-
     private String position;//职位
-
-    private String areaname;//所属地区
 
     private String sex;//性别
 

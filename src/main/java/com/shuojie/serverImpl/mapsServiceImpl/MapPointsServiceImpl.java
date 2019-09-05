@@ -1,8 +1,8 @@
-package com.shuojie.serverImpl;
+package com.shuojie.serverImpl.mapsServiceImpl;
 
-import com.shuojie.dao.MapPointsMapper;
-import com.shuojie.domain.MapPoints;
-import com.shuojie.service.MapPointsService;
+import com.shuojie.dao.mapsMapper.MapPointsMapper;
+import com.shuojie.domain.maps.MapPoints;
+import com.shuojie.service.mapsService.MapPointsService;
 import com.shuojie.utils.vo.Result;
 import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;

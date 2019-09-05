@@ -1,6 +1,6 @@
-package com.shuojie.service;
+package com.shuojie.service.mapsService;
 
-import com.shuojie.domain.Current;
+import com.shuojie.domain.maps.Current;
 import com.shuojie.utils.vo.Result;
 
 public interface CurrentService {

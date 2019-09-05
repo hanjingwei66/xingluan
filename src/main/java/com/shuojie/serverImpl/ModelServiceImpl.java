@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service("modelServiceImpl")
 public class ModelServiceImpl implements ModelService {
@@ -32,5 +33,10 @@ public class ModelServiceImpl implements ModelService {
                  result = new Result(201,"insertModelError","insertModel");
             }
                 return result;
+    }
+
+    @Override
+    public List<Model> getModel() {
+        return modelMapper.getModel();
     }
 }

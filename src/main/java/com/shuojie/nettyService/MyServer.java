@@ -35,7 +35,7 @@ public class MyServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(webSocketChannelInitializer);
             ChannelFuture channelFuture = serverBootstrap
-                    .bind(new InetSocketAddress(8090)).sync();
+                    .bind(new InetSocketAddress(8091)).sync();
             channelFuture.channel().closeFuture().sync();
             System.out.println("启动成功");
         }finally {

@@ -8,7 +8,6 @@
     <result column="firm_id" property="firmId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="id_number" property="idNumber" jdbcType="CHAR" />
-    <result column="affiliation_firm" property="affiliationFirm" jdbcType="VARCHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
