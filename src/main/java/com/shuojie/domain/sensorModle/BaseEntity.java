@@ -1,4 +1,4 @@
-package com.shuojie.domain.sesorModle;
+package com.shuojie.domain.sensorModle;
 
 import lombok.Data;
 

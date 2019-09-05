@@ -1,9 +1,9 @@
-package com.shuojie.domain.sesorModle;
+package com.shuojie.domain.sensorModle;
 
 import lombok.Data;
 
 @Data
-public class BaseSesor extends BaseEntity{
+public class BaseSensor extends BaseEntity{
     private Integer id;//传感器id
     private String sesorName;//传感器名字
     private Integer sesorType;//传感器类型 0 测角 1测距 2 激光 3十轴
