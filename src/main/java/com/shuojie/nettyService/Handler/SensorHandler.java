@@ -30,13 +30,17 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
     private Long AUTH_CODE_EXPIRE_SECONDS;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-
+        ByteBuf buf = ctx.alloc().directBuffer();
 //        InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
 //        String ip = inetSocketAddress.getHostName();
 //        System.out.println("收到id为"+ctx.channel().id().asLongText()+"ip为"+ip+"发来的消息1："+msg.text());
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
-        switch (command){
+        if(!command.substring(0,4).equals("sens")){
+            buf.retain();//检查引用计数器是否是 1
+            msg.retain();
+            ctx.fireChannelRead(msg);
+        }        switch (command){
             case "sensor_check"://检测数量
                 List<BaseSensor> list =new ArrayList();
                 for(int i=0; i<17;i++){
@@ -63,7 +67,6 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
                 map.put("command", "sensor_check");
                 String sesorList = JSONObject.toJSONString(map);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(sesorList));
-                ByteBuf buf = ctx.alloc().directBuffer();
                 System.out.println("buf.refCnt()"+buf.refCnt());
                 return;
             case "sensor_allow"://检测

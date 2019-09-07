@@ -20,14 +20,10 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Result insertModel(Model model) {
             modelMapper.insertModel(model);
-            String modelName = model.getModelName();
-            BigDecimal moLatitude = model.getMoLatitude();
-            BigDecimal moLongitude = model.getMoLongitude();
-            String direction = model.getDirection();
-            if (!StringUtil.isNullOrEmpty(modelName)
-                    && !moLatitude.equals(null)
-                    && !moLongitude.equals(null)
-                    && !StringUtil.isNullOrEmpty(direction)){
+            if (!StringUtil.isNullOrEmpty(model.getModelName())
+                    && model.getMoLatitude() != null
+                    && model.getMoLongitude() != null
+                    && !StringUtil.isNullOrEmpty(model.getDirection())){
                  result = new Result(200,"insertModelSuccess","insertModel");
             }else {
                  result = new Result(201,"insertModelError","insertModel");

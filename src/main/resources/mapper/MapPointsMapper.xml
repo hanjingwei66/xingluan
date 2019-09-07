@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.shuojie.domain.maps.MapPoints" >
     <id column="mid" property="mid" jdbcType="INTEGER" />
     <result column="points_name" property="pointsName" jdbcType="VARCHAR" />
-    <result column="ma_longitude" property="maLongitude" jdbcType="DECIMAL" />
-    <result column="ma_latitude" property="maLatitude" jdbcType="DECIMAL" />
+    <result column="ma_longitude" property="maLongitude" jdbcType="DOUBLE" />
+    <result column="ma_latitude" property="maLatitude" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
     mid, points_name, ma_longitude, ma_latitude

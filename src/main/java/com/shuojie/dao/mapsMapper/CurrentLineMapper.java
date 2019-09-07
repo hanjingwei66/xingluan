@@ -8,6 +8,4 @@ public interface CurrentLineMapper {
 
     //添加经纬度
     void insertCurrentLine(CurrentLine currentLine);
-
-
 }

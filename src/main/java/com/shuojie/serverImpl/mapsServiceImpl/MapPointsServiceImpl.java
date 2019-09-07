@@ -20,20 +20,14 @@ public class MapPointsServiceImpl implements MapPointsService {
 
     @Override
     public Result insertMapPoints(MapPoints mapPoints) {
-        try {
             mapPointsMapper.insertMapPoints(mapPoints);
-            BigDecimal maLatitude = mapPoints.getMaLatitude();
-            BigDecimal maLongitude = mapPoints.getMaLongitude();
-            String pointsName = mapPoints.getPointsName();
-            if (!maLatitude.equals(null)
-                    && !maLongitude.equals(null)
-                    && !StringUtil.isNullOrEmpty(pointsName)){
-               result = new Result(200,"insertMapPointsSuccess","insertMapPoints");
-           }
-        } catch (Exception e) {
-            result = new Result(201,"insertMapPointsError","insertMapPoints");
-        }
-
+            if ( mapPoints.getMaLatitude() != null
+                    && mapPoints.getMaLongitude() != null
+                    && !StringUtil.isNullOrEmpty(mapPoints.getPointsName())) {
+                result = new Result(200, "insertMapPointsSuccess", "insertMapPoints");
+            } else {
+                result = new Result(201, "insertMapPointsError", "insertMapPoints");
+            }
        return result;
     }
 }

@@ -83,7 +83,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         User user =new User();
         Contact contact = new Contact();
 
-        if(command.substring(0,4).equals("sens")){
+        if(!command.substring(0,3).equals("api")){
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
@@ -130,7 +130,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     ctx.channel().writeAndFlush(new TextWebSocketFrame(res));
                 }catch (Exception e) {
                     e.printStackTrace();
-
                 }
                 break;
             //忘记密码
@@ -161,7 +160,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
-            //事件经纬度存储
         }
 
 //        if(command.equals("login")){

@@ -3,18 +3,15 @@
 <mapper namespace="com.shuojie.dao.mapsMapper.CurrentLineMapper" >
   <resultMap id="BaseResultMap" type="com.shuojie.domain.maps.CurrentLine" >
     <id column="clid" property="clid" jdbcType="INTEGER" />
-    <result column="cu_li_longitude" property="cuLiLongitude" jdbcType="DECIMAL" />
-    <result column="cu_li_latitude" property="cuLiLatitude" jdbcType="DECIMAL" />
+    <result column="cu_li_longitude" property="cuLiLongitude" jdbcType="DOUBLE" />
+    <result column="cu_li_latitude" property="cuLiLatitude" jdbcType="DOUBLE" />
+    <result column="cuid" property="cuid" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List" >
-     clid, cu_li_longitude, cu_li_latitude
+    clid, cu_li_longitude, cu_li_latitude,cuid
   </sql>
-
   <insert id="insertCurrentLine" parameterType="com.shuojie.domain.maps.CurrentLine" >
-    insert into current_line (clid, cu_li_longitude,
-      cu_li_latitude)
-    values (#{clid,jdbcType=INTEGER}, #{cuLiLongitude,jdbcType=DECIMAL},
-      #{cuLiLatitude,jdbcType=DECIMAL})
+    insert into current_line (cu_li_longitude,cu_li_latitude,cuid)
+    values (#{cuLiLongitude},#{cuLiLatitude},#{cuid})
   </insert>
-
 </mapper>
