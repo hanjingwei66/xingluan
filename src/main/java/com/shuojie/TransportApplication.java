@@ -12,9 +12,9 @@ public class TransportApplication   {
 
     }
 
-//    @Override
-//    public void run (String ...args)throws Exception{
-////        new MyServer();
-//        new Mqttclien();implements CommandLineRunner
-//    }
+  /*  @Override
+    public void run (String ...args)throws Exception{
+        new MyServer();
+    // new Mqttclien();implements CommandLineRunner
+}*/
 }

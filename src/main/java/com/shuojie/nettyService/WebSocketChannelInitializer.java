@@ -1,5 +1,6 @@
 package com.shuojie.nettyService;
 
+import com.shuojie.nettyService.Handler.MapsWebSocketFrameHandle;
 import com.shuojie.nettyService.Handler.SensorHandler;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
 import io.netty.channel.ChannelInitializer;
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
-@Autowired
-private TextWebSocketFrameHandler textWebSocketFrameHandler;
+    @Autowired
+    private TextWebSocketFrameHandler textWebSocketFrameHandler;
     @Autowired
     private SensorHandler sensorHandler;
+    @Autowired
+    private MapsWebSocketFrameHandle mapsWebSocketFrameHandle;
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -47,6 +50,7 @@ private TextWebSocketFrameHandler textWebSocketFrameHandler;
 
         pipeline.addLast("TextWebSocketFrameHandler",textWebSocketFrameHandler);
         pipeline.addLast("SensorHandler",sensorHandler);
+        pipeline.addLast("mapsWebSocketFrameHandle",mapsWebSocketFrameHandle);
 //        pipeline.addLast(new BinaryWebSocketFrameHandler());
 //        new StringDecoder();
         //测试git

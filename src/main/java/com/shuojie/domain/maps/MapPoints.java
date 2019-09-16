@@ -1,4 +1,4 @@
-package com.shuojie.domain;
+package com.shuojie.domain.maps;
 
 import lombok.Data;
 
@@ -11,8 +11,8 @@ public class MapPoints {
 
     private String pointsName;//数字空间地图点名称（String时间）
 
-    private BigDecimal maLongitude;//数字空间地图点经度
+    private Double maLongitude;//数字空间地图点经度
 
-    private BigDecimal maLatitude;//数字空间地图点纬度
+    private Double maLatitude;//数字空间地图点纬度
 
 }

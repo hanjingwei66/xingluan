@@ -10,9 +10,9 @@ public class Model {
 
     private String modelName;//模型名称
 
-    private BigDecimal moLongitude;//模型经度
+    private Double moLongitude;//模型经度
 
-    private BigDecimal moLatitude;//模型纬度
+    private Double moLatitude;//模型纬度
 
     private String direction;//方向
 

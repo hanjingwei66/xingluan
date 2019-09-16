@@ -1,6 +1,6 @@
 package com.shuojie.utils.vo;
 
-import com.shuojie.domain.OriginLine;
+import com.shuojie.domain.maps.OriginLine;
 import lombok.Data;
 
 import java.util.List;

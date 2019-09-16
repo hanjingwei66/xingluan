@@ -1,7 +1,7 @@
 package com.shuojie.controller;
 
-import com.shuojie.domain.MapPoints;
-import com.shuojie.service.MapPointsService;
+import com.shuojie.domain.maps.MapPoints;
+import com.shuojie.service.mapsService.MapPointsService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

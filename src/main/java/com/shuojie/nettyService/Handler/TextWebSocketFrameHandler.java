@@ -80,21 +80,22 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         channels.add(ctx.channel());
         ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
         System.out.println("收到"+ctx.channel().id().asLongText()+"发来的消息："+msg.text());
-//        if(msg instanceof WebSocketFrame){}
+//        if(msg instanceof WebSocketFrame){
+//
+//        }else{
+////            buf.retain();//检查引用计数器是否是 1
+////            ctx.fireChannelRead(msg);
+//        }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
         Contact contact = new Contact();
-//        try {
-            if(!command.substring(0,4).equals("api_")){
-                buf.retain();//检查引用计数器是否是 1
-                msg.retain();
-                ctx.fireChannelRead(msg);
-            }
-//        }finally {
-//            buf.release();
-//            msg.release();
-//        }
+
+        if(command.substring(0,4).equals("api_")){
+            buf.retain();//检查引用计数器是否是 1
+            msg.retain();
+            ctx.fireChannelRead(msg);
+        }
         switch (command){
             case "api_login":
                 System.out.println("loging");
@@ -120,7 +121,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setYzm(json.getString("yzm"));
                 user.setUsername(json.getString("username"));
                 user.setIdNumber(json.getString("idNumber"));
-                user.setAffiliationFirm(json.getString("firmId"));
 //                user.setPosition();//职位
 //                user.setAreaname(login.getAreaname());//所属地区
                 Result results =userServer.register(user);
@@ -138,7 +138,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     ctx.channel().writeAndFlush(new TextWebSocketFrame(res));
                 }catch (Exception e) {
                     e.printStackTrace();
-
                 }
                 break;
             //忘记密码

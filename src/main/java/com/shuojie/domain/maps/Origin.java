@@ -1,4 +1,4 @@
-package com.shuojie.domain;
+package com.shuojie.domain.maps;
 
 
 import lombok.Data;

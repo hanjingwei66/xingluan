@@ -87,7 +87,6 @@ public class UserServiceImpl implements IUserService {
             this.result.setLoginFlag(logflag);
         }
         return result;}catch (Exception e) {
-                e.printStackTrace();
             return result;
             }
     }
@@ -146,8 +145,6 @@ public class UserServiceImpl implements IUserService {
         res.setUsername(user1.getUsername());
         res.setMobile(user1.getMobile());
         res.setFirmId(user1.getFirmId());
-        res.setAffiliationFirm(user.getAffiliationFirm());
-        res.setAreaname(user1.getAreaname());
         res.setSex(user1.getSex());
         return res;
     }

@@ -1,4 +1,4 @@
-package com.shuojie.dao;
+package com.shuojie.dao.mapsMapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
