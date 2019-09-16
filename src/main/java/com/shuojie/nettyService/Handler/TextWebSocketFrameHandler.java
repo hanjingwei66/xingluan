@@ -1,11 +1,14 @@
 package com.shuojie.nettyService.Handler;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.Contact;
 import com.shuojie.domain.User;
+import com.shuojie.domain.system.SysContact;
 import com.shuojie.service.ContactService;
 import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
+import com.shuojie.service.sysService.SysContactService;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 import io.netty.buffer.ByteBuf;
@@ -22,6 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
@@ -37,7 +43,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Autowired
     private IUserService userServer;
     @Autowired
-    private ContactService contactServer;
+    private  ContactService contactServer;
+    @Autowired
+    private SysContactService sysContactService;
 //    private static UserMerberService usermerberservice;
 //    private static IUserService userServer;
 //    private static ContactService contactServer;
@@ -83,19 +91,19 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         User user =new User();
         Contact contact = new Contact();
 
-        if(!command.substring(0,3).equals("api")){
+        if(command.substring(0,4).equals("api_")){
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
         }
         switch (command){
-            case "login":
+            case "api_login":
                 System.out.println("loging");
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 System.out.println(user.toString());
                 ReturnUser result = userServer.toLogin(user);
-                result.setCommand("login");
+                result.setCommand("api_login");
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if(result.getCode()==200){
@@ -107,7 +115,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
                 break;
             //注册
-            case "register" :
+            case "api_register" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 user.setYzm(json.getString("yzm"));
@@ -116,16 +124,16 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //                user.setPosition();//职位
 //                user.setAreaname(login.getAreaname());//所属地区
                 Result results =userServer.register(user);
-                results.setCommand("register");
+                results.setCommand("api_register");
 
                 String registerReponse = JSONObject.toJSONString(results);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(registerReponse));
                 break;
-            case "sendMsg" :
+            case "api_sendMsg" :
                 String telephone =json.getString("mobile").toString();
                 try {
                     Result result1 = usermerberservice.sendMsg(telephone);
-                    result1.setCommand("sendMsg");
+                    result1.setCommand("api_sendMsg");
                     String res = JSONObject.toJSONString(result1);
                     ctx.channel().writeAndFlush(new TextWebSocketFrame(res));
                 }catch (Exception e) {
@@ -133,7 +141,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 }
                 break;
             //忘记密码
-            case "updatePassword" :
+            case "api_updatePassword" :
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 user.setYzm(json.getString("yzm"));
@@ -143,11 +151,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 System.out.println("updatePassword");
                 break;
             //修改密码
-            case "xiugaiPassword" :
-                user.setId(Integer.valueOf(json.getString("id")));
+            case "api_xiugaiPassword" :
+                user.setId(json.getInteger("id"));
                 user.setMobile(json.getString("mobile"));
+                user.setOldPassword(json.getString("oldpassword"));
                 user.setPassword(json.getString("password"));
-                user.setPassword(json.getString("oldpassword"));
                 user.setYzm(json.getString("yzm"));
                 Result response = userServer.xiugaiUserPassworld(user);
                 String xiugaiPasswordReponse = JSONObject.toJSONString(response);
@@ -155,12 +163,58 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 System.out.println("updatePassword");
                 break;
             //添加留言
-            case "insertContact" :
+            case "api_insertContact" :
                 contact.setId(Integer.valueOf(json.getString("id")));
                 contact.setContactText(new String(json.getString("contactText")));
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
+                break;
+            case "api_selectSysMsg" :
+                Integer id = json.getInteger("id");
+                List<SysContact> list = sysContactService.selectById(id);
+                Map map=new HashMap();
+                map.put("data",list);
+                map.put("command","api_selectSysMsg");
+                String contectlist = JSONObject.toJSONString(map);
+                System.out.println(contectlist);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(contectlist));
+                break;
+            case "api_deleteSysMsg" :
+                //JSONArray array = json.getJSONArray("sysContactId");
+                JSONArray array = json.getJSONArray("sysContactId");
+
+                try {
+                    for(int i=0;i<array.size();i++){
+                        sysContactService.deleteById(array.getInteger(i));
+                    }
+
+                    Result result1=new Result(200,"SUCCESS","api_deleteSysMsg");
+                    String respon = JSONObject.toJSONString(result1);
+
+                    ctx.channel().writeAndFlush(new TextWebSocketFrame(respon));
+                }catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+                break;
+            case "api_updateStatus" :
+                Integer array1= json.getInteger("sysContactId");
+                try {
+                    sysContactService.updateStatus(array1);
+                    Result result1 = new Result(200, "SUCCESS", "api_updateStatus");
+                    String respon = JSONObject.toJSONString(result1);
+                    ctx.channel().writeAndFlush(new TextWebSocketFrame(respon));
+                }catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+                break;
+//                sysContactService.deleteById(sysContactId);
+//                System.out.println(contectlist);
+//                ctx.channel().writeAndFlush(new TextWebSocketFrame(contectlist));
+
+            //事件经纬度存储
         }
 
 //        if(command.equals("login")){
@@ -186,7 +240,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         //打印出channel唯一值，asLongText方法是channel的id的全名
         Channel incoming = ctx.channel();
-//        channels.add(ctx.channel());
+        channels.add(ctx.channel());
         for (Channel channel : channels) {
             channel.writeAndFlush(new TextWebSocketFrame("[SERVER] - " + incoming.remoteAddress() + " 加入\n"));
             System.out.println("123");

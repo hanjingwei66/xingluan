@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class DistanceSensor extends BaseSensor {
-    private String istan;//距离
+    private Double distance;//距离
 }

@@ -3,10 +3,12 @@ package com.shuojie.domain.sensorModle;
 import lombok.Data;
 
 @Data
+
 public class BaseSensor extends BaseEntity{
-    private Integer id;//传感器id
-    private String sesorName;//传感器名字
-    private Integer sesorType;//传感器类型 0 测角 1测距 2 激光 3十轴
+
+    private Long sensorId;//传感器id
+    private String sensorName;//传感器名字
+    private Integer sensorType;//传感器类型 0 测角 1测距 2 激光 3十轴
     private Integer power;//电量 0-100;
     private Integer status;//状态0，正常 1，非正常
     private Integer signal ;//信号 0 无信号，1 信号弱， 2 信号差， 3 信号中4 信号好

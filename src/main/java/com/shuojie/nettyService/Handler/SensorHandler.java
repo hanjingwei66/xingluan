@@ -1,7 +1,9 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
 import com.shuojie.domain.sensorModle.BaseSensor;
+import com.shuojie.utils.snowFlake.SnowFlake;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -10,6 +12,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /*传感器handler*/
@@ -23,6 +26,8 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
     private boolean flag;
 //    @Autowired
 //    private RedisService redisService;
+@Resource
+private DistanceSensorMapper distanceSensorMapper;
     @Value("${redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     //过期时间60秒
@@ -30,17 +35,23 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
     private Long AUTH_CODE_EXPIRE_SECONDS;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        ByteBuf buf = ctx.alloc().directBuffer();
+
 //        InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
 //        String ip = inetSocketAddress.getHostName();
 //        System.out.println("收到id为"+ctx.channel().id().asLongText()+"ip为"+ip+"发来的消息1："+msg.text());
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
-        if(!command.substring(0,4).equals("sens")){
+        ByteBuf buf = ctx.alloc().directBuffer();
+        try {
+        if(!command.substring(0,4).equals("api_")){
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
-        }        switch (command){
+        }
+        }finally {
+            buf.release();
+        }
+        switch (command){
             case "sensor_check"://检测数量
                 List<BaseSensor> list =new ArrayList();
                 for(int i=0; i<17;i++){
@@ -52,10 +63,10 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
                     String angle=(int)(Math.random()*15)+"";
                     Double distance =Math.random()*100;
                     BaseSensor s= new BaseSensor();
-                    s.setId(id);
+                    s.setSensorId( SnowFlake.nextId());
                     s.setPower(power);
-                    s.setSesorName("Sesor"+id);
-                    s.setSesorType(sesorType);
+                    s.setSensorName("Sesor"+id);
+                    s.setSensorType(sesorType);
                     s.setStatus(status);
                     s.setSignal(signal);
 //                    s.setAngle(angle);
@@ -78,20 +89,24 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
 //                System.out.println("value"+redisauthcode);
                 break;
             case "sensor_start":
-                //REDIS_KEY_PREFIX_AUTH_CODE
+//                REDIS_KEY_PREFIX_AUTH_CODE
 //                redisService.set( "portal:authCode:"+"123", ctx);
 
-                new Timer("testTimer").schedule(new TimerTask() {
-                    @Override
-                    public void run() {
+//                new Timer("testTimer").schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
 //                        String rediscode= redisService.get("portal:authCode:"+"demo/topics");
 //                        ctx.channel().writeAndFlush(new TextWebSocketFrame(rediscode));
                         System.out.println("123");
-                    }
-                }, 100,100);
-
+//                    }
+//                }, 100,100);
 
                 break;
+            case "sensor_test":
+                System.out.println("112");
+
+
+                System.out.println("1");
         }
 
     }
