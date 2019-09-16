@@ -86,8 +86,10 @@ public class UserServiceImpl implements IUserService {
             Integer logflag =userMapper.selectBytelphone(user.getMobile());
             this.result.setLoginFlag(logflag);
         }
-        return result;}catch (Exception e) {
-            return result;
+        return result;
+
+        }catch (Exception e) {
+             return result = new ReturnUser(401,"weizhiError","login");
             }
     }
 
@@ -117,7 +119,7 @@ public class UserServiceImpl implements IUserService {
         String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
         String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
         if (newUser.getYzm().equals(code)){
-            if (!newUser.getOldPassword().equals(md5Password)){
+            if (oldUser.getPassword().equals(md5Password)){
                 newUser.setPassword(md5Password);
                 userMapper.xiugaiUserPassworld(newUser);
                 baseResult = new Result(200,"xiugaiSuccess","xiugaiPassword");

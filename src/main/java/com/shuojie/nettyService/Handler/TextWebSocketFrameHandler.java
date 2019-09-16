@@ -144,6 +144,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 break;
             //修改密码
             case "xiugaiPassword" :
+                user.setId(Integer.valueOf(json.getString("id")));
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 user.setPassword(json.getString("oldpassword"));

@@ -52,7 +52,7 @@
   </select>
   <!--注册-->
   <insert id="register" parameterType="com.shuojie.domain.User">
-    insert into user (id,mobile,password,firm_id,username,id_number,firmUserId)
+    insert into user (id,mobile,password,firm_id,username,id_number,firm_user_id)
     values (#{id},#{mobile},#{password},#{firmId},#{username},#{idNumber},#{firmUserId})
   </insert>
   <!--查询用户信息-->
