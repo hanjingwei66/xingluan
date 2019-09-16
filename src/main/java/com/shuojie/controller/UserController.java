@@ -89,4 +89,8 @@ public class UserController {
     public List<UserFirm> getUserFirm(Integer id){
      return userServer.getUserFirm(id);
     }*/
+@RequestMapping( "/getUserFirm")
+public String getUserFirm(){
+    return"123";
+}
 }

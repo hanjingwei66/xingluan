@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
             String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
             user.setPassword(md5Password);
             String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
-            Result res = new Result(200, "registerSuccess","register");
+            Result res = new Result(200, "registerSuccess","api_register");
             if (user.getYzm().equals(code)) {
                 userMapper.register(user);
                 return res;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements IUserService {
             return res;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(201, "registerError","register");
+            return new Result(201, "registerError","api_register");
         }
     }
     //登录
@@ -69,7 +69,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null&& login.getLoginFlag() <= 3){
-            ReturnUser result =new ReturnUser(200,"loginSuccess","login");
+            ReturnUser result =new ReturnUser(200,"loginSuccess","api_login");
             result.setId(login.getId());
             result.setMobile(login.getMobile());
             result.setFirmId(login.getFirmId());
@@ -78,10 +78,10 @@ public class UserServiceImpl implements IUserService {
             result.setPosition(login.getPosition());
             result.setUserFirm(login.getUserFirm());
             result.setFirmUserId(login.getFirmUserId());
-            userMapper.updateReset(login.getMobile());//重置
+            userMapper.updateReset(login.getMobile());//重置登陆状态
             return result;
         }else {
-            result = new ReturnUser(201,"passwordError","login");
+            result = new ReturnUser(201,"passwordError","api_login");
             userMapper.updateStuse(user);
             Integer logflag =userMapper.selectBytelphone(user.getMobile());
             this.result.setLoginFlag(logflag);
@@ -103,10 +103,10 @@ public class UserServiceImpl implements IUserService {
             oldUser.setPassword(md5Password);//用户数据库里的密码
             userMapper.updateUserPassworld(oldUser);
             userMapper.updateReset(newUser.getMobile());//重置
-            baseResult = new Result(200,"updateSuccess","updatePassword");
+            baseResult = new Result(200,"updateSuccess","api_updatePassword");
             return baseResult;
         }else {
-            baseResult = new Result(201,"updateError","updatePassword");
+            baseResult = new Result(201,"updateError","api_updatePassword");
         }
         return baseResult;
     }
@@ -114,19 +114,27 @@ public class UserServiceImpl implements IUserService {
     //修改密码
     @Override
     public Result xiugaiUserPassworld(User newUser) {
+        //1通过id获取修改前的对象（数据库里的）
         User oldUser = userMapper.xiugaiGetUserByid(newUser);
-        String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
+        //2把前台传来的原密码加密
+        String md5OldPassword = DigestUtils.md5DigestAsHex(newUser.getOldPassword().getBytes());
+        //获取验证码
         String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
+        //判断验证码是否相等
         if (newUser.getYzm().equals(code)){
-            if (!newUser.getOldPassword().equals(md5Password)){
+            //加密过后的俩个原密码是否相同
+            if (oldUser.getPassword().equals(md5OldPassword)){
+                //新密码加密
+                String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
+                //赋值
                 newUser.setPassword(md5Password);
                 userMapper.xiugaiUserPassworld(newUser);
-                baseResult = new Result(200,"xiugaiSuccess","xiugaiPassword");
+                baseResult = new Result(200,"xiugaiSuccess","api_xiugaiPassword");
             }else {
-                baseResult = new Result(201,"xiugaiSuccess","xiugaiPassword");
+                baseResult = new Result(201,"xiugaiSuccess","api_xiugaiPassword");
             }
         }else {
-            baseResult = new Result(401,"yzmError","xiugaiPassword");
+            baseResult = new Result(401,"yzmError","api_xiugaiPassword");
         }
         return baseResult;
     }

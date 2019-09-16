@@ -1,8 +1,11 @@
 package com.shuojie.mqttClient;
 
 
+import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
+import com.shuojie.domain.sensorModle.DistanceSensor;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
 import com.shuojie.service.RedisService;
+import com.shuojie.utils.snowFlake.SnowFlake;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelId;
 import io.netty.channel.group.ChannelGroup;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.text.MessageFormat;
 
 @Slf4j
@@ -24,6 +28,8 @@ public class Mqttclien  {
     private RedisService redisService;
     @Autowired
     private TextWebSocketFrameHandler textWebSocketFrameHandler;
+    @Resource
+    private DistanceSensorMapper distanceSensorMapper;
 //    @Autowired
 //    private TextWebSocketFrameHandler text;
     @Value("${redis.key.prefix.authCode}")
@@ -56,8 +62,8 @@ public class Mqttclien  {
                     String theMsg = MessageFormat.format("{0} is arrived for topic {1}.", new String(message.getPayload()), topic);
 //                    redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + topic,new String(message.getPayload()));
 //                    redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + );
-                    System.out.println(theMsg);
-
+                    System.out.println("getload"+new String(message.getPayload()));
+    log.info("getload"+new String(message.getPayload())+"id"+message.getId()+message.getQos());
 //            ConcurrentMap<Object, Channel> serverChannels = textWebSocketFrameHandler.getServerChannels();
 //            Channel s = serverChannels.get("s");
 //            s.writeAndFlush(new TextWebSocketFrame(theMsg));
@@ -69,12 +75,22 @@ public class Mqttclien  {
 //                    if(){
 //
 //                    }
+                    DistanceSensor sensor =new DistanceSensor();
+                    sensor.setStartTime();
                     for (Channel channel : channels) {
                         ChannelId id = channel.id();
                         Channel channel1 = channels.find(id);
                         channel.writeAndFlush(new TextWebSocketFrame( new String(message.getPayload())));
-                        System.out.println("456");
                     }
+
+                    sensor.setSensorId( SnowFlake.nextId());
+                    sensor.setDistance(45.4545);
+                    sensor.setPower(95);
+                    sensor.setSensorType(1);
+                    sensor.setSignal(1);
+                    sensor.setEndTime();
+                    distanceSensorMapper.insert(sensor);
+
                 }
 
                 public void deliveryComplete(IMqttDeliveryToken token) {
