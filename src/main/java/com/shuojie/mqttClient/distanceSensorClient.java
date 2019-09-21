@@ -38,7 +38,7 @@ public class distanceSensorClient  {
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
 
-    @PostConstruct
+    //@PostConstruct
     public void start() throws Exception {
         String broker = "tcp://localhost:1883";
         String clientId = "JavaSample1";

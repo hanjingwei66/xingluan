@@ -30,6 +30,8 @@ public class ReturnUser extends Result{
 
     private Integer loginFlag;//登陆状态
 
+    private String token;
+
     public Integer getLoginFlag() {
         return loginFlag;
     }

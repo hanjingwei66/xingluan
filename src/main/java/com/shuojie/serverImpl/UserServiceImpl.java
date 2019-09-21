@@ -64,7 +64,6 @@ public class UserServiceImpl implements IUserService {
     //登录
     @Override
     public ReturnUser toLogin(User user) {
-        try {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
@@ -86,9 +85,7 @@ public class UserServiceImpl implements IUserService {
             Integer logflag =userMapper.selectBytelphone(user.getMobile());
             this.result.setLoginFlag(logflag);
         }
-        return result;}catch (Exception e) {
-            return result;
-            }
+        return result;
     }
 
     //忘记密码
