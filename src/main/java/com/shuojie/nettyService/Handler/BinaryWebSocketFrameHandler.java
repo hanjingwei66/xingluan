@@ -3,6 +3,7 @@ package com.shuojie.nettyService.Handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
@@ -13,7 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
+@ChannelHandler.Sharable
 public class BinaryWebSocketFrameHandler  extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
     private static final Logger log = LoggerFactory.getLogger(BinaryWebSocketFrameHandler.class);
 

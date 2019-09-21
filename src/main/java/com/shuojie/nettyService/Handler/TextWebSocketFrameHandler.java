@@ -84,14 +84,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //
 //        }else{
 ////            buf.retain();//检查引用计数器是否是 1
-////            ctx.fireChannelRead(msg);
+////            ctx.fireChannelRe(msg);
 //        }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
         User user =new User();
         Contact contact = new Contact();
 
-        if(command.substring(0,4).equals("api_")){
+        if(!command.substring(0,4).equals("api_")){
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);

@@ -11,6 +11,8 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketFrameAggregator;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
+import io.netty.handler.codec.mqtt.MqttDecoder;
+import io.netty.handler.codec.mqtt.MqttEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,8 +32,8 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         //websocket协议本身是基于http协议的，所以这边也要使用http解编码器
         pipeline.addLast(new HttpServerCodec());
         //mqtt 协议的编码解码器
-//        pipeline.addLast(new MqttDecoder());
-//        pipeline.addLast(MqttEncoder.INSTANCE);
+        pipeline.addLast(new MqttDecoder());
+        pipeline.addLast(MqttEncoder.INSTANCE);
         //以块的方式来写的处理器
         pipeline.addLast(new ChunkedWriteHandler());
         //netty是基于分段请求的，HttpObjectAggregator的作用是将请求分段再聚合,参数是聚合字节的最大长度

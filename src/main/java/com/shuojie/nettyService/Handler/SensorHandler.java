@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*传感器handler*/
 @Component
@@ -43,7 +46,7 @@ private DistanceSensorMapper distanceSensorMapper;
         String command = json.getString("command");
         ByteBuf buf = ctx.alloc().directBuffer();
         try {
-        if(!command.substring(0,4).equals("api_")){
+        if(!command.substring(0,5).equals("sensor")){
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
@@ -150,6 +153,7 @@ private DistanceSensorMapper distanceSensorMapper;
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+        cause.printStackTrace();
+        ctx.close();
     }
 }
