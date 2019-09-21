@@ -97,6 +97,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             ctx.fireChannelRead(msg);
         }
         switch (command){
+            //登录
             case "api_login":
                 System.out.println("loging");
                 user.setMobile(json.getString("mobile"));
@@ -129,6 +130,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 String registerReponse = JSONObject.toJSONString(results);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(registerReponse));
                 break;
+            //短信
             case "api_sendMsg" :
                 String telephone =json.getString("mobile").toString();
                 try {
