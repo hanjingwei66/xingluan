@@ -32,6 +32,8 @@ public class ReturnUser extends Result{
 
     private String token;
 
+    private String chanleId;
+
     public Integer getLoginFlag() {
         return loginFlag;
     }

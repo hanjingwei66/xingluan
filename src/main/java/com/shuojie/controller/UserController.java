@@ -25,7 +25,7 @@ public class UserController {
      return userServer.selectUser();
  }
 
-    @RequestMapping(value = "/find" ,method = RequestMethod.GET)
+    @RequestMapping("/find")
     public String findAll(){
         return "123";
     }

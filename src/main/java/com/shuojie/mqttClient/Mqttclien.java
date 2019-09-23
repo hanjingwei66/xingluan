@@ -1,14 +1,15 @@
 package com.shuojie.mqttClient;
 
 
-import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
+import com.shuojie.dao.sensorMappers.SensorMapper;
 import com.shuojie.domain.sensorModle.DistanceSensor;
 import com.shuojie.domain.sensorModle.SensorTitle;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
-import com.shuojie.service.RedisService;
+import com.shuojie.service.sensorService.AsyncService;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelId;
 import io.netty.channel.group.ChannelGroup;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 
@@ -25,11 +25,16 @@ import java.text.MessageFormat;
 @Component
 public class Mqttclien  {
     @Autowired
-    private RedisService redisService;
+    private SensorMapper sensorMapper;
+//    @Autowired
+//    private RedisService redisService;
     @Autowired
     private TextWebSocketFrameHandler textWebSocketFrameHandler;
-    @Resource
-    private DistanceSensorMapper distanceSensorMapper;
+    @Autowired
+    private AsyncService asyncService;
+//    @Resource
+//    private DistanceSensorMapper distanceSensorMapper;
+
 //    @Autowired
 //    private TextWebSocketFrameHandler text;
     @Value("${redis.key.prefix.authCode}")
@@ -85,11 +90,16 @@ public class Mqttclien  {
                         tt.setZdzxqk(wrap.get(22));
                         tt.setNum(wrap.getShort(23));
                         tt.setDataLength(wrap.getShort(25));
-                        byte [] contant=new byte[tt.getDataLength()];
-                        for (int i = 0; i <payload.length -27 ; i++) {
-                            contant[i]=payload[i+27];
-                        }
-                        tt.setData(new String(contant));
+//                        byte [] contant=new byte[tt.getDataLength()];
+//                        if(contant!=null&&contant[0]!=0&&payload.length>27){
+//                            for (int i = 0; i <payload.length -27 ; i++) {
+//                                contant[i]=payload[i+27];
+//                            }
+////                            tt.setData(new String(contant));
+//                        }
+
+//                        asyncService.executeAsync(tt);
+//                        sensorMapper.insert(tt);
                         System.out.println(tt.toString());
                     }
 
@@ -130,7 +140,7 @@ public class Mqttclien  {
                         for (Channel channel : channels) {
                             ChannelId id = channel.id();
                             Channel channel1 = channels.find(id);
-//                            channel1.writeAndFlush(new TextWebSocketFrame( tt.toString()));
+                            channel1.writeAndFlush(new TextWebSocketFrame( "123"));
                         }
 //                    }catch (Exception e){
 //                        e.printStackTrace();
@@ -154,7 +164,7 @@ public class Mqttclien  {
             });
 
 
-            String content = "服务器下发数据";
+            String content = "123456";
 //            int jizhongqid = tt.getJizhongqid();
 //            int jiedianid = tt.getJiedianid();
             int jizhongqid = 88879;
@@ -180,7 +190,7 @@ public class Mqttclien  {
 //            System.arraycopy(bytes1, 0, bt3, bytes.length, bytes1.length);
 //            bt3[bt3.length]=bytes2;
 //            byte[] bytes3 = EncodUtil.byteMerger(bt3, content.getBytes());
-            int qos = 2;
+            int qos = 0;
 //            System.out.println("Publishing message:" + content);
             MqttMessage message = new MqttMessage(bytes3);
             message.setQos(qos);

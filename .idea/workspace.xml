@@ -1,181 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eeb26104-fdf7-4227-884b-e42a8da5ebc6" name="Default Changelist" comment="Merge branch 'master' of https://github.com/hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/com/shuojie/mqttClient/Mqttclien.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/EncodUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/MyClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/shuojie.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/transport.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/MavenWrapperDownloader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/TransportApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/CurrentInfoController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/CurrentLineController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/MapPointsController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/ModelController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/OriginController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/OriginLineController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/ContactMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/ModelMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/UpdateLogMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/UserFirmMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/UserMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/mapsMapper/CurrentInfoMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/mapsMapper/CurrentLineMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/mapsMapper/MapPointsMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/mapsMapper/OriginLineMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/mapsMapper/OriginMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/sensorMappers/DistanceSensorMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/systemMappers/SysContactMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/Contact.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/Jingwei.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/Model.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/UpdateLog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/UserFirm.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/CurrentInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/CurrentLine.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/MapPoints.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/Origin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/OriginLine.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/AngleSensor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/BaseEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/BaseSensor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/DistanceSensor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/LaserSensor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/SensorTitle.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/TenaxisSensor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/system/SysContact.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/EncodUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyClient/ClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyClient/ClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyClient/MyClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/MqttHandler$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/MqttHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/SensorHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/WebSocketChannelInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/ContactServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/ModelServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/SensorServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/UserServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/mapsServiceImpl/CurrentInfoServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/mapsServiceImpl/CurrentLineServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/mapsServiceImpl/MapPointsServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/mapsServiceImpl/OriginLineServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/mapsServiceImpl/OriginServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/ContactService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/IUserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/ModelService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/RedisService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/UserMerberService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/mapsService/CurrentInfoService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/mapsService/CurrentLineService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/mapsService/MapPointsService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/mapsService/OriginLineService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/mapsService/OriginService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/sysService/SysContactService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/autowiredUtil/SpringUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/Ex.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/Ey.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/MapPoint.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/kalman.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/matrix.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/ss.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/kalman/vector.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/vo/Result.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/vo/ReturnOrigin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/vo/ReturnUser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/ContactMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/CurrentInfoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/CurrentLineMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/DistanceSensorMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/MapPointsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/ModelMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/OriginLineMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/OriginMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/SysContactMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UpdateLogMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UserFirmMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.TransportApplication$$EnhancerBySpringCGLIB$$3f2ae62b.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.TransportApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.ContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/ContactController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.CurrentController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.CurrentLineController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.MapPointsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.ModelController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.OriginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.OriginLineController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.controller.UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.Contact.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.Current.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.CurrentLine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.MapPoints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.Origin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.OriginLine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.UpdateLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.UserFirm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.sensorModle.BaseEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.sensorModle.BaseSensor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.sensorModle.DistanceSensor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.domain.system.SysContact.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.mqttClient.Mqttclien.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.mqttClient.distanceSensorClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.nettyService.Handler.SensorHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.nettyService.Handler.TextWebSocketFrameHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.nettyService.MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.nettyService.WebSocketChannelInitializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.ContactServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.CurrentLineServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.CurrentServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.MapPointsServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.ModelServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.OriginLineServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.OriginServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.RedisServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/RedisServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.UserMerberServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/UserMerberServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.serverImpl.sysServiceImpl.SysContactServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/sysServiceImpl/SysContactServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.utils.sms.MessageUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/sms/MessageUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.shuojie.utils.snowFlake.SnowFlake.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/snowFlake/SnowFlake.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.zaxxer.hikari.pool.ProxyLeakTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/io.netty.util.concurrent.FastThreadLocalRunnable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/io.netty.util.concurrent.PromiseTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/io.netty.util.concurrent.ScheduledFutureTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.lang.ClassLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.lang.reflect.Method.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.util.TimerThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.util.concurrent.FutureTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.apache.catalina.loader.WebappClassLoaderBase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.eclipse.paho.client.mqttv3.internal.CommsCallback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.eclipse.paho.client.mqttv3.internal.CommsReceiver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.eclipse.paho.client.mqttv3.internal.CommsSender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.springframework.beans.factory.support.DisposableBeanAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/org.springframework.boot.devtools.restart.RestartLauncher.class" beforeDir="false" />
+    <list default="true" id="eeb26104-fdf7-4227-884b-e42a8da5ebc6" name="Default Changelist" comment="1234">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/ExecutorConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/MultipartConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/sensorMappers/SensorMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sensorServiceImpl/AsyncServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/sensorService/AsyncService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/configuration/ExecutorConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/configuration/MultipartConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/dao/sensorMappers/SensorMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/serverImpl/sensorServiceImpl/AsyncServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/shuojie/service/sensorService/AsyncService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/distanceSensorClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/distanceSensorClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/ReturnUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/ReturnUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/shuojie.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/transport.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MavenWrapperDownloader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/TransportApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/TransportApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/CurrentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/maps/CurrentInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/SensorTitle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/domain/sensorModle/SensorTitle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/mqttClient/Mqttclien.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/SensorHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/SensorHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/MyServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/WebSocketChannelInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/nettyService/WebSocketChannelInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/shuojie/utils/vo/ReturnUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/shuojie/utils/vo/ReturnUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/UserFirmMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/UserFirmMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/maven-wrapper.properties" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -213,65 +84,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-42">
-              <caret line="135" column="46" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="46" />
+            <state relative-caret-position="83">
+              <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="306">
+              <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1139">
+              <caret line="120" column="10" selection-start-line="120" selection-start-column="10" selection-end-line="125" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/system/SysContact.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/Result.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
+              <folding>
+                <element signature="e#1907#1908#0" expanded="true" />
+                <element signature="e#1944#1945#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/systemMappers/SysContactMapper.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/MyClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientInitializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="355">
+              <caret line="47" column="38" lean-forward="true" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -280,23 +164,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/configuration/MultipartConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="94" column="25" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/EncodUtil.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1453">
-              <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-              <folding>
-                <element signature="e#1310#1311#0" expanded="true" />
-                <element signature="e#1365#1366#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="357">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -440,7 +323,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -451,6 +333,22 @@
             <path>
               <item name="transport" type="b2602c69:ProjectViewProjectNode" />
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name=".mvn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name=".mvn" type="462c0819:PsiDirectoryNode" />
+              <item name="wrapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -473,6 +371,24 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="configuration" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="transport" type="b2602c69:ProjectViewProjectNode" />
@@ -490,7 +406,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="sensorMappers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="transport" type="b2602c69:ProjectViewProjectNode" />
@@ -500,7 +417,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
               <item name="domain" type="462c0819:PsiDirectoryNode" />
-              <item name="sensorModle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="transport" type="b2602c69:ProjectViewProjectNode" />
@@ -511,11 +427,76 @@
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
               <item name="mqttClient" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="nettyService" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="nettyService" type="462c0819:PsiDirectoryNode" />
+              <item name="Handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="serverImpl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="serverImpl" type="462c0819:PsiDirectoryNode" />
+              <item name="mapsServiceImpl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="sysService" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -527,7 +508,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/netty-learning-example" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -537,11 +518,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workSpace\shuojie\.idea" />
       <recent name="D:\workSpace\shuojie\src\main\resources\mapper" />
       <recent name="D:\workSpace\shuojie\src\main\java\com\shuojie\dao\systemMappers" />
       <recent name="D:\workSpace\shuojie\src\main\java\com\shuojie\serverImpl" />
       <recent name="D:\workSpace\shuojie\src\main\java\com\shuojie\utils" />
-      <recent name="D:\workSpace\shuojie\src\main\java\com\shuojie" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.shuojie.mqttClient" />
@@ -1161,7 +1142,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568597061173</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Merge branch 'master' of https://github.com/hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/com/shuojie/mqttClient/Mqttclien.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
+      <created>1569051314727</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1569051314727</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1234">
+      <created>1569052710600</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1569052710600</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1188,32 +1183,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="0" width="1946" height="1056" extended-state="0" />
+    <frame x="1942" y="0" width="1946" height="1056" extended-state="0" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="UI Designer" order="1" />
       <window_info id="Favorites" order="2" sideWeight="0.50359714" side_tool="true" weight="0.22949947" />
       <window_info id="Web" order="3" sideWeight="0.50359714" side_tool="true" weight="0.22949947" />
-      <window_info content_ui="combo" id="Project" order="4" sideWeight="0.80613893" visible="true" weight="0.27224576" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" sideWeight="0.80613893" visible="true" weight="0.27489406" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Structure" order="7" sideWeight="0.19386107" weight="0.23908414" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8940678" weight="0.23218143" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.86528224" weight="0.1738661" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7033898" visible="true" weight="0.32397407" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.86528224" weight="0.5097192" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32937366" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5148305" side_tool="true" visible="true" weight="0.24406047" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.4851695" visible="true" weight="0.24406047" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5158898" side_tool="true" weight="0.2699784" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48411018" weight="0.2699784" />
       <window_info anchor="bottom" id="Run with VisualVM" order="12" sideWeight="0.786475" weight="0.41792658" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.8690096" weight="0.32829374" />
+      <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.8681144" weight="0.300216" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="16" sideWeight="0.65495205" weight="0.46544278" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973376" />
@@ -1285,7 +1280,10 @@
     <MESSAGE value="传感器客户端" />
     <MESSAGE value="传感器客户端修改" />
     <MESSAGE value="Merge branch 'master' of https://github.com/hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/com/shuojie/mqttClient/Mqttclien.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/com/shuojie/mqttClient/Mqttclien.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java&#10;#&#9;src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/com/shuojie/mqttClient/Mqttclien.java&#10;#&#9;src/main/java/com/shuojie/mqttClient/distanceSensorClient.java&#10;#&#9;target/classes/com/shuojie/controller/ContactController.class&#10;#&#9;target/classes/com/shuojie/nettyService/MyServer.class&#10;#&#9;target/classes/com/shuojie/serverImpl/RedisServiceImpl.class&#10;#&#9;target/classes/com/shuojie/serverImpl/UserMerberServiceImpl.class&#10;#&#9;target/classes/com/shuojie/serverImpl/sysServiceImpl/SysContactServiceImpl.class&#10;#&#9;target/classes/com/shuojie/utils/sms/MessageUtil.class&#10;#&#9;target/classes/com/shuojie/utils/snowFlake/SnowFlake.class" />
+    <MESSAGE value="123" />
+    <MESSAGE value="1234" />
+    <option name="LAST_COMMIT_MESSAGE" value="1234" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1304,7 +1302,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java</url>
-          <line>67</line>
+          <line>68</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
@@ -1315,15 +1313,22 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/distanceSensorClient.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java</url>
+          <line>264</line>
           <properties />
-          <option name="timeStamp" value="30" />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java</url>
-          <line>69</line>
+          <line>74</line>
           <properties />
-          <option name="timeStamp" value="37" />
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java</url>
@@ -1346,335 +1351,45 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/OriginLineMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OriginLineMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/MapPointsMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/MapPointsMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/CurrentLineMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/ContactMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/utils/sms/MessageUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ContactMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/ChannelHandlerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/ChannelInboundHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/handler/codec/mqtt/MqttDecoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-          <folding>
-            <element signature="e#748#749#0" expanded="true" />
-            <element signature="e#774#775#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/handler/codec/ReplayingDecoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="56" lean-forward="true" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/handler/codec/ByteToMessageDecoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/ChannelInboundHandlerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/ChannelHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/MqttConnectOptions.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
-          <folding>
-            <element signature="e#1754#1755#0" expanded="true" />
-            <element signature="e#1794#1795#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.1.9.RELEASE/spring-beans-5.1.9.RELEASE.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="247" selection-start-line="247" selection-end-line="247" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="35" column="63" lean-forward="true" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/text/MessageFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="840" column="23" selection-start-line="840" selection-start-column="23" selection-end-line="840" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/text/Format.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="177" column="36" lean-forward="true" selection-start-line="177" selection-start-column="36" selection-end-line="177" selection-end-column="36" />
-          <folding>
-            <element signature="e#5542#5543#0" expanded="true" />
-            <element signature="e#5629#5630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/text/NumberFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143">
-          <caret line="217" column="18" selection-start-line="217" selection-start-column="18" selection-end-line="217" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/SubMsg.java" />
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
-          <folding>
-            <element signature="e#20727#20728#0" expanded="true" />
-            <element signature="e#20771#20772#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/nio/HeapByteBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/internal/CommsCallback.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="186" selection-start-line="186" selection-end-line="186" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="111" column="40" lean-forward="true" selection-start-line="111" selection-start-column="40" selection-end-line="111" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="870" column="65" selection-start-line="870" selection-start-column="65" selection-end-line="870" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/MqttCallback.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/MqttAsyncClient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11084">
-          <caret line="712" column="34" selection-start-line="712" selection-start-column="20" selection-end-line="712" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/nio/ByteBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28832">
-          <caret line="1735" column="28" selection-start-line="1735" selection-start-column="28" selection-end-line="1735" selection-end-column="28" />
-          <folding>
-            <element signature="e#12369#12370#0" expanded="true" />
-            <element signature="e#12420#12421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Softs/jdk1.8.0_181/src.zip!/java/nio/DirectByteBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3570">
-          <caret line="243" column="17" selection-start-line="243" selection-start-column="17" selection-end-line="243" selection-end-column="17" />
-          <folding>
-            <element signature="e#5442#5443#0" expanded="true" />
-            <element signature="e#5489#5490#0" expanded="true" />
-            <element signature="e#15757#15758#0" expanded="true" />
-            <element signature="e#15815#15816#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/ModelMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/distanceSensorClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/CurrentInfoMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="107" column="34" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="34" />
+        <state relative-caret-position="85">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/MqttMessage.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/CurrentLineMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="85">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientInitializer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/MapPointsMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="85">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/MyClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/OriginLineMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/OriginMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="94" column="25" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/HexConvert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/EncodUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1453">
-          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-          <folding>
-            <element signature="e#1310#1311#0" expanded="true" />
-            <element signature="e#1365#1366#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/system/SysContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="119">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1685,24 +1400,330 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/ContactMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Title.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/.name">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="23" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/MyClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/sensorMappers/DistanceSensorMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/configuration/ExecutorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/service/sysService/SysContactService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/CheckPointImpl.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/ContactServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/MapPointsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/CurrentLineServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/CurrentInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/sensorMappers/SensorMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/service/sensorService/AsyncService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sensorServiceImpl/AsyncServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0.jar!/org/eclipse/paho/client/mqttv3/internal/CommsCallback.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1031">
+          <caret line="197" column="51" lean-forward="true" selection-start-line="197" selection-start-column="51" selection-end-line="197" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/Channel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/ChannelId.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/ReturnUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/AbstractChannelHandlerContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="868" selection-start-line="868" selection-end-line="868" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/channel/SimpleChannelInboundHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="43" column="32" lean-forward="true" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/ContactController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/CurrentInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+          <folding>
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-start-column="1" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final.jar!/io/netty/util/concurrent/EventExecutorGroup.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="e#1907#1908#0" expanded="true" />
+            <element signature="e#1944#1945#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-42">
-          <caret line="135" column="46" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="46" />
+        <state relative-caret-position="83">
+          <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="47" column="38" lean-forward="true" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/configuration/MultipartConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1139">
+          <caret line="120" column="10" selection-start-line="120" selection-start-column="10" selection-end-line="125" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1759,11 +1780,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>shuojie</last-edited>
+          <last-edited>transport</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.22929293" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
