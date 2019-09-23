@@ -7,9 +7,11 @@ import com.shuojie.domain.User;
 import com.shuojie.domain.system.SysContact;
 import com.shuojie.service.ContactService;
 import com.shuojie.service.IUserService;
+import com.shuojie.service.UpdateLogService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.service.sysService.SysContactService;
 import com.shuojie.utils.vo.Result;
+import com.shuojie.utils.vo.ReturnUpdateLog;
 import com.shuojie.utils.vo.ReturnUser;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -46,6 +48,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     private  ContactService contactServer;
     @Autowired
     private SysContactService sysContactService;
+    @Autowired
+    private UpdateLogService updateLogService;
 //    private static UserMerberService usermerberservice;
 //    private static IUserService userServer;
 //    private static ContactService contactServer;
@@ -122,6 +126,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setYzm(json.getString("yzm"));
                 user.setUsername(json.getString("username"));
                 user.setIdNumber(json.getString("idNumber"));
+                user.setFirmId(json.getInteger("firmId"));
 //                user.setPosition();//职位
 //                user.setAreaname(login.getAreaname());//所属地区
                 Result results =userServer.register(user);
@@ -154,7 +159,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 break;
             //修改密码
             case "api_xiugaiPassword" :
-                user.setId(json.getInteger("id"));
+                user.setId(json.getLong("id"));
                 user.setMobile(json.getString("mobile"));
                 user.setOldPassword(json.getString("oldpassword"));
                 user.setPassword(json.getString("password"));
@@ -209,8 +214,13 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     ctx.channel().writeAndFlush(new TextWebSocketFrame(respon));
                 }catch (Exception e) {
                     e.printStackTrace();
-
                 }
+                break;
+            //查询版本内容
+            case "api_getUpdateLog" :
+                ReturnUpdateLog updateLog = updateLogService.getUpdateLog();
+                String getUpdateLogReponse = JSONObject.toJSONString(updateLog);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(getUpdateLogReponse));
                 break;
 //                sysContactService.deleteById(sysContactId);
 //                System.out.println(contectlist);
