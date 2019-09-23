@@ -1,12 +1,13 @@
 package com.shuojie.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shuojie.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     List<User> selectUser();
 
     //注册

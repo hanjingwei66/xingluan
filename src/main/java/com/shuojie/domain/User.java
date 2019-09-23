@@ -1,11 +1,15 @@
 package com.shuojie.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 
 @Data
 public class User {
-    private Integer id;
+
+    @TableId
+    private Long id;
 
     private String mobile;//手机号
 
@@ -13,6 +17,7 @@ public class User {
 
     private String command;//用于前台指令标识
 
+    @TableField(exist = false)
     private String oldPassword;//前台传过来的密码
     private String password;
 
@@ -26,13 +31,12 @@ public class User {
 
     private String sex;//性别
 
+    @TableField(exist = false)
     private String yzm;//验证码
-
-    private String contact;//联系我们内容
 
     private UserFirm userFirm;//企业关联表
 
     private Integer  loginFlag ; //登陆标识
 
-    private Integer firmUserId;//企业用户id
+    //private Integer firmUserId;//企业用户id
 }

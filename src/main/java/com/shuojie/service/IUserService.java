@@ -1,12 +1,13 @@
 package com.shuojie.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.shuojie.domain.User;
 import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnUser;
 
 import java.util.List;
 
-public interface IUserService {
+public interface IUserService extends IService<User> {
      List<User> selectUser();
 
      //注册
