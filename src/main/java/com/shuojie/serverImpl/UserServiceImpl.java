@@ -1,5 +1,6 @@
 package com.shuojie.serverImpl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shuojie.dao.UserMapper;
 import com.shuojie.domain.User;
 import com.shuojie.domain.UserFirm;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service("userServiceImpl")
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUserService {
 
     @Resource
     private UserMapper userMapper;
@@ -48,7 +49,7 @@ public class UserServiceImpl implements IUserService {
             String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
             Result res = new Result(200, "registerSuccess","api_register");
             if (user.getYzm().equals(code)) {
-                userMapper.register(user);
+                userMapper.insert(user);
                 return res;
             } else {
                 res.setCode(401);
@@ -62,7 +63,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
     //登录
-    @Override
+    @Override//待定mp
     public ReturnUser toLogin(User user) {
         try {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
@@ -77,7 +78,7 @@ public class UserServiceImpl implements IUserService {
             result.setIdNumber(login.getIdNumber());
             result.setPosition(login.getPosition());
             result.setUserFirm(login.getUserFirm());
-            result.setFirmUserId(login.getFirmUserId());
+            //result.setFirmUserId(login.getFirmUserId());
             userMapper.updateReset(login.getMobile());//重置登陆状态
             return result;
         }else {
@@ -86,7 +87,8 @@ public class UserServiceImpl implements IUserService {
             Integer logflag =userMapper.selectBytelphone(user.getMobile());
             this.result.setLoginFlag(logflag);
         }
-        return result;}catch (Exception e) {
+        return result;
+        }catch (Exception e) {
             return result;
             }
     }
