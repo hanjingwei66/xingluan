@@ -9,5 +9,8 @@
   <sql id="Base_Column_List" >
     id, update_name, update_text
   </sql>
-  
+    <select id="getUpdateLog" resultType="com.shuojie.domain.UpdateLog">
+      select * from update_log;
+    </select>
+
 </mapper>
