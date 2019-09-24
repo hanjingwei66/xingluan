@@ -1,9 +1,12 @@
 package com.shuojie.domain.sensorModle;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class SensorTitle {
+    @TableId
+    Long id;
     byte version;//版本
     byte comand;//2 命令字
     int jizhongqid;//6 集中器 ID

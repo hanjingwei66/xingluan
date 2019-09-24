@@ -1,5 +1,6 @@
 package com.shuojie.nettyService;
 
+import com.shuojie.nettyService.Handler.BinaryWebSocketFrameHandler;
 import com.shuojie.nettyService.Handler.MapsWebSocketFrameHandle;
 import com.shuojie.nettyService.Handler.SensorHandler;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
@@ -25,6 +26,9 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
     private SensorHandler sensorHandler;
     @Autowired
     private MapsWebSocketFrameHandle mapsWebSocketFrameHandle;
+    @Autowired
+    private BinaryWebSocketFrameHandler binaryWebSocketFrameHandler;
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -50,10 +54,10 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 //        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
 
 
-        pipeline.addLast("TextWebSocketFrameHandler",textWebSocketFrameHandler);
-        pipeline.addLast("SensorHandler",sensorHandler);
-        pipeline.addLast("mapsWebSocketFrameHandle",mapsWebSocketFrameHandle);
-//        pipeline.addLast(new BinaryWebSocketFrameHandler());
+        pipeline.addLast("TextWebSocketFrameHandler", textWebSocketFrameHandler);
+        pipeline.addLast("SensorHandler", sensorHandler);
+        pipeline.addLast("mapsWebSocketFrameHandle", mapsWebSocketFrameHandle);
+        pipeline.addLast("BinaryWebSocketFrameHandler", binaryWebSocketFrameHandler);
 //        new StringDecoder();
         //测试git
 

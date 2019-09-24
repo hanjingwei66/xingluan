@@ -19,28 +19,32 @@ import java.net.InetSocketAddress;
 public class MyServer {
     @Autowired
     private WebSocketChannelInitializer webSocketChannelInitializer;
+
     @PostConstruct
-    public void start() throws Exception{
+    public void start() throws Exception {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup wokerGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup,wokerGroup)
+            serverBootstrap.group(bossGroup, wokerGroup)
                     .option(ChannelOption.SO_BACKLOG, 1024)
-                    .option(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
-                    .option(ChannelOption.SO_KEEPALIVE,true)
+//                    .option(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
+//                    .option(ChannelOption.SO_KEEPALIVE,true)
                     .handler(new LoggingHandler(LogLevel.TRACE))//TRACE
                     .channel(NioServerSocketChannel.class)
                     .childHandler(webSocketChannelInitializer);
             ChannelFuture channelFuture = serverBootstrap
                     .bind(new InetSocketAddress(8091)).sync();
-            channelFuture.channel().closeFuture().sync();
             System.out.println("启动成功");
-        }finally {
-            bossGroup.shutdownGracefully();
-            wokerGroup.shutdownGracefully();
+//            channelFuture.channel().closeFuture().sync();
+
+        } finally {
+            System.out.println("关闭");
+//            bossGroup.shutdownGracefully();
+//            wokerGroup.shutdownGracefully();
+
         }
 
     }

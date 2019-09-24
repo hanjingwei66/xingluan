@@ -6,8 +6,8 @@ import com.shuojie.domain.maps.CurrentInfo;
 import com.shuojie.domain.maps.CurrentLine;
 import com.shuojie.domain.maps.MapPoints;
 import com.shuojie.service.ModelService;
-import com.shuojie.service.mapsService.CurrentLineService;
 import com.shuojie.service.mapsService.CurrentInfoService;
+import com.shuojie.service.mapsService.CurrentLineService;
 import com.shuojie.service.mapsService.MapPointsService;
 import com.shuojie.utils.vo.Result;
 import io.netty.buffer.ByteBuf;
@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentMap;
 
 @Slf4j
@@ -50,7 +49,9 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
 
     private ConcurrentMap<Object, Channel> serverChannels = PlatformDependent.newConcurrentHashMap();
 
-    public ConcurrentMap<Object,Channel> getServerChannels() {return serverChannels;}
+    public ConcurrentMap<Object, Channel> getServerChannels() {
+        return serverChannels;
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
@@ -64,13 +65,13 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
         MapPoints mapPoints = new MapPoints();
         Model model = new Model();
 
-        if(!command.substring(0,4).equals("maps")){
+        if (!command.substring(0, 4).equals("maps")) {
             buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
         }
 
-        switch (command){
+        switch (command) {
             //添加当前线路line_name,clid,current_date
             case "maps_insertCurrentInfo":
                // current.setCurrentDate(json.getString("currentDate"));
@@ -85,7 +86,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 currentLine.setCuLiLatitude(json.getDouble("cuLiLatitude"));
                 currentLine.setCuid(Integer.valueOf(json.getString("cuid")));
                 Result curLin = currentLineService.insertCurrentLine(currentLine);
-                String  insertCurrentLineResponse = JSONObject.toJSONString(curLin);
+                String insertCurrentLineResponse = JSONObject.toJSONString(curLin);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertCurrentLineResponse));
                 break;
             //添加数据空间地图初始点
@@ -107,10 +108,10 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                     Result mod = modelService.insertModel(model);
                     String insertModelResponse = JSONObject.toJSONString(mod);
                     ctx.channel().writeAndFlush(new TextWebSocketFrame(insertModelResponse));
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
         }
-}
+    }
 }

@@ -9,13 +9,17 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
+@Component
 @ChannelHandler.Sharable
-public class BinaryWebSocketFrameHandler  extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
+public class BinaryWebSocketFrameHandler extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
     private static final Logger log = LoggerFactory.getLogger(BinaryWebSocketFrameHandler.class);
 
     @Override
@@ -25,10 +29,12 @@ public class BinaryWebSocketFrameHandler  extends SimpleChannelInboundHandler<Bi
         if (msg instanceof BinaryWebSocketFrame) {
             ByteBuf content = msg.content();
             log.info("服务器接收到二进制消息,消息长度:[{}]", msg.content().capacity());
-
+            MultipartFile file = (MultipartFile) msg.content();
+            String originalFilename = file.getOriginalFilename();
+            System.out.println(originalFilename);
             byte[] array = new byte[content.readableBytes()];//转为字节数组
             String path = "F:/test";
-            File dest = new File(path + "/" + "fileName");
+            File dest = new File(path + "/" + ctx.channel().id().asLongText() + msg);
             if (!dest.getParentFile().exists()) { //判断文件父目录是否存在
                 dest.getParentFile().mkdir();
             }
@@ -45,6 +51,7 @@ public class BinaryWebSocketFrameHandler  extends SimpleChannelInboundHandler<Bi
         }
 
     }
+
     private void writeChunk(ChannelHandlerContext ctx) throws IOException {
 //        while (httpDecoder.hasNext()) {
 //            InterfaceHttpData data = httpDecoder.next();

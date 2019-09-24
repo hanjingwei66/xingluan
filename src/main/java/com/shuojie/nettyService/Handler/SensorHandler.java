@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*传感器handler*/
 @Component
 @ChannelHandler.Sharable
-public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     //    private static RedisService redisService;
 //    static {
 //        redisService = SpringUtil.getBean(RedisService.class);
@@ -33,6 +36,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
     //过期时间60秒
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
 
@@ -43,29 +47,29 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
         String command = json.getString("command");
         ByteBuf buf = ctx.alloc().directBuffer();
         try {
-            if(!command.substring(0,5).equals("sensor")){
+            if (!command.substring(0, 5).equals("sensor")) {
                 buf.retain();//检查引用计数器是否是 1
                 msg.retain();
                 ctx.fireChannelRead(msg);
             }
-        }finally {
+        } finally {
             buf.release();
         }
-        switch (command){
+        switch (command) {
             case "sensor_check"://检测数量
-                List<BaseSensor> list =new ArrayList();
-                for(int i=0; i<17;i++){
-                    Integer id=(int)(Math.random()*100);
-                    Integer sesorType=((int) (Math.random()*4));
-                    Integer power =80+((int)(Math.random()*20));
-                    Integer status=0;
-                    Integer signal =2+(int)(Math.random()*3);
-                    String angle=(int)(Math.random()*15)+"";
-                    Double distance =Math.random()*100;
-                    BaseSensor s= new BaseSensor();
-                    s.setSensorId( SnowFlake.nextId());
+                List<BaseSensor> list = new ArrayList();
+                for (int i = 0; i < 17; i++) {
+                    Integer id = (int) (Math.random() * 100);
+                    Integer sesorType = ((int) (Math.random() * 4));
+                    Integer power = 80 + ((int) (Math.random() * 20));
+                    Integer status = 0;
+                    Integer signal = 2 + (int) (Math.random() * 3);
+                    String angle = (int) (Math.random() * 15) + "";
+                    Double distance = Math.random() * 100;
+                    BaseSensor s = new BaseSensor();
+                    s.setSensorId(SnowFlake.nextId());
                     s.setPower(power);
-                    s.setSensorName("Sesor"+id);
+                    s.setSensorName("Sesor" + id);
                     s.setSensorType(sesorType);
                     s.setStatus(status);
                     s.setSignal(signal);
@@ -73,15 +77,15 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
 //                    s.setDistance(distance);
                     list.add(s);
                 }
-                Map map=new HashMap();
-                map.put("list",list);
+                Map map = new HashMap();
+                map.put("list", list);
                 map.put("command", "sensor_check");
                 String sesorList = JSONObject.toJSONString(map);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(sesorList));
-                System.out.println("buf.refCnt()"+buf.refCnt());
+                System.out.println("buf.refCnt()" + buf.refCnt());
                 return;
             case "sensor_allow"://检测
-                if(flag){
+                if (flag) {
 
                 }
 //                String redisauthcode= redisService.get("portal:authCode:"+"demo/topics");//REDIS_KEY_PREFIX_AUTH_CODE
@@ -97,7 +101,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
 //                    public void run() {
 //                        String rediscode= redisService.get("portal:authCode:"+"demo/topics");
 //                        ctx.channel().writeAndFlush(new TextWebSocketFrame(rediscode));
-                        System.out.println("123");
+                System.out.println("123");
 //                    }
 //                }, 100,100);
 
@@ -110,7 +114,6 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
         }
 
     }
-
 
 
     @Override
@@ -150,6 +153,7 @@ public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFra
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+        cause.printStackTrace();
+        ctx.close();
     }
 }
