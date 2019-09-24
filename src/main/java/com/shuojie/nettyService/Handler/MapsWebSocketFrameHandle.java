@@ -73,7 +73,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
         switch (command){
             //添加当前线路line_name,clid,current_date
             case "maps_insertCurrentInfo":
-                current.setCurrentDate(json.getString("currentDate"));
+               // current.setCurrentDate(json.getString("currentDate"));
                 current.setLineName(json.getString("lineName"));
                 Result cur = currentService.insertCurrentInfo(current);
                 String insertCurrentInfoResponse = JSONObject.toJSONString(cur);

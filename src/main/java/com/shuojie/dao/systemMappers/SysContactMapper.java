@@ -1,9 +1,9 @@
 /*
-*
-* SysContactMapper.java
-* 
-* @date 2019-09-06
-*/
+ *
+ * SysContactMapper.java
+ *
+ * @date 2019-09-06
+ */
 package com.shuojie.dao.systemMappers;
 
 import com.shuojie.domain.system.SysContact;

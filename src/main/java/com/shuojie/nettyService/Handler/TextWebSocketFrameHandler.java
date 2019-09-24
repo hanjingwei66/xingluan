@@ -119,6 +119,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 }
 
                 break;
+            case "api_logout":
+                this.handlerRemoved(ctx);
+                Result logoutResult=new Result(200,"SUCCESS","api_logout");
+                String logout = JSONObject.toJSONString(logoutResult);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(logout));
+                break;
             //注册
             case "api_register" :
                 user.setMobile(json.getString("mobile"));
@@ -226,7 +232,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //                System.out.println(contectlist);
 //                ctx.channel().writeAndFlush(new TextWebSocketFrame(contectlist));
 
-            //事件经纬度存储
         }
 
 //        if(command.equals("login")){

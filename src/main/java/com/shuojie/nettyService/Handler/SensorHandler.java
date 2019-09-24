@@ -13,24 +13,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*传感器handler*/
 @Component
 @ChannelHandler.Sharable
 public class SensorHandler  extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-//    private static RedisService redisService;
+    //    private static RedisService redisService;
 //    static {
 //        redisService = SpringUtil.getBean(RedisService.class);
 //    }
     private boolean flag;
-//    @Autowired
+    //    @Autowired
 //    private RedisService redisService;
-@Resource
-private DistanceSensorMapper distanceSensorMapper;
+    @Resource
+    private DistanceSensorMapper distanceSensorMapper;
     @Value("${redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     //过期时间60秒
@@ -46,11 +43,11 @@ private DistanceSensorMapper distanceSensorMapper;
         String command = json.getString("command");
         ByteBuf buf = ctx.alloc().directBuffer();
         try {
-        if(!command.substring(0,5).equals("sensor")){
-            buf.retain();//检查引用计数器是否是 1
-            msg.retain();
-            ctx.fireChannelRead(msg);
-        }
+            if(!command.substring(0,5).equals("sensor")){
+                buf.retain();//检查引用计数器是否是 1
+                msg.retain();
+                ctx.fireChannelRead(msg);
+            }
         }finally {
             buf.release();
         }
@@ -153,7 +150,6 @@ private DistanceSensorMapper distanceSensorMapper;
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
+        super.exceptionCaught(ctx, cause);
     }
 }

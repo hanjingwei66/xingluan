@@ -1,4 +1,8 @@
 package com.shuojie.utils.vo;
+
+import lombok.Data;
+
+@Data
 public  class Result {
     private int code;
     private String message;
@@ -7,30 +11,6 @@ public  class Result {
     public Result(int code, String message, String command) {
         this.code = code;
         this.message = message;
-        this.command = command;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public void setCommand(String command) {
         this.command = command;
     }
 }
