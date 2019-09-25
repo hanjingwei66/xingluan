@@ -5,10 +5,12 @@ import com.shuojie.domain.Model;
 import com.shuojie.domain.maps.CurrentInfo;
 import com.shuojie.domain.maps.CurrentLine;
 import com.shuojie.domain.maps.MapPoints;
+import com.shuojie.domain.maps.Origin;
 import com.shuojie.service.ModelService;
 import com.shuojie.service.mapsService.CurrentInfoService;
 import com.shuojie.service.mapsService.CurrentLineService;
 import com.shuojie.service.mapsService.MapPointsService;
+import com.shuojie.service.mapsService.OriginService;
 import com.shuojie.utils.vo.Result;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 @Slf4j
@@ -44,6 +47,9 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
 
     @Autowired
     private ModelService modelService;
+
+    @Autowired
+    private OriginService originService;
 
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -72,9 +78,9 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
         }
 
         switch (command) {
-            //添加当前线路line_name,clid,current_date
+            //添加当前线路line_name,clid,current_shijian
             case "maps_insertCurrentInfo":
-               // current.setCurrentDate(json.getString("currentDate"));
+                current.setCurrentShijian(json.getString("currentShijian"));
                 current.setLineName(json.getString("lineName"));
                 Result cur = currentService.insertCurrentInfo(current);
                 String insertCurrentInfoResponse = JSONObject.toJSONString(cur);
@@ -98,7 +104,13 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 String insertMapPointsResponse = JSONObject.toJSONString(map);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertMapPointsResponse));
                 break;
-            //添加模型信息
+            //线路方案切换
+            case "maps_getOriginLine":
+                List<Origin> originLine = originService.getOriginLine();
+                String originLineResponse = JSONObject.toJSONString(originLine);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(originLineResponse));
+                break;
+                //添加模型信息
             case "maps_insertModel":
                 try {
                     model.setModelName(json.getString("modelName"));
@@ -111,6 +123,12 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
+            //查询全部模型信息
+            case"maps_getModel":
+                List<Model> modelList = modelService.getModel();
+                String getModelReponse = JSONObject.toJSONString(modelList);
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(getModelReponse));
                 break;
         }
     }

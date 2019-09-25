@@ -1,5 +1,8 @@
 package com.shuojie.serverImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shuojie.dao.ModelMapper;
 import com.shuojie.domain.Model;
 import com.shuojie.service.ModelService;
@@ -12,14 +15,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service("modelServiceImpl")
-public class ModelServiceImpl implements ModelService {
+public class ModelServiceImpl extends ServiceImpl<ModelMapper,Model> implements ModelService {
     @Resource
     private ModelMapper modelMapper;
     private Result result;
 
     @Override
     public Result insertModel(Model model) {
-            modelMapper.insertModel(model);
+            modelMapper.insert(model);
             if (!StringUtil.isNullOrEmpty(model.getModelName())
                     && model.getMoLatitude() != null
                     && model.getMoLongitude() != null
@@ -33,6 +36,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public List<Model> getModel() {
-        return modelMapper.getModel();
+        LambdaQueryWrapper<Model> modelLambdaQueryWrapper = Wrappers.lambdaQuery();
+        return modelMapper.getModel(modelLambdaQueryWrapper);
     }
 }

@@ -43,7 +43,7 @@ public class Mqttclien  {
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
     SensorTitle tt=new SensorTitle();
-    @PostConstruct
+    //@PostConstruct
     public void start() throws Exception {
         String broker = "tcp://47.98.193.195:1883";
         String clientId = "JavaSample12";

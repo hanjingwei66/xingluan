@@ -1,5 +1,6 @@
 package com.shuojie.serverImpl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shuojie.dao.ContactMapper;
 import com.shuojie.domain.Contact;
 import com.shuojie.service.ContactService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service("contactServiceImpl")
-public class ContactServiceImpl implements ContactService {
+public class ContactServiceImpl extends ServiceImpl<ContactMapper,Contact> implements ContactService {
 
     @Resource
     private ContactMapper contactMapper;
@@ -18,7 +19,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Result insertContact(Contact contact) {
-        contactMapper.insertContact(contact);
+        contactMapper.insert(contact);
         if (contact.getContactText() != null){
             result = new Result(200,"contactSuccess","insertContact");
         }else {
