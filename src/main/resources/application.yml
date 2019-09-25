@@ -9,10 +9,15 @@ spring:
     username: users
     password: root
 #    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-
-#netty:
-#  host: 127.0.0.1
-#  port: 7397
+  http:
+    multipart:
+      max-file-size: 200Mb   #文件上传大小
+      max-request-size: 4000Mb  #最打请求大小
+#上传位置
+uploadDir: F:\mystudy\pic\
+netty:
+  host: 127.0.0.1
+  port: 8091
 #mybatis:
 #  mapper-locations: classpath:mapper/*.xml
 #  type-aliases-package: com.shuojie.domain
@@ -41,8 +46,7 @@ jedis:
 
 logging:
   level:
-    com:
-      example:
-        mapper: debug
+    root: warn
+    com.shuojie.dao: debug
   pattern:
     console: '%p%m%n'

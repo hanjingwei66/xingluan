@@ -42,8 +42,8 @@ public class Mqttclien  {
     //过期时间60秒
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
-    SensorTitle tt=new SensorTitle();
-    @PostConstruct
+
+//    @PostConstruct
     public void start() throws Exception {
         String broker = "tcp://47.98.193.195:1883";
         String clientId = "JavaSample12";
@@ -75,6 +75,7 @@ public class Mqttclien  {
                     ByteBuffer wrap = ByteBuffer.wrap(payload);
 
                     if(payload!=null&&payload.length>=27){
+                        SensorTitle tt=new SensorTitle();
                         tt.setVersion(wrap.get(0));
                         tt.setComand(wrap.get(1));
                         tt.setJizhongqid(wrap.getInt(2));
@@ -89,7 +90,7 @@ public class Mqttclien  {
                         tt.setTime(wrap.getInt(18));
                         tt.setZdzxqk(wrap.get(22));
                         tt.setNum(wrap.getShort(23));
-                        tt.setDataLength(wrap.getShort(25));
+                        tt.setSensorDataLength(wrap.getShort(25));
 //                        byte [] contant=new byte[tt.getDataLength()];
 //                        if(contant!=null&&contant[0]!=0&&payload.length>27){
 //                            for (int i = 0; i <payload.length -27 ; i++) {
@@ -99,7 +100,7 @@ public class Mqttclien  {
 //                        }
 
 //                        asyncService.executeAsync(tt);
-//                        sensorMapper.insert(tt);
+                        sensorMapper.insert(tt);
                         System.out.println(tt.toString());
                     }
 
