@@ -11,8 +11,6 @@ import com.shuojie.service.UpdateLogService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.service.sysService.SysContactService;
 import com.shuojie.utils.vo.Result;
-import com.shuojie.utils.vo.ReturnUpdateLog;
-import com.shuojie.utils.vo.ReturnUser;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -107,7 +105,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 System.out.println(user.toString());
-                ReturnUser result = userServer.toLogin(user);
+                Result result = userServer.toLogin(user);
 //                String id =ctx.channel().id().asLongText();
 //                result.setChanleId(id);
                 result.setCommand("api_login");
@@ -203,7 +201,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     for (int i = 0; i < array.size(); i++) {
                         sysContactService.deleteById(array.getInteger(i));
                     }
-
                     Result result1 = new Result(200, "SUCCESS", "api_deleteSysMsg");
                     String respon = JSONObject.toJSONString(result1);
 
@@ -226,7 +223,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 break;
             //查询版本内容
             case "api_getUpdateLog" :
-                ReturnUpdateLog updateLog = updateLogService.getUpdateLog();
+                Result updateLog = updateLogService.getUpdateLog();
                 String getUpdateLogReponse = JSONObject.toJSONString(updateLog);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(getUpdateLogReponse));
                 break;

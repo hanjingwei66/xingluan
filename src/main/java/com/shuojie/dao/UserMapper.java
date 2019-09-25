@@ -11,7 +11,7 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectUser();
 
     //注册
-    void register(User user);
+    //void register(User user);
 
     //登录
     User toLogin(User user);
@@ -22,7 +22,7 @@ public interface UserMapper extends BaseMapper<User> {
     void updateUserPassworld(User newUser);
 
     //个人信息
-    User findUserById(User user);
+   // User findUserById(User user);
 
     //修改密码
     User xiugaiGetUserByid(User user);

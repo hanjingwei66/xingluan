@@ -7,7 +7,6 @@ import com.shuojie.domain.UserFirm;
 import com.shuojie.service.IUserService;
 import com.shuojie.service.RedisService;
 import com.shuojie.utils.vo.Result;
-import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
 
     @Resource
     private UserMapper userMapper;
-
-     private ReturnUser result;
 
      private Result baseResult;
 
@@ -64,33 +61,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     }
     //登录
     @Override//待定mp
-    public ReturnUser toLogin(User user) {
-        try {
+    public Result toLogin(User user) {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         User login = userMapper.toLogin(user);
         if (login != null&& login.getLoginFlag() <= 3){
-            ReturnUser result =new ReturnUser(200,"loginSuccess","api_login");
-            result.setId(login.getId());
-            result.setMobile(login.getMobile());
-            result.setFirmId(login.getFirmId());
-            result.setUsername(login.getUsername());
-            result.setIdNumber(login.getIdNumber());
-            result.setPosition(login.getPosition());
-            result.setUserFirm(login.getUserFirm());
-            //result.setFirmUserId(login.getFirmUserId());
+            User returnUser = new User();
+            returnUser.setId(login.getId());
+            returnUser.setMobile(login.getMobile());
+            returnUser.setFirmId(login.getFirmId());
+            returnUser.setUsername(login.getUsername());
+            returnUser.setIdNumber(login.getIdNumber());
+            returnUser.setPosition(login.getPosition());
+            returnUser.setUserFirm(login.getUserFirm());
+            //returnUser.setFirmUserId(login.getFirmUserId());
+            Result<User> result =new Result(200,"loginSuccess","api_login",returnUser);
             userMapper.updateReset(login.getMobile());//重置登陆状态
             return result;
         }else {
-            result = new ReturnUser(201,"passwordError","api_login");
+            Result<User> result = new Result(201,"passwordError","api_login",user);
             userMapper.updateStuse(user);
             Integer logflag =userMapper.selectBytelphone(user.getMobile());
-            this.result.setLoginFlag(logflag);
-        }
-        return result;
-        }catch (Exception e) {
+            user.setLoginFlag(logflag);
             return result;
-            }
+        }
     }
 
     //忘记密码
@@ -108,8 +102,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
             return baseResult;
         }else {
             baseResult = new Result(201,"updateError","api_updatePassword");
+            return baseResult;
         }
-        return baseResult;
     }
 
     //修改密码
@@ -138,17 +132,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
             baseResult = new Result(401,"yzmError","api_xiugaiPassword");
         }
         return baseResult;
-    }
-
-    //查询用户信息
-    public ReturnUser findUserById(User user){
-        ReturnUser res= new ReturnUser(200,"查询成功","");
-        User user1 = userMapper.findUserById(user);
-        res.setUsername(user1.getUsername());
-        res.setMobile(user1.getMobile());
-        res.setFirmId(user1.getFirmId());
-        res.setSex(user1.getSex());
-        return res;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.shuojie.serverImpl.mapsServiceImpl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shuojie.dao.mapsMapper.MapPointsMapper;
 import com.shuojie.domain.maps.MapPoints;
 import com.shuojie.service.mapsService.MapPointsService;
@@ -11,7 +12,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 @Service("mapPointsServiceImpl")
-public class MapPointsServiceImpl implements MapPointsService {
+public class MapPointsServiceImpl extends ServiceImpl<MapPointsMapper,MapPoints> implements MapPointsService {
     @Resource
     private MapPointsMapper mapPointsMapper;
 
@@ -20,7 +21,7 @@ public class MapPointsServiceImpl implements MapPointsService {
 
     @Override
     public Result insertMapPoints(MapPoints mapPoints) {
-            mapPointsMapper.insertMapPoints(mapPoints);
+            mapPointsMapper.insert(mapPoints);
             if ( mapPoints.getMaLatitude() != null
                     && mapPoints.getMaLongitude() != null
                     && !StringUtil.isNullOrEmpty(mapPoints.getPointsName())) {

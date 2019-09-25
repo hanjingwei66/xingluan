@@ -5,7 +5,6 @@ import com.shuojie.domain.User;
 import com.shuojie.service.IUserService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.utils.vo.Result;
-import com.shuojie.utils.vo.ReturnUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,8 +53,8 @@ public class UserController {
      return "success";
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ReturnUser login(@RequestBody User user){
-        ReturnUser result = userServer.toLogin(user);
+    public Result login(@RequestBody User user){
+        Result result = userServer.toLogin(user);
         return result;
  }
  //发送短信
@@ -70,13 +69,6 @@ public class UserController {
     @RequestMapping(value = "/updatePassword",method = RequestMethod.POST)
     public Result updatePassword(@RequestBody User user){
         return  userServer.updateUserPassworld(user);
-    }
-
-    //用户信息查询
-    @RequestMapping(value = "/findUserById",method = RequestMethod.POST)
-    public ReturnUser findUserById(@RequestBody User user){
-        ReturnUser returnUser = userServer.findUserById(user);
-        return returnUser;
     }
 
     //修改密码

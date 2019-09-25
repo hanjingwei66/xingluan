@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public  class Result<T> {
+public  class Result <T>{
     private int code;
     private String message;
     private String command;
