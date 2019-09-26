@@ -1,6 +1,7 @@
 package com.shuojie.service.mapsService;
 
 import com.shuojie.domain.maps.Origin;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnOrigin;
 
 import java.util.ArrayList;
@@ -13,5 +14,5 @@ public interface OriginService {
 
     ArrayList getOriginName();
 
-    List<Origin> getOriginLine();
+    Result getOriginLine();
 }

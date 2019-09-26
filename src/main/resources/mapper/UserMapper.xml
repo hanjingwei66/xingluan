@@ -55,10 +55,6 @@
     insert into user (id,mobile,password,firm_id,username,id_number,firm_user_id)
     values (#{id},#{mobile},#{password},#{firmId},#{username},#{idNumber},#{firmUserId})
   </insert>
-  <!--查询用户信息-->
-  <select id="findUserById"  resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
-    select * from user where id = #{id}
-  </select>
   <!--修改密码-->
   <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
       update user set password = #{password} where id = #{id}

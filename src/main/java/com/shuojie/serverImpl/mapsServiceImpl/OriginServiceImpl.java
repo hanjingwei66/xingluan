@@ -3,6 +3,7 @@ package com.shuojie.serverImpl.mapsServiceImpl;
 import com.shuojie.dao.mapsMapper.OriginMapper;
 import com.shuojie.domain.maps.Origin;
 import com.shuojie.service.mapsService.OriginService;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,15 @@ public class OriginServiceImpl implements OriginService {
 
     //查询线路名称和线路经纬度
     @Override
-    public List<Origin> getOriginLine() {
+    public Result getOriginLine() {
         List<Origin> originLine = originMapper.getOriginLine();
-        return originLine;
+        if (originLine != null){
+            Result<List<Origin>> listResult = new Result<>(200, "getOriginLineSuccess", "getOriginLine",originLine);
+            return listResult;
+        }else {
+            Result result = new Result(201, "getOriginLineError", "getOriginLine");
+            return result;
+        }
     }
 
 }
