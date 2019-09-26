@@ -21,6 +21,6 @@ public class SensorTitle {
     int time;//15 时间戳 0x01：掉线，0x00：在线
     byte zdzxqk;//16 终端在线情况
     short num;//17 终端入网总数
-    short dataLength;// 18 数据长度
-    String data;//19 有效数据
+    short sensorDataLength;// 18 数据长度
+    String sensorData;//19 有效数据
 }
