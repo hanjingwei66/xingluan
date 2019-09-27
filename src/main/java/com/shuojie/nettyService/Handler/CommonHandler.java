@@ -37,7 +37,7 @@ public class CommonHandler extends SimpleChannelInboundHandler<TextWebSocketFram
             case "common_pictureList"://检测数量
                 PictureList pictureList = JSONObject.parseObject(msg.text(),PictureList.class);
                 List<PictureList> pictureLists = pictureListService.selectList(pictureList);
-                Result result=new Result (200,"SUCCESS","common_pictureList",pictureLists);
+                Result result =new Result (200,"SUCCESS","common_pictureList",pictureLists);
                 String jsonPictureLists = JSONObject.toJSONString(result);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(jsonPictureLists));
                 break;

@@ -24,7 +24,7 @@ public  class Result <T>{
         this.message = message;
         this.command = command;
     }
-    public Result(int code, String message, String command,List list) {
+    public Result(int code, String message, String command,List<T> list) {
         this.code = code;
         this.message = message;
         this.command = command;

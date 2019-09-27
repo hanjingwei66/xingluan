@@ -4,7 +4,6 @@ import com.shuojie.dao.mapsMapper.OriginMapper;
 import com.shuojie.domain.maps.Origin;
 import com.shuojie.service.mapsService.OriginService;
 import com.shuojie.utils.vo.Result;
-import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,17 +15,15 @@ public class OriginServiceImpl implements OriginService {
     @Resource
     private OriginMapper originMapper;
 
-    private ReturnOrigin returnOrigin;
-
     //根据orName查询经纬度
-    @Override
+/*    @Override
     public ReturnOrigin getByName(Origin origin) {
         ArrayList o = originMapper.getByName(origin);
         ReturnOrigin returnOrigin= new ReturnOrigin();
         returnOrigin.setOrName(getOriginName());
         returnOrigin.setOriginAndLine(o);
         return returnOrigin;
-    }
+    }*/
 
     //查询orName
     public ArrayList getOriginName(){
@@ -40,7 +37,7 @@ public class OriginServiceImpl implements OriginService {
     public Result getOriginLine() {
         List<Origin> originLine = originMapper.getOriginLine();
         if (originLine != null){
-            Result<List<Origin>> listResult = new Result<>(200, "getOriginLineSuccess", "getOriginLine",originLine);
+            Result listResult = new Result<List<Origin>>(200, "getOriginLineSuccess", "getOriginLine",originLine);
             return listResult;
         }else {
             Result result = new Result(201, "getOriginLineError", "getOriginLine");

@@ -8,7 +8,6 @@ package com.shuojie.dao.mapsMapper;
 
 
 import com.shuojie.domain.maps.Origin;
-import com.shuojie.utils.vo.ReturnOrigin;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
 public interface OriginMapper {
 
     //根据orName查询经纬度
-    ArrayList<ReturnOrigin> getByName(Origin origin);
+    //ArrayList<ReturnOrigin> getByName(Origin origin);
 
     //查询orName
     ArrayList getOriginName();
