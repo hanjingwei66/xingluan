@@ -10,5 +10,5 @@ public interface ModelService extends IService<Model> {
 
     Result insertModel(Model model);
 
-    List<Model> getModel();
+    Result getModel();
 }
