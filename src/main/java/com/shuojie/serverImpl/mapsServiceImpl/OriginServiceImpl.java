@@ -4,7 +4,6 @@ import com.shuojie.dao.mapsMapper.OriginMapper;
 import com.shuojie.domain.maps.Origin;
 import com.shuojie.service.mapsService.OriginService;
 import com.shuojie.utils.vo.Result;
-import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,9 +26,6 @@ public class OriginServiceImpl implements OriginService {
     }*/
 
     @Override
-    public ReturnOrigin getByName(Origin origin) {
-        return null;
-    }
 
     //查询orName
     public ArrayList getOriginName(){
