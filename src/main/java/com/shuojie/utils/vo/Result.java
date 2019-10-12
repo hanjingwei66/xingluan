@@ -12,6 +12,7 @@ public  class Result <T>{
     private String command;
     private T data;
     private List list;
+    private Integer type;
 
     public Result(int code, String message, String command, T data) {
         this.code = code;

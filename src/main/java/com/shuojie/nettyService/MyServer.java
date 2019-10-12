@@ -45,7 +45,7 @@ public class MyServer {
             if (null != channelFuture && channelFuture.isSuccess()) {
                 logger.info("Netty正在启动。。。 ");
             } else {
-                logger.error("itstack-demo-netty server start error. ");
+                logger.error("itstac k-demo-netty server start error. ");
             }
         }
         return channelFuture;
@@ -62,7 +62,7 @@ public class MyServer {
         return channel;
     }
 
-//
+
 //    public void start() throws Exception {
 //
 //        EventLoopGroup bossGroup = new NioEventLoopGroup();

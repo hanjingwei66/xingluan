@@ -12,7 +12,9 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @ChannelHandler.Sharable
@@ -34,10 +36,12 @@ public class CommonHandler extends SimpleChannelInboundHandler<TextWebSocketFram
             buf.release();
         }
         switch (command) {
-            case "common_pictureList"://检测数量
+            case "common_pictureList"://图例集
+                Integer type = json.getInteger("type");
                 PictureList pictureList = JSONObject.parseObject(msg.text(),PictureList.class);
                 List<PictureList> pictureLists = pictureListService.selectList(pictureList);
-                Result result =new Result (200,"SUCCESS","common_pictureList",pictureLists);
+                Result result=new Result (200,"SUCCESS","common_pictureList",pictureLists);
+                result.setType(type);
                 String jsonPictureLists = JSONObject.toJSONString(result);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(jsonPictureLists));
                 break;

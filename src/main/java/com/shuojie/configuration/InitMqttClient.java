@@ -7,7 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(value = 2)
+@Order(value = 1)
 public class InitMqttClient implements CommandLineRunner {
     @Autowired
     private Mqttclien  mqttclien;
