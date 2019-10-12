@@ -35,8 +35,15 @@ public class ModelServiceImpl extends ServiceImpl<ModelMapper,Model> implements 
     }
 
     @Override
-    public List<Model> getModel() {
+    public Result getModel() {
         LambdaQueryWrapper<Model> modelLambdaQueryWrapper = Wrappers.lambdaQuery();
-        return modelMapper.getModel(modelLambdaQueryWrapper);
+        List<Model> model = modelMapper.getModel(modelLambdaQueryWrapper);
+        if (model != null){
+            Result<Model> modelResult = new Result<>(200, "getModelSuccess", "getModel", model);
+            return modelResult;
+        }else {
+            Result modelResult = new Result(201, "getModelSuccess", "getModel");
+            return modelResult;
+        }
     }
 }

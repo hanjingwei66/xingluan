@@ -10,7 +10,6 @@
     <result column="id_number" property="idNumber" jdbcType="CHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
     <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
   </resultMap>
 
@@ -22,7 +21,6 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
         <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
         <result column="position" property="position" jdbcType="VARCHAR" />
-        <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
         <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
         <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
           <id property="fid" column="fid" jdbcType="INTEGER"/>

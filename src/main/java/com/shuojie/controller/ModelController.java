@@ -23,7 +23,7 @@ public class ModelController {
     }
 
     @RequestMapping(value = "/getModel", method = RequestMethod.GET)
-    public List<Model> getModel() {
+    public Result getModel() {
         return modelService.getModel();
     }
 }

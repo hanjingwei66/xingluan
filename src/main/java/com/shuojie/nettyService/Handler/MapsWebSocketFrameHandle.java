@@ -132,7 +132,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
 
             //查询全部模型信息
             case"maps_getModel":
-                List<Model> modelList = modelService.getModel();
+                Result modelList = modelService.getModel();
                 String getModelReponse = JSONObject.toJSONString(modelList);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(getModelReponse));
                 break;
