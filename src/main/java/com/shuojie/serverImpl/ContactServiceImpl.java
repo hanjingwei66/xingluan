@@ -21,9 +21,9 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper,Contact> imple
     public Result insertContact(Contact contact) {
         contactMapper.insert(contact);
         if (contact.getContactText() != null){
-            result = new Result(200,"contactSuccess","insertContact");
+            result = new Result(200,"contactSuccess","api_insertContact");
         }else {
-            result = new Result(201,"contactError","insertContact");
+            result = new Result(201,"contactError","api_insertContact");
         }
         return result;
     }

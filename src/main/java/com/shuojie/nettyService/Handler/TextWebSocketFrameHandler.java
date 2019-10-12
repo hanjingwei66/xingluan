@@ -120,10 +120,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
                 break;
             case "api_logout":
-                this.handlerRemoved(ctx);
+
                 Result logoutResult=new Result(200,"SUCCESS","api_logout");
                 String logout = JSONObject.toJSONString(logoutResult);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(logout));
+                this.handlerRemoved(ctx);
                 break;
             //注册
             case "api_register":
@@ -167,7 +168,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             case "api_xiugaiPassword" :
                 user.setId(json.getLong("id"));
                 user.setMobile(json.getString("mobile"));
-                user.setOldPassword(json.getString("oldpassword"));
+                user.setOldPassword(json.getString("oldPassword"));
                 user.setPassword(json.getString("password"));
                 user.setYzm(json.getString("yzm"));
                 Result response = userServer.xiugaiUserPassworld(user);
@@ -177,14 +178,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 break;
             //添加留言
             case "api_insertContact":
-                contact.setId(Integer.valueOf(json.getString("id")));
+                contact.setId(Long.valueOf(json.getString("id")));
                 contact.setContactText(new String(json.getString("contactText")));
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
                 break;
             case "api_selectSysMsg":
-                Integer id = json.getInteger("id");
+                Long id = json.getLong("id");
                 List<SysContact> list = sysContactService.selectById(id);
                 Map map = new HashMap();
                 map.put("data", list);

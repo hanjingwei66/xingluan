@@ -9,7 +9,8 @@ public interface SysContactService {
     void insert(SysContact sysContact);
     void update();
     void delete();
-    List <SysContact> selectById(Integer id);
+    List <SysContact> selectById(Long id);
     void deleteById(Integer sysContactId);
     void updateStatus(Integer sysContactId);
+
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface SysContactMapper {
 
-    List<SysContact> selectById(Integer id);
+    List<SysContact> selectById(Long id);
     void deleteById(Integer sysContactId);
     void updateStatus(Integer sysContactId);
 }

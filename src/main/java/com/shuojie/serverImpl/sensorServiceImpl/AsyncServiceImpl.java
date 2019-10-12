@@ -4,13 +4,14 @@ import com.shuojie.dao.sensorMappers.SensorMapper;
 import com.shuojie.domain.sensorModle.SensorTitle;
 import com.shuojie.service.sensorService.AsyncService;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AsyncServiceImpl implements AsyncService {
-    @Mapper
-    SensorMapper sensorMapper;
+    @Autowired
+    private SensorMapper sensorMapper;
 
     @Override
     @Async("asyncServiceExecutor")

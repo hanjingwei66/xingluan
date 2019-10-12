@@ -27,7 +27,7 @@ public class SysContactServiceImpl implements SysContactService {
 
     }
 
-    public List<SysContact> selectById(Integer id){
+    public List<SysContact> selectById(Long id){
 
         List<SysContact> list = sysContactMapper.selectById(id);
 

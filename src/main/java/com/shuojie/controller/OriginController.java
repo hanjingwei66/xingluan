@@ -2,6 +2,7 @@ package com.shuojie.controller;
 
 import com.shuojie.domain.maps.Origin;
 import com.shuojie.service.mapsService.OriginService;
+import com.shuojie.utils.vo.Result;
 import com.shuojie.utils.vo.ReturnOrigin;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class OriginController {
         return originServer.getOriginName();
     }
     @RequestMapping(value = "/getOriginLine",method = RequestMethod.GET)
-    public List<Origin> getOriginLine(){
+    public Result getOriginLine(){
         return originServer.getOriginLine();
     }
 }

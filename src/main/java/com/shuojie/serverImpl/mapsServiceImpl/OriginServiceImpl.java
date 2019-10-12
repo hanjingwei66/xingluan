@@ -40,7 +40,7 @@ public class OriginServiceImpl implements OriginService {
     public Result getOriginLine() {
         List<Origin> originLine = originMapper.getOriginLine();
         if (originLine != null){
-            Result<List<Origin>> listResult = new Result<>(200, "getOriginLineSuccess", "getOriginLine",originLine);
+            Result<List<Origin>> listResult = new Result(200, "getOriginLineSuccess", "getOriginLine",originLine);
             return listResult;
         }else {
             Result result = new Result(201, "getOriginLineError", "getOriginLine");

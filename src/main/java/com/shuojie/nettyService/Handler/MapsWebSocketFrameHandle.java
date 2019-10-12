@@ -106,7 +106,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 break;
             //线路方案切换
             case "maps_getOriginLine":
-                List<Origin> originLine = originService.getOriginLine();
+                Result originLine = originService.getOriginLine();
                 String originLineResponse = JSONObject.toJSONString(originLine);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(originLineResponse));
                 break;

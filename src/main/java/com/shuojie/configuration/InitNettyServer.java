@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.net.InetSocketAddress;
 
 @Component
-@Order(value = 1)
+@Order(value = 2)
 public class InitNettyServer implements CommandLineRunner {
     @Value("${netty.host}")
     private String host;
@@ -26,7 +26,7 @@ public class InitNettyServer implements CommandLineRunner {
         InetSocketAddress address = new InetSocketAddress(host, port);
         ChannelFuture channelFuture = myServer.bing(address);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> myServer.destroy()));
-//        channelFuture.channel().closeFuture().syncUninterruptibly();
+       channelFuture.channel().closeFuture().sync();
        System.out.println("Netty 服务端启动成功");
     }
 }

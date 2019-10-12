@@ -12,6 +12,7 @@ public  class Result <T>{
     private String command;
     private T data;
     private List list;
+    private Integer type;
 
     public Result(int code, String message, String command, T data) {
         this.code = code;
@@ -24,7 +25,7 @@ public  class Result <T>{
         this.message = message;
         this.command = command;
     }
-    public Result(int code, String message, String command,List list) {
+    public Result(int code, String message, String command,List<T> list) {
         this.code = code;
         this.message = message;
         this.command = command;
