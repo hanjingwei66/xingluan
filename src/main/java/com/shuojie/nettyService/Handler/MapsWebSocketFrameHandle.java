@@ -78,6 +78,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
         }
 
         switch (command) {
+
             //添加当前线路line_name,clid,current_shijian
             case "maps_insertCurrentInfo":
                 current.setCurrentShijian(json.getString("currentShijian"));
@@ -86,6 +87,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 String insertCurrentInfoResponse = JSONObject.toJSONString(cur);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertCurrentInfoResponse));
                 break;
+
             //添加当前线路经纬度
             case "maps_insertCurrentLine":
                 currentLine.setCuLiLongitude(json.getDouble("cuLiLongitude"));
@@ -95,6 +97,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 String insertCurrentLineResponse = JSONObject.toJSONString(curLin);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertCurrentLineResponse));
                 break;
+
             //添加数据空间地图初始点
             case "maps_insertMapPoints":
                 mapPoints.setMaLongitude(json.getDouble("maLongitude"));
@@ -104,12 +107,14 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                 String insertMapPointsResponse = JSONObject.toJSONString(map);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(insertMapPointsResponse));
                 break;
+
             //线路方案切换
             case "maps_getOriginLine":
                 Result originLine = originService.getOriginLine();
                 String originLineResponse = JSONObject.toJSONString(originLine);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(originLineResponse));
                 break;
+
                 //添加模型信息
             case "maps_insertModel":
                 try {
@@ -124,6 +129,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
                     e.printStackTrace();
                 }
                 break;
+
             //查询全部模型信息
             case"maps_getModel":
                 List<Model> modelList = modelService.getModel();
