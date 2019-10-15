@@ -10,7 +10,6 @@
     <result column="id_number" property="idNumber" jdbcType="CHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
     <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
   </resultMap>
 
@@ -22,7 +21,6 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
         <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
         <result column="position" property="position" jdbcType="VARCHAR" />
-        <result column="firm_user_id" property="firmUserId" jdbcType="INTEGER"/>
         <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
         <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
           <id property="fid" column="fid" jdbcType="INTEGER"/>
@@ -46,6 +44,9 @@
   <select id="getUserByMobile" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
       select * from user where mobile = #{mobile}
     </select>
+  <select id="getMobileList" resultMap="BaseResultMap" parameterType="list">
+    select mobile from user
+  </select>
   <!--登录-->
   <select id="toLogin" resultMap="BaseFirm" parameterType="com.shuojie.domain.User">
      select * from user u left join user_firm f on(u.firm_id=f.fid) where mobile = #{mobile} and password = #{password}
@@ -55,10 +56,6 @@
     insert into user (id,mobile,password,firm_id,username,id_number,firm_user_id)
     values (#{id},#{mobile},#{password},#{firmId},#{username},#{idNumber},#{firmUserId})
   </insert>
-  <!--查询用户信息-->
-  <select id="findUserById"  resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
-    select * from user where id = #{id}
-  </select>
   <!--修改密码-->
   <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
       update user set password = #{password} where id = #{id}

@@ -92,12 +92,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.31</version>
         </dependency>
-        <!--mqttclient-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.fusesource.mqtt-client</groupId>-->
-        <!--            <artifactId>mqtt-client</artifactId>-->
-        <!--            <version>1.12</version>-->
-        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.eclipse.paho</groupId>
@@ -136,12 +130,20 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.29</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

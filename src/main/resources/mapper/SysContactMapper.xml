@@ -14,13 +14,13 @@
     <!--sys_contact_id, id, sys_contact_text, sys_contact_status, start_time, end_time, delete_flag-->
   <!--</sql>-->
 
-  <select id="selectById" parameterType="Integer" resultType="com.shuojie.domain.system.SysContact">
+  <select id="selectById" parameterType="java.lang.Long" resultType="com.shuojie.domain.system.SysContact">
     select * from sys_contact where id=#{id} and delete_flag=0
 </select>
-  <update id="deleteById" parameterType="Integer" >
+  <update id="deleteById" parameterType="java.lang.Integer" >
     update sys_contact set delete_flag=1 where sys_contact_id=#{sysContactId}
   </update>
-  <update id="updateStatus" parameterType="Integer" >
+  <update id="updateStatus" parameterType="java.lang.Integer" >
     update sys_contact set sys_contact_status=1 where sys_contact_id=#{sysContactId}
   </update>
 </mapper>
