@@ -9,6 +9,7 @@ import com.shuojie.service.RedisService;
 import com.shuojie.utils.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -41,6 +42,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     @Override
     public Result register(User user) {
         try {
+//            List mobileList = userMapper.getMobileList();
+//            for (Object mobile :mobileList) {
+//                if ((mobile).equals(user.getMobile())){
+//                   return baseResult = new Result(401, "mobileRepeat", "api_register");
+//                }
+//            }
             String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
             user.setPassword(md5Password);
             String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + user.getMobile());
@@ -54,7 +61,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
                 res.setCommand("register");
             }
             return res;
-        } catch (Exception e) {
+        } catch(DuplicateKeyException e){
+            return new Result(401, "mobileRepeat","api_register");
+        }catch (Exception e) {
             e.printStackTrace();
             return new Result(201, "registerError","api_register");
         }
@@ -91,18 +100,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     //根据手机号查用户信息
     @Override
     public Result updateUserPassworld(User newUser) {
-        User oldUser = userMapper.getUserByMobile(newUser);//老的用户
-        String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
-        String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
-        if(newUser.getYzm().equals(code)){
-            oldUser.setPassword(md5Password);//用户数据库里的密码
-            userMapper.updateUserPassworld(oldUser);
-            userMapper.updateReset(newUser.getMobile());//重置
-            baseResult = new Result(200,"updateSuccess","api_updatePassword");
-            return baseResult;
-        }else {
-            baseResult = new Result(201,"updateError","api_updatePassword");
-            return baseResult;
+        try {
+            User oldUser = userMapper.getUserByMobile(newUser);//老的用户
+            String code = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + newUser.getMobile());
+            String md5Password = DigestUtils.md5DigestAsHex(newUser.getPassword().getBytes());
+            List mobileList = userMapper.getMobileList();//数据库的手机号
+        /*for (Object mobile :mobileList) {
+           if (!((String)mobile).equals(newUser.getMobile())){
+              return baseResult = new Result(401, "mobileNoExist", "api_updatePassword");
+           }
+           break;
+        }*/
+            if (newUser.getYzm().equals(code)) {
+                oldUser.setPassword(md5Password);//用户数据库里的密码
+                userMapper.updateUserPassworld(oldUser);
+                userMapper.updateReset(newUser.getMobile());//重置
+                baseResult = new Result(200, "updateSuccess", "api_updatePassword");
+                return baseResult;
+            } else {
+                baseResult = new Result(201, "yzmError", "api_updatePassword");
+                return baseResult;
+            }
+        } catch (NullPointerException e) {
+            return baseResult = new Result(401, "mobileNoExist", "api_updatePassword");
         }
     }
 
