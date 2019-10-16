@@ -1,219 +1,42 @@
-/*
-*
-* User.java
-* 
-* @date 2019-08-17
-*/
 package com.shuojie.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+
+
+@Data
 public class User {
-    /**
-     * 
-     */
-    private Integer id;
 
-    /**
-     * 
-     */
-    private String mobile;
+    @TableId
+    private Long id;
 
-    /**
-     * 
-     */
+    private String mobile;//手机号
+
+    private String number;//版本
+
+    private String command;//用于前台指令标识
+
+    @TableField(exist = false)
+    private String oldPassword;//前台传过来的密码
     private String password;
 
-    /**
-     * 
-     */
-    private Integer firmId;
+    private Integer firmId;//企业id
 
-    /**
-     * 
-     */
-    private String username;
+    private String username;//姓名
 
-    /**
-     * 
-     */
-    private String idNumber;
+    private String idNumber;//身份证号
 
-    /**
-     * 
-     */
-    private String affiliationFirm;
+    private String position;//职位
 
-    /**
-     * 
-     */
-    private String position;
+    private String sex;//性别
 
-    /**
-     * 
-     */
-    private String areaname;
+    @TableField(exist = false)
+    private String yzm;//验证码
 
-    /**
-     * 
-     */
-    private Integer roleId;
+    private UserFirm userFirm;//企业关联表
 
-    /**
-     * 
-     * @return id 
-     */
-    public Integer getId() {
-        return id;
-    }
+    private Integer  loginFlag ; //登陆标识
 
-    /**
-     * 
-     * @param id 
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 
-     * @return mobile 
-     */
-    public String getMobile() {
-        return mobile;
-    }
-
-    /**
-     * 
-     * @param mobile 
-     */
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
-
-    /**
-     * 
-     * @return password 
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 
-     * @param password 
-     */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    /**
-     * 
-     * @return firm_id 
-     */
-    public Integer getFirmId() {
-        return firmId;
-    }
-
-    /**
-     * 
-     * @param firmId 
-     */
-    public void setFirmId(Integer firmId) {
-        this.firmId = firmId;
-    }
-
-    /**
-     * 
-     * @return username 
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * 
-     * @param username 
-     */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    /**
-     * 
-     * @return id_number 
-     */
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    /**
-     * 
-     * @param idNumber 
-     */
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber == null ? null : idNumber.trim();
-    }
-
-    /**
-     * 
-     * @return affiliation_firm 
-     */
-    public String getAffiliationFirm() {
-        return affiliationFirm;
-    }
-
-    /**
-     * 
-     * @param affiliationFirm 
-     */
-    public void setAffiliationFirm(String affiliationFirm) {
-        this.affiliationFirm = affiliationFirm == null ? null : affiliationFirm.trim();
-    }
-
-    /**
-     * 
-     * @return position 
-     */
-    public String getPosition() {
-        return position;
-    }
-
-    /**
-     * 
-     * @param position 
-     */
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
-    }
-
-    /**
-     * 
-     * @return areaname 
-     */
-    public String getAreaname() {
-        return areaname;
-    }
-
-    /**
-     * 
-     * @param areaname 
-     */
-    public void setAreaname(String areaname) {
-        this.areaname = areaname == null ? null : areaname.trim();
-    }
-
-    /**
-     * 
-     * @return role_id 
-     */
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    /**
-     * 
-     * @param roleId 
-     */
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+    //private Integer firmUserId;//企业用户id
 }

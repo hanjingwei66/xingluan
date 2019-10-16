@@ -3,163 +3,77 @@
 <mapper namespace="com.shuojie.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.shuojie.domain.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="firm_id" property="firmId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="id_number" property="idNumber" jdbcType="CHAR" />
-    <result column="affiliation_firm" property="affiliationFirm" jdbcType="VARCHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
-    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
   </resultMap>
+
+
+  <resultMap id="BaseFirm" type="com.shuojie.domain.User" extends="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <!--<result column="firm_name" property="firmName" jdbcType="VARCHAR" />-->
+        <result column="position" property="position" jdbcType="VARCHAR" />
+        <result column="login_flag" property="loginFlag" jdbcType="INTEGER"/>
+        <association property="userFirm" javaType="com.shuojie.domain.UserFirm">
+          <id property="fid" column="fid" jdbcType="INTEGER"/>
+          <result property="firmName" column="firm_name" jdbcType="VARCHAR"/>
+          <result property="firmUrl" column="firm_url" jdbcType="VARCHAR"/>
+        </association>
+  </resultMap>
+
   <sql id="Base_Column_List" >
-    id, mobile, password, firm_id, username, id_number, affiliation_firm, position, areaname, 
-    role_id
+    id, mobile, password, firm_id, username, id_number, affiliation_firm, position,
+    areaname,sex,firmUserId
   </sql>
-
-  <select id="queryInfoByUsername" parameterType="java.lang.String" resultType="java.util.Map">
-        SELECT id, username, password FROM user_t WHERE username = #{username,jdbcType=VARCHAR}
-    </select>
-
-  <insert id="insertData"  parameterType="java.util.Map">
-        INSERT INTO user_t ( id, username,password )
-        VALUES ( #{id, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR});
-    </insert>
-  <select id="selectUser" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
+  <!--查询全部-->
+  <select id="selectUser" resultMap="BaseResultMap" >
     select * from user
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where id = #{id,jdbcType=INTEGER}
+  <!--忘记密码-->
+  <update id="updateUserPassworld" parameterType="com.shuojie.domain.User"  >
+      update user set password = #{password} where mobile = #{ mobile}
+  </update>
+  <select id="getUserByMobile" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
+      select * from user where mobile = #{mobile}
+    </select>
+  <select id="getMobileList" resultMap="BaseResultMap" parameterType="list">
+    select mobile from user
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.shuojie.domain.User" >
-    insert into user (id, mobile, password, 
-      firm_id, username, id_number, 
-      affiliation_firm, position, areaname, 
-      role_id)
-    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
-      #{firmId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{idNumber,jdbcType=CHAR}, 
-      #{affiliationFirm,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{areaname,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=INTEGER})
+  <!--登录-->
+  <select id="toLogin" resultMap="BaseFirm" parameterType="com.shuojie.domain.User">
+     select * from user u left join user_firm f on(u.firm_id=f.fid) where mobile = #{mobile} and password = #{password}
+  </select>
+  <!--注册-->
+  <insert id="register" parameterType="com.shuojie.domain.User">
+    insert into user (id,mobile,password,firm_id,username,id_number,firm_user_id)
+    values (#{id},#{mobile},#{password},#{firmId},#{username},#{idNumber},#{firmUserId})
   </insert>
-  <insert id="insertSelective" parameterType="com.shuojie.domain.User" >
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="mobile != null" >
-        mobile,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="firmId != null" >
-        firm_id,
-      </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="idNumber != null" >
-        id_number,
-      </if>
-      <if test="affiliationFirm != null" >
-        affiliation_firm,
-      </if>
-      <if test="position != null" >
-        position,
-      </if>
-      <if test="areaname != null" >
-        areaname,
-      </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="mobile != null" >
-        #{mobile,jdbcType=CHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="firmId != null" >
-        #{firmId,jdbcType=INTEGER},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="idNumber != null" >
-        #{idNumber,jdbcType=CHAR},
-      </if>
-      <if test="affiliationFirm != null" >
-        #{affiliationFirm,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null" >
-        #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="areaname != null" >
-        #{areaname,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shuojie.domain.User" >
-    update user
-    <set >
-      <if test="mobile != null" >
-        mobile = #{mobile,jdbcType=CHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="firmId != null" >
-        firm_id = #{firmId,jdbcType=INTEGER},
-      </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="idNumber != null" >
-        id_number = #{idNumber,jdbcType=CHAR},
-      </if>
-      <if test="affiliationFirm != null" >
-        affiliation_firm = #{affiliationFirm,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null" >
-        position = #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="areaname != null" >
-        areaname = #{areaname,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
+  <!--修改密码-->
+  <update id="xiugaiUserPassworld" parameterType="com.shuojie.domain.User"  >
+      update user set password = #{password} where id = #{id}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shuojie.domain.User" >
-    update user
-    set mobile = #{mobile,jdbcType=CHAR},
-      password = #{password,jdbcType=VARCHAR},
-      firm_id = #{firmId,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      id_number = #{idNumber,jdbcType=CHAR},
-      affiliation_firm = #{affiliationFirm,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      areaname = #{areaname,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+  <!--登陆状态-->
+  <update id="updateStuse"  parameterType="com.shuojie.domain.User" >
+      update user set login_flag = login_flag + 1 where mobile = #{ mobile}
   </update>
+  <!--重置登陆状态-->
+  <update id="updateReset"  parameterType="java.lang.String" >
+      update user set login_flag = 0 where mobile = #{ mobile}
+  </update>
+  <!--查看登陆状态-->
+  <select id="selectBytelphone" resultType="java.lang.Integer" parameterType="java.lang.String">
+      select login_flag from user where mobile = #{mobile}
+  </select>
+  <select id="xiugaiGetUserByid" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
+      select * from user where id = #{id}
+  </select>
+
 </mapper>
