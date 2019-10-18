@@ -14,7 +14,7 @@ import java.util.List;
 public interface ModelMapper extends BaseMapper<Model> {
 
     //添加模型信息
-    void insertModel(Model model);
+   // void insertModel(Model model);
 
     //查询模型信息
     List<Model> getModel(@Param(Constants.WRAPPER)Wrapper<Model> wrapper);
