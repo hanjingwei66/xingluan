@@ -1,5 +1,4 @@
 server:
-  servlet:
   port: 9527
 
 netty:
