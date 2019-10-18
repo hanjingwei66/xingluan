@@ -20,6 +20,8 @@ public interface UserMapper extends BaseMapper<User> {
     //根据手机号查询
     User getUserByMobile(User user);
     void updateUserPassworld(User newUser);
+    List getMobileList();
+
 
     //个人信息
    // User findUserById(User user);

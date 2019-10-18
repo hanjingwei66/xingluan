@@ -25,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     private SysContactService sysContactService;
     @Autowired
     private UpdateLogService updateLogService;
+//    @Autowired
+//    private SubMsg subMsg;
 //    private static UserMerberService usermerberservice;
 //    private static IUserService userServer;
 //    private static ContactService contactServer;
@@ -81,7 +85,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         channels.add(ctx.channel());
         ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
-        System.out.println("收到" + ctx.channel().id().asLongText() + "发来的消息：" + msg.text());
+        InetSocketAddress  socketAddress= (InetSocketAddress)ctx.channel().remoteAddress();
+        System.out.println("收到" + ctx.channel().id().asLongText() + "发来的消息：" + msg.text()+"ip"+socketAddress.getAddress().getHostAddress());
+
 //        if(msg instanceof WebSocketFrame){
 //
 //        }else{
@@ -113,7 +119,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if (result.getCode() == 200) {
                     //登陆成功加入管道
-//                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
+//                    channels.add(ctx.channel());
                 } else {
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
@@ -124,7 +130,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 Result logoutResult=new Result(200,"SUCCESS","api_logout");
                 String logout = JSONObject.toJSONString(logoutResult);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(logout));
-                this.handlerRemoved(ctx);
+                channels.remove(ctx.channel());
+               // this.handlerRemoved(ctx);
                 break;
             //注册
             case "api_register":
@@ -262,7 +269,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             channel.writeAndFlush(new TextWebSocketFrame("[SERVER] - " + incoming.remoteAddress() + " 加入\n"));
             System.out.println("123");
         }
-
+        InetSocketAddress  socketAddress= (InetSocketAddress)ctx.channel().remoteAddress();
+        System.out.println("收到" + ctx.channel().id().asLongText() + "ip"+socketAddress.getAddress().getHostAddress());
         System.out.println("handlerAdded：" + ctx.channel().id().asLongText() + "你好世界");
     }
 

@@ -23,7 +23,7 @@ public class SensorPropertImpl implements SensorProperty {
 
     @Override
     public Double computeDistance(byte a, byte b) {
-        Double result = (a<<8|b)/10.0;
+        Double result = ((a& 0xFF)<<8|(b & 0xFF))/10.0;
         return result;
     }
 

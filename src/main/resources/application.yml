@@ -1,10 +1,9 @@
 server:
-  servlet:
   port: 9527
 
 netty:
 #  host: 172.16.95.6
-  host: 192.168.1.110
+  host: 192.168.1.6
   port: 8092
 
 spring:
@@ -13,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.98.193.195:3306/transoirtion?serverTimezone=Hongkong&characterEncoding=utf8&useUnicode=true&useSSL=false
 #    url: jdbc:p6spy:mysql://localhost:3306/transoirtion?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
-    username: douzidong
+    username: hanjingwei66
     password: Shuojie,.123456
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大

@@ -35,6 +35,9 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 //    private RedisService redisService;
     @Resource
     private DistanceSensorMapper distanceSensorMapper;
+    //订阅
+    @Autowired
+    private SubMsg subMsg;
 
     @Value("${redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
@@ -65,7 +68,13 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 List<BaseSensor> list = new ArrayList();
                 for (int i = 0; i < 6; i++) {
                     Integer id = (int) (Math.random() * 100);
-                    Integer sesorType = ((int) (Math.random() * 4));
+                    Integer sesorType=0;
+                    if(i<3){
+                        sesorType=0;
+                    }else {
+                        sesorType=1;
+                    }
+                    //Integer sesorType = ((int) (Math.random() * 4));
                     Integer power = 80 + ((int) (Math.random() * 20));
                     Integer status = 0;
                     Integer signal = 2 + (int) (Math.random() * 3);
@@ -116,36 +125,19 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
               //  2595fcd0是网关ID，00015b6c是设备ID，07为数据长度，ff fe为识别码，没实际意义，后面五个数据分别代表
             //激光器是否使用（01开00关）+超声波测距是否使用（01开00关）+十轴是否使用（01开00关）+
                 // 上传间隔时间（计算方式为=0a*100ms=1s）+放置方式（00设备水平放置，01设备垂直放置）。
+                subMsg.runsub("client-id-0","demo/test");
                 byte []bytes4={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
-                        0x00,0x01,0x5b,0x6c
+                        0x00,0x01,0x5b,0x15
+                        ,0x07, (byte)0xff, (byte) 0xfe,
+                        0x01,0x01,0x01,0x0a,0x00};
+                byte []bytes6={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
+                        0x00,0x01,0x5a,0x6a
                         ,0x07, (byte)0xff, (byte) 0xfe,
                         0x01,0x00,0x01,0x0a,0x00};
-//                String content = "123456";
-//                int jizhongqid = 630586576;
-//                int jiedianid = 88940;
-//                int shibiema=65534;
-//                int jguan=01;
-//                int chaosheng=01;
-//                int shizi=01;
-//                int time=16;
-//                int type=00;
-//
-//                byte[] bytes = EncodUtil.intToByteArray(jizhongqid);//集中器id
-//                byte[] bytes1 = EncodUtil.intToByteArray(jiedianid);//终端id
-//
-//                byte bytes2= (byte) content.getBytes().length;//有效数据字节长度
-//                System.out.println(bytes2);
-////            //合并数组
-//                byte[] bt3 = new byte[bytes.length+bytes1.length+1];
-//                for (int i = 0; i < bytes.length; i++) {
-//                    bt3[i]=bytes[i];
-//                }
-//                for (int i = 0; i < bytes1.length; i++) {
-//                    bt3[i+bytes.length]=bytes1[i];
-//                }
-//                bt3[bt3.length-1]=bytes2;
-//                byte[] bytes3 = EncodUtil.byteMerger(bt3, bytes4);
                 PubMsg.publish(bytes4,"client-id-0","demo/test");
+//                PubMsg.publish(bytes6,"client-id-0","demo/test");
+
+
                 break ;
             case "sensor_test":
                 System.out.println("112");

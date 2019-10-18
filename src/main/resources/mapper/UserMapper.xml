@@ -44,6 +44,9 @@
   <select id="getUserByMobile" resultMap="BaseResultMap" parameterType="com.shuojie.domain.User">
       select * from user where mobile = #{mobile}
     </select>
+  <select id="getMobileList" resultMap="BaseResultMap" parameterType="list">
+    select mobile from user
+  </select>
   <!--登录-->
   <select id="toLogin" resultMap="BaseFirm" parameterType="com.shuojie.domain.User">
      select * from user u left join user_firm f on(u.firm_id=f.fid) where mobile = #{mobile} and password = #{password}

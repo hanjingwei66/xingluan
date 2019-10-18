@@ -30,7 +30,6 @@ public class OriginServiceImpl implements OriginService {
     //查询orName
     public ArrayList getOriginName(){
         ArrayList originName = originMapper.getOriginName();
-
         return originName;
     }
 

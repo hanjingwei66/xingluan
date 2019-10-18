@@ -138,8 +138,23 @@ public class Mqttclien  {
                             zullProperty.setAngularVelocity(AngularVelocityList);
                             zullProperty.setAngular(AngularList);
                             zullProperty.setHight(hight);
+//----------------------------------------------------------------------------------------------------------
+                            log.info("getload"+new String(message.getPayload())+"id"+message.getId()+message.getQos());
 
+                            ChannelGroup channels= textWebSocketFrameHandler.channels;
+
+                            Result result=new Result(200,"success","sensor_init",zullProperty);
+                            String jsonzullProperty = JSONObject.toJSONString(result);
+
+                            for (Channel channel : channels) {
+                                ChannelId id = channel.id();
+                                Channel channel1 = channels.find(id);
+                                channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
+                            }
+                            return;
+//---------------------------------------------------------------------------------------------------------------------
                         }
+
 //                        Date date = new Date();
                         Long timeStamp = System.currentTimeMillis();
 //                        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -150,31 +165,27 @@ public class Mqttclien  {
                         System.out.println("  系统时间"+timeStamp);
 ////                        asyncService.executeAsync(tt);
 //
-//                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                        System.out.println(df.format(date));
-////                        sensorMapper.insert(tt);
-//                        System.out.println(tt.toString());
-                    }
 
-
-
-
-                    log.info("getload"+new String(message.getPayload())+"id"+message.getId()+message.getQos());
+//---------------------------------------------------------------------------------------------------------------------
+                        log.info("getload"+new String(message.getPayload())+"id"+message.getId()+message.getQos());
 //            ConcurrentMap<Object, Channel> serverChannels = textWebSocketFrameHandler.getServerChannels();
 //            Channel s = serverChannels.get("s");
 //            s.writeAndFlush(new TextWebSocketFrame(theMsg));
 
-                   ChannelGroup channels= textWebSocketFrameHandler.channels;
-//                    DistanceSensor sensor =new DistanceSensor();
-//                    sensor.setStartTime();
-                    Result result=new Result(200,"success","sensor_init",zullProperty);
-                    String jsonzullProperty = JSONObject.toJSONString(result);
+                        ChannelGroup channels= textWebSocketFrameHandler.channels;
 
-                    for (Channel channel : channels) {
+                        Result result=new Result(200,"success","sensor_check",tt);
+                        String jsonzullProperty = JSONObject.toJSONString(result);
+
+                        for (Channel channel : channels) {
                             ChannelId id = channel.id();
                             Channel channel1 = channels.find(id);
                             channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
                         }
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    }
+
+
                 }
 
                 public void deliveryComplete(IMqttDeliveryToken token) {

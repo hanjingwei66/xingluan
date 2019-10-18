@@ -59,7 +59,7 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast("BinaryWebSocketFrameHandler", binaryWebSocketFrameHandler);
         pipeline.addLast("CommonHandler", commonHandler);
 //        new StringDecoder();
-        //测试git
+        //测试git0281470051500F24474E524D432C3032353934382E30302C412C333431302E33333136332C4E2C31303834382E35383833312C452C302E3035392C2C3135313031392C2C2C442A36380D0A1303020102004857A203
 
     }
 
