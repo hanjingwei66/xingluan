@@ -109,7 +109,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -271,7 +271,7 @@
       <workItem from="1571014837490" duration="10308000" />
       <workItem from="1571034303781" duration="18485000" />
       <workItem from="1571205449621" duration="20507000" />
-      <workItem from="1571363172237" duration="7057000" />
+      <workItem from="1571363172237" duration="7510000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of github.com:hanjingwei66/shuojie&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <created>1571396526688</created>
@@ -333,10 +333,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412000" />
+    <option name="totallyTimeSpent" value="865000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50104165" side_tool="true" weight="0.32978722" />
