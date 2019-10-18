@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44344d8c-124d-4e38-abc5-9ff37d169341" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/ModelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/ModelMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UpdateLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UpdateLogMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/OriginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/OriginServiceImpl.java" afterDir="false" />
+    <list default="true" id="44344d8c-124d-4e38-abc5-9ff37d169341" name="Default" comment="1018">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,8 +91,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+            <state relative-caret-position="27">
+              <caret line="1" column="6" lean-forward="true" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -125,6 +121,12 @@
       <select />
     </treeState>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -141,11 +143,58 @@
               <item name="transport" type="b2602c69:ProjectViewProjectNode" />
               <item name="shuojie" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -221,14 +270,14 @@
       <workItem from="1571014837490" duration="10308000" />
       <workItem from="1571034303781" duration="18485000" />
       <workItem from="1571205449621" duration="20507000" />
-      <workItem from="1571363172237" duration="5246000" />
+      <workItem from="1571363172237" duration="6377000" />
     </task>
-    <task id="LOCAL-00001" summary="登录，忘记密码手机号判断">
-      <created>1571126411969</created>
+    <task id="LOCAL-00001" summary="1018">
+      <created>1571393887332</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1571126411969</updated>
+      <updated>1571393887332</updated>
     </task>
     <task id="LOCAL-00002" summary="111">
       <created>1571392867114</created>
@@ -279,10 +328,11 @@
       <option name="project" value="LOCAL" />
       <updated>1569287850601</updated>
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14000" />
+    <option name="totallyTimeSpent" value="1145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -304,8 +354,8 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.92395836" visible="true" weight="0.28135222" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.3293348" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.92395836" weight="0.28135222" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" visible="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21108742" />
@@ -385,7 +435,8 @@
     <MESSAGE value="登录，忘记密码手机号判断" />
     <MESSAGE value="111" />
     <MESSAGE value="登录忘记密码更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="登录忘记密码更新" />
+    <MESSAGE value="1018" />
+    <option name="LAST_COMMIT_MESSAGE" value="1018" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -749,8 +800,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        <state relative-caret-position="27">
+          <caret line="1" column="6" lean-forward="true" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
         </state>
       </provider>
     </entry>
