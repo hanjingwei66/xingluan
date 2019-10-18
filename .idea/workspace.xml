@@ -1,11 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec07b54d-d7a0-4812-8556-99bd7cb32de4" name="Default Changelist" comment="123">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java~origin_master" beforeDir="false" />
+    <list default="true" id="ec07b54d-d7a0-4812-8556-99bd7cb32de4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/DruidConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/ExecutorConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/InitMqttClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/InitNettyServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/MultipartConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/MyBatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/configuration/WeatherConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/ContactController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/CurrentInfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/CurrentLineController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/MapPointsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/ModelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/OriginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/OriginLineController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/UploadDownloadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/ContactMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/ModelMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/ModelMapper.java~origin_master" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UpdateLogMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UpdateLogMapper.java~origin_master" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UserFirmMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/CurrentInfoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/CurrentLineMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/MapPointsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/OriginLineMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/mapsMapper/OriginMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/sensorMappers/DistanceSensorMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/sensorMappers/SensorMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/systemMappers/PictureListMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/dao/systemMappers/SysContactMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/Jingwei.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/UpdateLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/UserFirm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/maps/CurrentInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/maps/CurrentLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/maps/MapPoints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/maps/Origin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/maps/OriginLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/AngleSensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/BaseSensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/DistanceSensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/LaserSensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/SensorTitle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/TenaxisSensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/sensorModle/ZullProperty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/system/PicturListR.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/system/PictureList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/domain/system/SysContact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/EncodUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/Mqttclien.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/PubMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/PushCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/SubMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/mqttClient/distanceSensorClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/ClientInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyClient/MyClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/BinaryWebSocketFrameHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/CommonHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MapsWebSocketFrameHandle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/MqttHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/SensorHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/MyServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/WebSocketChannelInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/CheckPointImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/ContactServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/ModelServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/RedisServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/SensorServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java~origin_master" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserMerberServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java~origin_master" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/CurrentInfoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/CurrentLineServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/MapPointsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/OriginLineServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/OriginServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/mapsServiceImpl/OriginServiceImpl.java~origin_master" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sensorServiceImpl/AsyncServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sensorServiceImpl/SensorPropertImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sysServiceImpl/PictureListImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/sysServiceImpl/SysContactServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/ContactService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/IUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/ModelService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/UpdateLogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/UserMerberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/mapsService/CurrentInfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/mapsService/CurrentLineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/mapsService/MapPointsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/mapsService/OriginLineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/mapsService/OriginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/sensorService/AsyncService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/sensorService/SensorProperty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/sysService/PictureListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/service/sysService/SysContactService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/AddressUtil/AddressUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/autowiredUtil/SpringUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/Ex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/Ey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/MapPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/kalman.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/matrix.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/ss.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/kalman/vector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/sms/MessageUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/snowFlake/SnowFlake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/utils/vo/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/qqqqq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ContactMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/CurrentInfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/CurrentLineMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/DistanceSensorMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/MapPointsMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ModelMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/OriginLineMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/OriginMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysContactMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UpdateLogMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserFirmMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shuojie/Animo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shuojie/HexConvert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shuojie/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shuojie/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java~origin_master" beforeDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,81 +175,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            <state>
               <folding>
-                <element signature="e#1113#1114#0" expanded="true" />
-                <element signature="e#1159#1160#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1112#1113#0" expanded="true" />
+                <element signature="e#1158#1159#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/dao/UserMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/service/IUserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UpdateLogServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/nettyService/Handler/TextWebSocketFrameHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="168" column="40" selection-start-line="168" selection-start-column="40" selection-end-line="168" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
-              <folding>
-                <element signature="e#2001#2002#0" expanded="true" />
-                <element signature="e#2061#2062#0" expanded="true" />
-                <element signature="e#2206#2207#0" expanded="true" />
-                <element signature="e#2262#2263#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/TransportApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -116,6 +189,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -161,23 +241,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="transport" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shuojie" type="462c0819:PsiDirectoryNode" />
-              <item name="serverImpl" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -185,6 +248,9 @@
       <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -261,19 +327,19 @@
       <workItem from="1571205449621" duration="20507000" />
       <workItem from="1571363172237" duration="6709000" />
     </task>
-    <task id="LOCAL-00001" summary="1018">
-      <created>1571393887332</created>
+    <task id="LOCAL-00001" summary="123">
+      <created>1571398027279</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1571393887332</updated>
+      <updated>1571398027279</updated>
     </task>
-    <task id="LOCAL-00002" summary="1018">
-      <created>1571396281915</created>
+    <task id="LOCAL-00002" summary="asf">
+      <created>1571398156209</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1571396281915</updated>
+      <updated>1571398156209</updated>
     </task>
     <task id="LOCAL-00003" summary="登录忘记密码更新">
       <created>1571393309540</created>
@@ -317,6 +383,7 @@
       <option name="project" value="LOCAL" />
       <updated>1569287850601</updated>
     </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -325,7 +392,7 @@
   <component name="ToolWindowManager">
     <frame x="1930" y="0" width="1936" height="1056" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -346,7 +413,7 @@
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49947917" weight="0.3293348" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.82447916" visible="true" weight="0.32946146" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="13" sideWeight="0.82447916" visible="true" weight="0.32946146" />
       <window_info anchor="bottom" id="Application Servers" order="14" weight="0.32978722" />
       <window_info anchor="bottom" id="Run with VisualVM" order="15" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="16" />
@@ -418,30 +485,19 @@
     <MESSAGE value="10-12" />
     <MESSAGE value="登录，忘记密码判断" />
     <MESSAGE value="登录，忘记密码手机号判断" />
-    <MESSAGE value="111" />
     <MESSAGE value="登录忘记密码更新" />
     <MESSAGE value="1018" />
-    <option name="LAST_COMMIT_MESSAGE" value="1018" />
+    <MESSAGE value="123" />
+    <MESSAGE value="111" />
+    <MESSAGE value="111333" />
+    <MESSAGE value="asf" />
+    <option name="LAST_COMMIT_MESSAGE" value="asf" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/configuration/InitNettyServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/domain/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -747,11 +803,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/serverImpl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        <state>
           <folding>
-            <element signature="e#1113#1114#0" expanded="true" />
-            <element signature="e#1159#1160#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1112#1113#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -789,6 +845,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/service/IUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shuojie/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
+          <folding>
+            <element signature="e#2001#2002#0" expanded="true" />
+            <element signature="e#2061#2062#0" expanded="true" />
+            <element signature="e#2206#2207#0" expanded="true" />
+            <element signature="e#2262#2263#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
