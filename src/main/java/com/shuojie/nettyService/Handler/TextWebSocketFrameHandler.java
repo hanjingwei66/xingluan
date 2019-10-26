@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.domain.Contact;
 import com.shuojie.domain.User;
+import com.shuojie.domain.system.Session;
 import com.shuojie.domain.system.SysContact;
 import com.shuojie.service.ContactService;
 import com.shuojie.service.IUserService;
 import com.shuojie.service.UpdateLogService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.service.sysService.SysContactService;
+import com.shuojie.utils.NettyUtil.LoginCheckUtil;
+import com.shuojie.utils.NettyUtil.SessionUtil;
 import com.shuojie.utils.vo.Result;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -19,6 +22,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import io.netty.util.internal.PlatformDependent;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +54,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     private SysContactService sysContactService;
     @Autowired
     private UpdateLogService updateLogService;
+    @Autowired
+    AuthHandler authHandler;
 //    @Autowired
 //    private SubMsg subMsg;
 //    private static UserMerberService usermerberservice;
@@ -84,7 +90,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         channels.add(ctx.channel());
-        ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
+//        ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf（堆外分配内存）
+//        ByteBuf buf = ctx.alloc().heapBuffer();//堆内分配内存
         InetSocketAddress  socketAddress= (InetSocketAddress)ctx.channel().remoteAddress();
         System.out.println("收到" + ctx.channel().id().asLongText() + "发来的消息：" + msg.text()+"ip"+socketAddress.getAddress().getHostAddress());
 
@@ -100,14 +107,13 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         Contact contact = new Contact();
 
         if (!command.substring(0, 4).equals("api_")) {
-            buf.retain();//检查引用计数器是否是 1
+//            buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
         }
         switch (command) {
             //登录
             case "api_login":
-                System.out.println("loging");
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 System.out.println(user.toString());
@@ -118,8 +124,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if (result.getCode() == 200) {
-                    //登陆成功加入管道
-//                    channels.add(ctx.channel());
+                    LoginCheckUtil.markAsLogin(ctx.channel());//给当前的通道打上登录标记；
+                    User user2 = (User)result.getData();
+                    SessionUtil.bindSession(new Session(user2.getId(),user2.getUsername()),ctx.channel());//绑定session用map管理用户id为key channel为value
                 } else {
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
@@ -130,6 +137,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 Result logoutResult=new Result(200,"SUCCESS","api_logout");
                 String logout = JSONObject.toJSONString(logoutResult);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(logout));
+                SessionUtil.unBindSession(ctx.channel());
+                ctx.pipeline().addAfter("TextWebSocketFrameHandler","authHandler",authHandler);
                 channels.remove(ctx.channel());
                // this.handlerRemoved(ctx);
                 break;

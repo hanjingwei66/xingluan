@@ -62,7 +62,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         channels.add(ctx.channel());
-        ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
+//        ByteBuf buf = ctx.alloc().directBuffer();//从 channel 获取 ByteBufAllocator 然后分配一个 ByteBuf
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
 
@@ -72,7 +72,7 @@ public class MapsWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
         Model model = new Model();
 
         if (!command.substring(0, 4).equals("maps")) {
-            buf.retain();//检查引用计数器是否是 1
+//            buf.retain();//检查引用计数器是否是 1
             msg.retain();
             ctx.fireChannelRead(msg);
         }

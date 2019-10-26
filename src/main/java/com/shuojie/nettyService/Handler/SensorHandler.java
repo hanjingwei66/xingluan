@@ -6,6 +6,7 @@ import com.shuojie.domain.sensorModle.BaseSensor;
 import com.shuojie.mqttClient.EncodUtil;
 import com.shuojie.mqttClient.PubMsg;
 import com.shuojie.mqttClient.SubMsg;
+import com.shuojie.utils.NettyUtil.LoginCheckUtil;
 import com.shuojie.utils.snowFlake.SnowFlake;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
@@ -53,18 +54,9 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 //        System.out.println("收到id为"+ctx.channel().id().asLongText()+"ip为"+ip+"发来的消息1："+msg.text());
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
-        ByteBuf buf = ctx.alloc().directBuffer();
-        try {
-            if (!command.substring(0, 5).equals("sensor")) {
-                buf.retain();//检查引用计数器是否是 1
-                msg.retain();
-                ctx.fireChannelRead(msg);
-            }
-        } finally {
-            buf.release();
-        }
         switch (command) {
             case "sensor_check"://检测数量
+                if(LoginCheckUtil.hasLogin(ctx.channel())){
                 List<BaseSensor> list = new ArrayList();
                 for (int i = 0; i < 6; i++) {
                     Integer id = (int) (Math.random() * 100);
@@ -96,7 +88,8 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 map.put("command", "sensor_check");
                 String sesorList = JSONObject.toJSONString(map);
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(sesorList));
-                System.out.println("buf.refCnt()" + buf.refCnt());
+//                System.out.println("buf.refCnt()" + buf.refCnt());
+                }
                 return;
             case "sensor_allow"://检测
                 if (flag) {

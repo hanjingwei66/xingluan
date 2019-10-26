@@ -36,12 +36,12 @@ public class CommonHandler extends SimpleChannelInboundHandler<TextWebSocketFram
         ByteBuf buf = ctx.alloc().directBuffer();
         try {
             if (!command.substring(0, 6).equals("common")) {
-                buf.retain();//检查引用计数器是否是 1
+//                buf.retain();//检查引用计数器是否是 1
                 msg.retain();
                 ctx.fireChannelRead(msg);
             }
         } finally {
-            buf.release();
+//            buf.release();
         }
         switch (command) {
             case "common_pictureList"://图例集

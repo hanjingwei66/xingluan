@@ -35,6 +35,7 @@ public class MyServer {
             b.group(parentGroup, childGroup)
                     .channel(NioServerSocketChannel.class)    //非阻塞模式
                     .option(ChannelOption.SO_BACKLOG, 128)
+                    .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(webSocketChannelInitializer);
 
             channelFuture = b.bind(address).syncUninterruptibly();
