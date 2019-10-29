@@ -141,16 +141,17 @@ public class Mqttclien  {
 //----------------------------------------------------------------------------------------------------------
                             log.info("getload"+new String(message.getPayload())+"id"+message.getId()+message.getQos());
 
-                            ChannelGroup channels= textWebSocketFrameHandler.channels;
+
 
                             Result result=new Result(200,"success","sensor_init",zullProperty);
                             String jsonzullProperty = JSONObject.toJSONString(result);
-
-                            for (Channel channel : channels) {
-                                ChannelId id = channel.id();
-                                Channel channel1 = channels.find(id);
-                                channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
-                            }
+                            textWebSocketFrameHandler.send(jsonzullProperty);
+//                            ChannelGroup channels= textWebSocketFrameHandler.channels;
+//                            for (Channel channel : channels) {
+//                                ChannelId id = channel.id();
+//                                Channel channel1 = channels.find(id);
+//                                channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
+//                            }
                             return;
 //---------------------------------------------------------------------------------------------------------------------
                         }
@@ -172,16 +173,16 @@ public class Mqttclien  {
 //            Channel s = serverChannels.get("s");
 //            s.writeAndFlush(new TextWebSocketFrame(theMsg));
 
-                        ChannelGroup channels= textWebSocketFrameHandler.channels;
-
-                        Result result=new Result(200,"success","sensor_check",tt);
-                        String jsonzullProperty = JSONObject.toJSONString(result);
-
-                        for (Channel channel : channels) {
-                            ChannelId id = channel.id();
-                            Channel channel1 = channels.find(id);
-                            channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
-                        }
+//                        ChannelGroup channels= textWebSocketFrameHandler.channels;
+//
+//                        Result result=new Result(200,"success","sensor_check",tt);
+//                        String jsonzullProperty = JSONObject.toJSONString(result);
+//
+//                        for (Channel channel : channels) {
+//                            ChannelId id = channel.id();
+//                            Channel channel1 = channels.find(id);
+//                            channel1.writeAndFlush(new TextWebSocketFrame(jsonzullProperty ));
+//                        }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     }
 

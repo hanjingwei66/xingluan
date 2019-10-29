@@ -3,12 +3,10 @@ package com.shuojie.nettyService.Handler;
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
 import com.shuojie.domain.sensorModle.BaseSensor;
-import com.shuojie.mqttClient.EncodUtil;
 import com.shuojie.mqttClient.PubMsg;
 import com.shuojie.mqttClient.SubMsg;
-import com.shuojie.utils.NettyUtil.LoginCheckUtil;
+import com.shuojie.utils.nettyUtil.LoginCheckUtil;
 import com.shuojie.utils.snowFlake.SnowFlake;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -87,7 +85,7 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 map.put("list", list);
                 map.put("command", "sensor_check");
                 String sesorList = JSONObject.toJSONString(map);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(sesorList));
+                ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
 //                System.out.println("buf.refCnt()" + buf.refCnt());
                 }
                 return;

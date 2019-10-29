@@ -24,6 +24,14 @@ public class SelectHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 
     }
     @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        if(msg instanceof TextWebSocketFrame) {
+            this.channelRead0(ctx, (TextWebSocketFrame) msg);
+        }else {
+            ctx.fireChannelRead(msg);
+        }
+    }
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");

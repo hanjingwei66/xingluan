@@ -1,10 +1,9 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.aliyuncs.utils.StringUtils;
 import com.shuojie.domain.system.PictureList;
 import com.shuojie.service.sysService.PictureListService;
-import com.shuojie.utils.AddressUtil.AddressUtils;
+import com.shuojie.utils.addressUtil.AddressUtils;
 import com.shuojie.utils.vo.Result;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
@@ -18,9 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 @ChannelHandler.Sharable

@@ -11,10 +11,9 @@ import com.shuojie.service.IUserService;
 import com.shuojie.service.UpdateLogService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.service.sysService.SysContactService;
-import com.shuojie.utils.NettyUtil.LoginCheckUtil;
-import com.shuojie.utils.NettyUtil.SessionUtil;
+import com.shuojie.utils.nettyUtil.LoginCheckUtil;
+import com.shuojie.utils.nettyUtil.SessionUtil;
 import com.shuojie.utils.vo.Result;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -22,7 +21,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import io.netty.util.AttributeKey;
+import io.netty.util.ReferenceCountUtil;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import io.netty.util.internal.PlatformDependent;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +38,10 @@ import java.util.concurrent.ConcurrentMap;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>  {
 
     public static TextWebSocketFrameHandler textWebSocketFrameHandler;
+    private ChannelHandlerContext ctx;
 
     @Autowired
     private UserMerberService usermerberservice;
@@ -86,6 +85,14 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     private ConcurrentMap<Object, Channel> serverChannels = PlatformDependent.newConcurrentHashMap();
     //保存所有客户端连接
 //private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        if(msg instanceof TextWebSocketFrame) {
+            this.channelRead0(ctx, (TextWebSocketFrame) msg);
+        }else {
+            ctx.fireChannelRead(msg);
+        }
+    }
     //读到客户端的内容并且向客户端去写内容
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
@@ -99,7 +106,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //
 //        }else{
 ////            buf.retain();//检查引用计数器是否是 1
-////            ctx.fireChannelRe(msg);
+//            ctx.fireChannelRe(msg);
 //        }
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
@@ -108,8 +115,10 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
         if (!command.substring(0, 4).equals("api_")) {
 //            buf.retain();//检查引用计数器是否是 1
-            msg.retain();
+//            msg.retain();
             ctx.fireChannelRead(msg);
+        }else {
+            ReferenceCountUtil.release(msg);
         }
         switch (command) {
             //登录
@@ -122,11 +131,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 //                result.setChanleId(id);
                 result.setCommand("api_login");
                 String loginRespone = JSONObject.toJSONString(result);//json对象解析为json字符串
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(loginRespone));
+                ctx.writeAndFlush(new TextWebSocketFrame(loginRespone));
                 if (result.getCode() == 200) {
                     LoginCheckUtil.markAsLogin(ctx.channel());//给当前的通道打上登录标记；
                     User user2 = (User)result.getData();
                     SessionUtil.bindSession(new Session(user2.getId(),user2.getUsername()),ctx.channel());//绑定session用map管理用户id为key channel为value
+                    this.ctx=ctx;//存储到 ChannelHandlerContext的引用（用于传感器模块引用）
                 } else {
 //                    ctx.channel().writeAndFlush(new TextWebSocketFrame());
                 }
@@ -136,11 +146,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
                 Result logoutResult=new Result(200,"SUCCESS","api_logout");
                 String logout = JSONObject.toJSONString(logoutResult);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(logout));
+                ctx.writeAndFlush(new TextWebSocketFrame(logout));
                 SessionUtil.unBindSession(ctx.channel());
+                //登出之后加回校验
                 ctx.pipeline().addAfter("TextWebSocketFrameHandler","authHandler",authHandler);
                 channels.remove(ctx.channel());
-               // this.handlerRemoved(ctx);
                 break;
             //注册
             case "api_register":
@@ -156,7 +166,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 results.setCommand("api_register");
 
                 String registerReponse = JSONObject.toJSONString(results);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(registerReponse));
+                ctx.writeAndFlush(new TextWebSocketFrame(registerReponse));
                 break;
             //短信
             case "api_sendMsg":
@@ -165,7 +175,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     Result result1 = usermerberservice.sendMsg(telephone);
                     result1.setCommand("api_sendMsg");
                     String res = JSONObject.toJSONString(result1);
-                    ctx.channel().writeAndFlush(new TextWebSocketFrame(res));
+                    ctx.writeAndFlush(new TextWebSocketFrame(res));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -177,7 +187,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setYzm(json.getString("yzm"));
                 Result res = userServer.updateUserPassworld(user);
                 String updatePasswordReponse = JSONObject.toJSONString(res);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(updatePasswordReponse));
+                ctx.writeAndFlush(new TextWebSocketFrame(updatePasswordReponse));
                 System.out.println("updatePassword");
                 break;
             //修改密码
@@ -189,7 +199,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 user.setYzm(json.getString("yzm"));
                 Result response = userServer.xiugaiUserPassworld(user);
                 String xiugaiPasswordReponse = JSONObject.toJSONString(response);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
+                ctx.writeAndFlush(new TextWebSocketFrame(xiugaiPasswordReponse));
                 System.out.println("updatePassword");
                 break;
             //添加留言
@@ -198,7 +208,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 contact.setContactText(new String(json.getString("contactText")));
                 Result con = contactServer.insertContact(contact);
                 String insertContactResponse = JSONObject.toJSONString(con);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(insertContactResponse));
+                ctx.writeAndFlush(new TextWebSocketFrame(insertContactResponse));
                 break;
             case "api_selectSysMsg":
                 Long id = json.getLong("id");
@@ -208,7 +218,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 map.put("command", "api_selectSysMsg");
                 String contectlist = JSONObject.toJSONString(map);
                 System.out.println(contectlist);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(contectlist));
+                ctx.writeAndFlush(new TextWebSocketFrame(contectlist));
                 break;
             case "api_deleteSysMsg":
                 //JSONArray array = json.getJSONArray("sysContactId");
@@ -221,7 +231,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     Result result1 = new Result(200, "SUCCESS", "api_deleteSysMsg");
                     String respon = JSONObject.toJSONString(result1);
 
-                    ctx.channel().writeAndFlush(new TextWebSocketFrame(respon));
+                    ctx.writeAndFlush(new TextWebSocketFrame(respon));
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -233,7 +243,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     sysContactService.updateStatus(array1);
                     Result result1 = new Result(200, "SUCCESS", "api_updateStatus");
                     String respon = JSONObject.toJSONString(result1);
-                    ctx.channel().writeAndFlush(new TextWebSocketFrame(respon));
+                    ctx.writeAndFlush(new TextWebSocketFrame(respon));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -242,7 +252,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             case "api_getUpdateLog" :
                 Result updateLog = updateLogService.getUpdateLog();
                 String getUpdateLogReponse = JSONObject.toJSONString(updateLog);
-                ctx.channel().writeAndFlush(new TextWebSocketFrame(getUpdateLogReponse));
+                ctx.writeAndFlush(new TextWebSocketFrame(getUpdateLogReponse));
                 break;
 //                sysContactService.deleteById(sysContactId);
 //                System.out.println(contectlist);
@@ -308,7 +318,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("【channelActive】=====>" + ctx.channel());
     }
-
+    public void send(String msg) {
+        if(ctx!=null) {
+            ctx.writeAndFlush(new TextWebSocketFrame(msg));
+        }
+    }
 
 //
 //    @Override

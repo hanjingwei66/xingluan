@@ -1,4 +1,4 @@
-package com.shuojie.utils.AddressUtil;      /**
+package com.shuojie.utils.addressUtil;      /**
  * FileName: AddressUtils
  * Author:   Administrator
  * Date:     2019-04-18 14:36

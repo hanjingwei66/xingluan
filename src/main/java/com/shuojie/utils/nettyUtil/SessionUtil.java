@@ -1,4 +1,4 @@
-package com.shuojie.utils.NettyUtil;
+package com.shuojie.utils.nettyUtil;
 
 import com.shuojie.domain.system.Session;
 import io.netty.channel.Channel;

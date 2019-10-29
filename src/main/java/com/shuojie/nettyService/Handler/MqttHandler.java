@@ -8,6 +8,11 @@ import io.netty.handler.codec.mqtt.*;
 import java.io.IOException;
 
 public class MqttHandler extends SimpleChannelInboundHandler<MqttMessage> {
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+
+
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MqttMessage msg) throws Exception {

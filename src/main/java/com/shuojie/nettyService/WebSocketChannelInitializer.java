@@ -1,6 +1,7 @@
 package com.shuojie.nettyService;
 
 import com.shuojie.nettyService.Handler.*;
+import com.shuojie.utils.ssl.SslUtil;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -11,9 +12,21 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslHandler;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+import java.io.FileInputStream;
+import java.security.KeyStore;
 
 @Component
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
@@ -30,10 +43,30 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 //    @Autowired
 //    private CommonHandler commonHandler;
 
+//    private final SslContext context;
+//
+//    public  WebSocketChannelInitializer(SslContext context){
+//        this.context=context;
+//}
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
+//        SelfSignedCertificate cert = new SelfSignedCertificate();
+//        SSLContext context = SslUtil.createSSLContext("JKS" ,"D:/workSpace/shuojie/gornix.jks" ,"123456");
+//
+//        //        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
+//        SSLEngine sslEngine = context.createSSLEngine();
+//        sslEngine.setUseClientMode(false); /// 是否使用客户端模式
+//        sslEngine.setNeedClientAuth(false); ////是否需要验证客户端
 
+
+
+//        SelfSignedCertificate cert = new SelfSignedCertificate();
+//        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
+//        SSLEngine engine = context.newEngine(ch.alloc());
+//        engine.setUseClientMode(false);
+//        engine.setNeedClientAuth(false);
+//        pipeline.addLast(new SslHandler(engine));
         //websocket协议本身是基于http协议的，所以这边也要使用http解编码器
         pipeline.addLast(new HttpServerCodec());
         //mqtt 协议的编码解码器
@@ -50,12 +83,15 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         //ws://localhost:9999/ws
         //参数指的是contex_path
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws", null, true, 10485760));
+//        pipeline.addLast(new ObjectEncoder());
+//        pipeline.addLast(new ObjectDecoder(ClassResolvers.weakCachingConcurrentResolver(null)));
 
         //websocket定义了传递数据的6中frame类型
 //        pipeline.addLast(new com.shuojie.nettyService.Handler.SensorHandler());
         pipeline.addLast("TextWebSocketFrameHandler", textWebSocketFrameHandler);
-        pipeline.addLast("AuthHandler", authHandler);
+//        pipeline.addLast("AuthHandler", authHandler);
         pipeline.addLast("selectHandler",selectHandler);
+//        pipeline.addLast(new FileUploadServerHandler());
         pipeline.addLast("BinaryWebSocketFrameHandler", binaryWebSocketFrameHandler);
 //        pipeline.addLast("CommonHandler", commonHandler);
 //        new StringDecoder();

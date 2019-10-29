@@ -19,7 +19,7 @@ import javax.servlet.MultipartConfigElement;
 //@EnableScheduling
 @SpringBootApplication
 @MapperScan("com.shuojie.dao")
-@ServletComponentScan
+//@ServletComponentScan
 //@EnableAsync
 public class TransportApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {

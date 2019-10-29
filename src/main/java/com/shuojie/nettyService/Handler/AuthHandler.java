@@ -1,8 +1,7 @@
 package com.shuojie.nettyService.Handler;
 
-import com.shuojie.domain.system.Session;
-import com.shuojie.utils.NettyUtil.LoginCheckUtil;
-import com.shuojie.utils.NettyUtil.SessionUtil;
+import com.shuojie.utils.nettyUtil.LoginCheckUtil;
+import com.shuojie.utils.nettyUtil.SessionUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

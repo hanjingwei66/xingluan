@@ -1,10 +1,7 @@
 package com.shuojie.nettyService;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -16,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 //websocket长连接示例
 @Component
@@ -40,6 +39,21 @@ public class MyServer {
 
             channelFuture = b.bind(address).syncUninterruptibly();
             channel = channelFuture.channel();
+//            //定时调度任务
+//            channel.eventLoop().scheduleAtFixedRate(new Runnable() {
+//                @Override
+//                public void run() {
+//                    System.out.println("心跳连接");
+//                }
+//            },6, 6, TimeUnit.SECONDS);
+            channelFuture.addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                    if(!channelFuture.isSuccess()){
+                        channelFuture.cause().printStackTrace();
+                    }
+                }
+            });
         } catch (Exception e) {
             logger.error(e.getMessage());
         } finally {
