@@ -1,30 +1,16 @@
 package com.shuojie.mqttClient;
 
-import com.alibaba.fastjson.JSONObject;
 import com.shuojie.dao.sensorMappers.SensorMapper;
-import com.shuojie.domain.sensorModle.SensorTitle;
 import com.shuojie.domain.sensorModle.ZullProperty;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
-import com.shuojie.service.sensorService.AsyncService;
+import com.shuojie.service.sensorService.SensorAsyncService;
 import com.shuojie.service.sensorService.SensorProperty;
-import com.shuojie.utils.vo.Result;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelId;
-import io.netty.channel.group.ChannelGroup;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.nio.ByteBuffer;
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.shuojie.nettyService.Handler.TextWebSocketFrameHandler.textWebSocketFrameHandler;
 
 @Slf4j
 @Component
@@ -47,7 +33,7 @@ public class SubMsg {
     @Autowired
     private static TextWebSocketFrameHandler textWebSocketFrameHandler;
     @Autowired
-    private AsyncService asyncService;
+    private SensorAsyncService asyncService;
 //    @Resource
 //    private DistanceSensorMapper distanceSensorMapper;
 

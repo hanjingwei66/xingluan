@@ -41,6 +41,7 @@ import java.util.concurrent.ConcurrentMap;
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>  {
 
     public static TextWebSocketFrameHandler textWebSocketFrameHandler;
+
     private ChannelHandlerContext ctx;
 
     @Autowired
@@ -260,10 +261,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
         }
 
-//        if(command.equals("login")){
-//
-//            ReturnUser result = userServer.toLogin(user);
-//        }
         for (Channel channel : channels) {
             //将消息发送到所有客户端
 //            channel.writeAndFlush(new TextWebSocketFrame(msg.text()));
@@ -271,11 +268,6 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         }
         channels.writeAndFlush("发送所有建立连接设备");
 
-        /**
-         * writeAndFlush接收的参数类型是Object类型，但是一般我们都是要传入管道中传输数据的类型，比如我们当前的demo
-         * 传输的就是TextWebSocketFrame类型的数据
-         */
-//        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务时间："+LocalDateTime.now()));
     }
 
     //每个channel都有一个唯一的id值

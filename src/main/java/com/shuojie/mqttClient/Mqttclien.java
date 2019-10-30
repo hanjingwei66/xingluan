@@ -3,17 +3,15 @@ package com.shuojie.mqttClient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shuojie.dao.sensorMappers.SensorMapper;
-import com.shuojie.domain.sensorModle.DistanceSensor;
 import com.shuojie.domain.sensorModle.SensorTitle;
 import com.shuojie.domain.sensorModle.ZullProperty;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
-import com.shuojie.service.sensorService.AsyncService;
+import com.shuojie.service.sensorService.SensorAsyncService;
 import com.shuojie.service.sensorService.SensorProperty;
 import com.shuojie.utils.vo.Result;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelId;
-import io.netty.channel.group.ChannelGroup;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -21,12 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -39,7 +34,7 @@ public class Mqttclien  {
     @Autowired
     private TextWebSocketFrameHandler textWebSocketFrameHandler;
     @Autowired
-    private AsyncService asyncService;
+    private SensorAsyncService asyncService;
     @Autowired
     private SensorProperty sensorProperty;
 //    @Resource
@@ -82,10 +77,12 @@ public class Mqttclien  {
                     byte[] payload = message.getPayload();
 //                    String s = EncodUtil.BinaryToHexString(payload);
 //                    byte[] bytes = s.getBytes();
+//                    ByteBuf wrap = Unpooled.wrappedBuffer(payload);
+//                    ByteBufUtil.hexDump(payload);
                     ByteBuffer wrap = ByteBuffer.wrap(payload);
-
+                    SensorTitle tt=null;
                     if(payload!=null&&payload.length>=27){
-                        SensorTitle tt=new SensorTitle(); byte version;//版本
+                        tt=new SensorTitle();
                         tt.setVersion(wrap.get(0)); //版本
                         tt.setComand(wrap.get(1));//2 命令字
                         tt.setJizhongqid(wrap.getInt(2));//6 集中器 ID
@@ -125,7 +122,7 @@ public class Mqttclien  {
 //                        //高度
                             double hight= sensorProperty.computeHight(dataBytes[38], dataBytes[39], dataBytes[40], dataBytes[41]);
 ////                        tt.setSensorData(dataBytes.toString());
-                            zullProperty.setJiedianid(tt.getJiedianid());
+                            zullProperty.setJiedianid(wrap.getInt(6));
                             zullProperty.setTime(tt.getTime());
                             zullProperty.setVoltage1(VD00);
                             zullProperty.setVoltage2(VD01);
@@ -196,44 +193,6 @@ public class Mqttclien  {
                 }
             });
 
-
-//            String content = "1234567";
-////            int jizhongqid = tt.getJizhongqid();
-////            int jiedianid = tt.getJiedianid();
-//            int jizhongqid = 630586576;
-//            int jiedianid = 88940;
-//            int shibiema=65534;
-//            int jguan=01;
-//            int chaosheng=01;
-//            int shizi=01;
-//            int time=16;
-//            int type=00;
-//            byte []bytes4={(byte)0xff, (byte) 0xfe,0x01,0x00,0x01,0x5a,0x00};
-//            byte[] bytes = EncodUtil.intToByteArray(jizhongqid);//集中器id
-//            byte[] bytes1 = EncodUtil.intToByteArray(jiedianid);//终端id
-//
-//            byte bytes2= (byte) content.getBytes().length;//有效数据字节长度
-//            System.out.println(bytes2);
-////            //合并数组
-//            byte[] bt3 = new byte[bytes.length+bytes1.length+1];
-//            for (int i = 0; i < bytes.length; i++) {
-//                bt3[i]=bytes[i];
-//            }
-//            for (int i = 0; i < bytes1.length; i++) {
-//                bt3[i+bytes.length]=bytes1[i];
-//            }
-//            bt3[bt3.length-1]=bytes2;
-//            byte[] bytes3 = EncodUtil.byteMerger(bt3, bytes4);
-////            System.arraycopy(bytes, 0, bt3, 0, bytes.length);
-////            System.arraycopy(bytes1, 0, bt3, bytes.length, bytes1.length);
-////            bt3[bt3.length]=bytes2;
-////            byte[] bytes3 = EncodUtil.byteMerger(bt3, content.getBytes());
-//            int qos = 2;
-////            System.out.println("Publishing message:" + content);
-//            MqttMessage message = new MqttMessage();//bytes3
-//            message.setQos(qos);
-//            sampleClient.publish(topic, message);
-////            System.out.println("Message published");
 
         } catch (MqttException me) {
             System.out.println("reason" + me.getReasonCode());

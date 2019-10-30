@@ -1,12 +1,16 @@
 package com.shuojie.nettyService.Handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
 import com.shuojie.domain.sensorModle.BaseSensor;
+import com.shuojie.domain.sensorModle.SensorTitle;
 import com.shuojie.mqttClient.PubMsg;
 import com.shuojie.mqttClient.SubMsg;
+import com.shuojie.service.sensorService.SensorService;
 import com.shuojie.utils.nettyUtil.LoginCheckUtil;
 import com.shuojie.utils.snowFlake.SnowFlake;
+import com.shuojie.utils.vo.Result;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -34,6 +38,8 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 //    private RedisService redisService;
     @Resource
     private DistanceSensorMapper distanceSensorMapper;
+    @Autowired
+    private SensorService sensorService;
     //订阅
     @Autowired
     private SubMsg subMsg;
@@ -144,6 +150,17 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                     ,(byte)0xFE,0x54,0x00,0x00,0x00};
                 PubMsg.publish(bytes5,"client-id-0","demo/test");
                 System.out.println("1");
+                break;
+            case  "sensor_findLog_bytime":
+                String startTime = json.getString("startTime");
+                String endTime = json.getString("endTime");
+                long currentPage = Long.parseLong( json.getString("currentPage"));
+                long pageSize = Long.parseLong(json.getString("pageSize"));
+                Page page=new Page<SensorTitle>(currentPage,pageSize);
+                Result sensorlist = sensorService.selectPage(page,startTime,endTime);
+                String sesorList = JSONObject.toJSONString(sensorlist);
+                ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
+                break;
         }
 
     }
