@@ -11,9 +11,11 @@ import com.shuojie.service.IUserService;
 import com.shuojie.service.UpdateLogService;
 import com.shuojie.service.UserMerberService;
 import com.shuojie.service.sysService.SysContactService;
+import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.nettyUtil.LoginCheckUtil;
 import com.shuojie.utils.nettyUtil.SessionUtil;
 import com.shuojie.utils.vo.Result;
+import com.shuojie.utils.vo.SingleResult;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -36,10 +38,9 @@ import java.util.concurrent.ConcurrentMap;
 
 //处理文本协议数据，处理TextWebSocketFrame类型的数据，websocket专门处理文本的frame就是TextWebSocketFrame
 @Slf4j
-@Component
+@Component("TextWebSocketFrameHandler")
 @ChannelHandler.Sharable
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>  {
-
     public static TextWebSocketFrameHandler textWebSocketFrameHandler;
 
     private ChannelHandlerContext ctx;
@@ -124,6 +125,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         switch (command) {
             //登录
             case "api_login":
+                //{"command":"api_login","mobile":"admin","password":"admin"}
                 user.setMobile(json.getString("mobile"));
                 user.setPassword(json.getString("password"));
                 System.out.println(user.toString());
@@ -229,8 +231,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                     for (int i = 0; i < array.size(); i++) {
                         sysContactService.deleteById(array.getInteger(i));
                     }
+                    SingleResult singleResult=SingleResult.buildResult(SingleResult.Status.OK,"SUCCESS", "api_deleteSysMsg");
                     Result result1 = new Result(200, "SUCCESS", "api_deleteSysMsg");
-                    String respon = JSONObject.toJSONString(result1);
+                    String respon = JSONObject.toJSONString(singleResult);
 
                     ctx.writeAndFlush(new TextWebSocketFrame(respon));
                 } catch (Exception e) {
@@ -243,7 +246,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
                 try {
                     sysContactService.updateStatus(array1);
                     Result result1 = new Result(200, "SUCCESS", "api_updateStatus");
-                    String respon = JSONObject.toJSONString(result1);
+                    SingleResult singleResult=SingleResult.buildResult(SingleResult.Status.OK,"SUCCESS","api_updateStatus");
+                    String respon = JSONObject.toJSONString(singleResult);
                     ctx.writeAndFlush(new TextWebSocketFrame(respon));
                 } catch (Exception e) {
                     e.printStackTrace();

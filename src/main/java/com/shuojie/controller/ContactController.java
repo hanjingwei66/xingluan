@@ -2,6 +2,7 @@ package com.shuojie.controller;
 
 import com.shuojie.domain.Contact;
 import com.shuojie.service.ContactService;
+import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

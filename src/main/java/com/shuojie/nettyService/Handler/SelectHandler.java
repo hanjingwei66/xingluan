@@ -33,7 +33,7 @@ public class SelectHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
+        JSONObject json = JSONObject.parseObject(msg.text());//json字符串转json对象
         String command = json.getString("command");
 //        command.substring(0, 4).equals("api_")
         String command_prefix = command.substring(0, 4);
@@ -42,7 +42,7 @@ public class SelectHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 textWebSocketFrameHandler.channelRead0(ctx,msg);
               break;
             case "comm":
-                commonHandler.channelRead0(ctx,msg);
+                commonHandler.channelRead0(ctx,json);
                 break;
             case "sens":
                 sensorHandler.channelRead0(ctx,msg);

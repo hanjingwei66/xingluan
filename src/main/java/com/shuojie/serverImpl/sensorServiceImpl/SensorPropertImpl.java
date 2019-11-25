@@ -3,10 +3,14 @@ package com.shuojie.serverImpl.sensorServiceImpl;
 import com.shuojie.service.sensorService.SensorProperty;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+/**
+ * 此类得到传感器字节数据进行转换
+ */
+@Component("SensorProperty")
 public class SensorPropertImpl implements SensorProperty {
 
     @Override
@@ -28,7 +32,7 @@ public class SensorPropertImpl implements SensorProperty {
     }
 
     @Override
-        public List computeAcceleration(byte axl, byte axh, byte ayl, byte ayh, byte azl, byte azh) {
+        public double[] computeAcceleration(byte axl, byte axh, byte ayl, byte ayh, byte azl, byte azh) {
         short [] b ={ 0xF9, (short)ayh};
 //        byte [] b1={(byte) 0xF9, 0x07};
         short saxh=(short)(axh& 0xFF);
@@ -38,41 +42,33 @@ public class SensorPropertImpl implements SensorProperty {
        Double y= ((short)(sayh<<8)|ayl & 0xFF)/32768.00*16;
 //        Double y=((float)0xF907)/32768.00*16;
        Double z= ((short)(sazh<<8)|azl & 0xFF)/32768.00 *16;
-        List list= new ArrayList();
-        list.add(x);
-        list.add(y);
-        list.add(z);
-        return list;
+        double[] array={x,y,z};
+
+        return array;
     }
 
     @Override
-    public List computeAngularVelocity(byte wxl, byte wxh, byte wyl, byte wyh, byte wzl, byte wzh) {
+    public double[] computeAngularVelocity(byte wxl, byte wxh, byte wyl, byte wyh, byte wzl, byte wzh) {
         short swxh=(short)(wxh& 0xFF);
         short swyh=(short)(wyh& 0xFF);
         short swzh=(short)(wzh& 0xFF);
         Double x= ((short)(swxh<<8)|wxl & 0xFF)/32768.00*2000;
         Double y= ((short)(swyh<<8)|wyl & 0xFF)/32768.00*2000;
         Double z= ((short)(swzh<<8)|wzl & 0xFF)/32768.00*2000;
-        List list= new ArrayList();
-        list.add(x);
-        list.add(y);
-        list.add(z);
-        return list;
+        double[] array={x,y,z};
+        return array;
     }
 
     @Override
-    public List computeAngular(byte RollL, byte RollH, byte PitchL, byte PitchH, byte YawL, byte YawH) {
+    public double[] computeAngular(byte RollL, byte RollH, byte PitchL, byte PitchH, byte YawL, byte YawH) {
         short sRollH=(short)(RollH& 0xFF);
         short sPitchH=(short)(PitchH& 0xFF);
         short sYawH=(short)(YawH& 0xFF);
         Double x= ((short)(sRollH<<8)|RollL& 0xFF)/32768.00*180;
         Double y= ((short)(sPitchH<<8)|PitchL& 0xFF)/32768.00*180;
         Double z= ((short)(sYawH<<8)|YawL& 0xFF)/32768.00*180;
-        List list= new ArrayList();
-        list.add(x);
-        list.add(y);
-        list.add(z);
-        return list;
+        double[] array={x,y,z};
+        return array;
     }
 
     @Override

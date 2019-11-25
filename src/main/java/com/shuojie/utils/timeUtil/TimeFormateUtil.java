@@ -19,4 +19,18 @@ public class TimeFormateUtil {
 
         return null;
     }
+    public static String StampToTime(long timeStamp){
+        String time;
+        try {
+            if(timeStamp>9999999999L){
+                 time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timeStamp);
+            }else {
+                 time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timeStamp * 1000));
+            }
+            return time;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

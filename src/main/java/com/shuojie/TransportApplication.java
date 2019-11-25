@@ -10,6 +10,7 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -19,6 +20,7 @@ import javax.servlet.MultipartConfigElement;
 //@EnableScheduling
 @SpringBootApplication
 @MapperScan("com.shuojie.dao")
+//@ComponentScan("com.shuojie")
 //@ServletComponentScan
 //@EnableAsync
 public class TransportApplication extends SpringBootServletInitializer {

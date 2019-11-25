@@ -3,10 +3,15 @@ package com.shuojie.nettyService.Handler;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shuojie.dao.sensorMappers.DistanceSensorMapper;
-import com.shuojie.domain.sensorModle.BaseSensor;
-import com.shuojie.domain.sensorModle.SensorTitle;
+import com.shuojie.domain.sensorModle.*;
+import com.shuojie.mqttClient.Mqttclien;
 import com.shuojie.mqttClient.PubMsg;
-import com.shuojie.mqttClient.SubMsg;
+//import com.shuojie.mqttClient.SubMsg;
+import com.shuojie.serverImpl.sensorServiceImpl.DistanceSensorImpl;
+import com.shuojie.serverImpl.sensorServiceImpl.SensorData;
+import com.shuojie.serverImpl.sensorServiceImpl.SensorEventImpl;
+import com.shuojie.service.sensorService.Observer;
+import com.shuojie.service.sensorService.SensorEventService;
 import com.shuojie.service.sensorService.SensorService;
 import com.shuojie.utils.nettyUtil.LoginCheckUtil;
 import com.shuojie.utils.snowFlake.SnowFlake;
@@ -40,16 +45,18 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     private DistanceSensorMapper distanceSensorMapper;
     @Autowired
     private SensorService sensorService;
+    @Autowired
+    private SensorEventService sensorEventService;
     //订阅
     @Autowired
-    private SubMsg subMsg;
+    private Mqttclien mqttclien;
 
     @Value("${redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     //过期时间60秒
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
-
+    DistanceSensorImpl distanceSensor;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
 
@@ -79,7 +86,7 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                     BaseSensor s = new BaseSensor();
                     s.setSensorId(SnowFlake.nextId());
                     s.setPower(power);
-                    s.setSensorName("Sesor" + id);
+//                    s.setSensorName("Sesor" + id);
                     s.setSensorType(sesorType);
                     s.setStatus(status);
                     s.setSignal(signal);
@@ -122,20 +129,40 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
               //  2595fcd0是网关ID，00015b6c是设备ID，07为数据长度，ff fe为识别码，没实际意义，后面五个数据分别代表
             //激光器是否使用（01开00关）+超声波测距是否使用（01开00关）+十轴是否使用（01开00关）+
                 // 上传间隔时间（计算方式为=0a*100ms=1s）+放置方式（00设备水平放置，01设备垂直放置）。
-                subMsg.runsub("client-id-0","demo/test");
+
                 byte []bytes4={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
                         0x00,0x01,0x5b,0x15
                         ,0x07, (byte)0xff, (byte) 0xfe,
-                        0x01,0x01,0x01,0x0a,0x00};
+                        0x01,0x01,0x01,0x03,0x00};
                 byte []bytes6={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
                         0x00,0x01,0x5a,0x6a
                         ,0x07, (byte)0xff, (byte) 0xfe,
-                        0x01,0x00,0x01,0x0a,0x00};
+                        0x01,0x00,0x01,0x01,0x00};
                 PubMsg.publish(bytes4,"client-id-0","demo/test");
 //                PubMsg.publish(bytes6,"client-id-0","demo/test");
 
 
                 break ;
+
+                //测距传感器
+            case "sensor_distance":
+                SensorData sensorData = mqttclien.getPoint();
+                this.distanceSensor=new DistanceSensorImpl(sensorData);
+
+                break;
+            case "sensor_distance_remove":
+                 this.distanceSensor.remove();
+                    break;
+            case "sensor_sub":
+                mqttclien.mqttTopic="demo/test";
+                mqttclien.start();
+//              subMsg.runsub("client-id-0","demo/test1");
+                break;
+            case "sensor_remove_sub":
+                mqttclien.mqttTopic="nosub";
+                mqttclien.start();
+//              subMsg.runsub("client-id-0","demo/test1");
+                break;
             case "sensor_test":
                 System.out.println("112");
 
@@ -148,16 +175,44 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                         0x07,(byte)0xD3,(byte)0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,
                         (byte)0xF6,(byte)0xFF,0x0B
                     ,(byte)0xFE,0x54,0x00,0x00,0x00};
-                PubMsg.publish(bytes5,"client-id-0","demo/test");
+                PubMsg.publish(bytes5,"client-id-8","demo/test");
                 System.out.println("1");
                 break;
-            case  "sensor_findLog_bytime":
+                //传感器开始录制和结束录制记录
+            case "sensor_event_insert":
+                //{"command":"sensor_event_insert","userId":"1","startTime":"1","endTime":"1","sensorEventName":"1"}
+                SensorEvent sensorEvent=new SensorEvent();
+                Long userId = Long.parseLong(json.getString("userId"));
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
+                String sensorEventName = json.getString("sensorEventName");
+                sensorEvent.setUserId(userId);
+                sensorEvent.setStartTime(startTime);
+                sensorEvent.setEndTime(endTime);
+                sensorEvent.setSensorEventName(sensorEventName);
+                sensorEventService.insert(sensorEvent);
+                Result result1 = new Result(200, "SUCCESS", "sensor_event_insert");
+                String enventList1 = JSONObject.toJSONString(result1);
+                ctx.writeAndFlush(new TextWebSocketFrame(enventList1));
+                break;
+                //查找传感器事件集合
+            case "sensor_findList":
+                //{"command":"sensor_findList","userId":"2"}
+                String userId1 = json.getString("userId");
+                List<SensorEvent> list = sensorEventService.findList(userId1);
+                Result result = new Result(200, "SUCCESS", "sensor_findList", list);
+                String enventList = JSONObject.toJSONString(result);
+                ctx.writeAndFlush(new TextWebSocketFrame(enventList));
+                break;
+                //查找事件的详细信息
+            case  "sensor_findLog_byTime":
+            //{"command":"sensor_findLog_bytime","startTime":"2019-10-30 14:09:36","endTime":"2019-10-30 14:09:40","currentPage":"1","pageSize":"10"}
+                String selectStartTime = json.getString("startTime");
+                String selectEndTime = json.getString("endTime");
                 long currentPage = Long.parseLong( json.getString("currentPage"));
                 long pageSize = Long.parseLong(json.getString("pageSize"));
-                Page page=new Page<SensorTitle>(currentPage,pageSize);
-                Result sensorlist = sensorService.selectPage(page,startTime,endTime);
+                Page page=new Page<ZullProperty>(currentPage,pageSize);
+                Result sensorlist = sensorService.selectPage(page,selectStartTime,selectEndTime);
                 String sesorList = JSONObject.toJSONString(sensorlist);
                 ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
                 break;

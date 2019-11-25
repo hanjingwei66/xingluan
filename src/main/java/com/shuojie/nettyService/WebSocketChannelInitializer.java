@@ -28,7 +28,7 @@ import javax.net.ssl.SSLEngine;
 import java.io.FileInputStream;
 import java.security.KeyStore;
 
-@Component
+@Component("WebSocketChannelInitializer")
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Autowired
     private TextWebSocketFrameHandler textWebSocketFrameHandler;
@@ -54,19 +54,19 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
 //        SelfSignedCertificate cert = new SelfSignedCertificate();
 //        SSLContext context = SslUtil.createSSLContext("JKS" ,"D:/workSpace/shuojie/gornix.jks" ,"123456");
 //
-//        //        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
+//        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
 //        SSLEngine sslEngine = context.createSSLEngine();
 //        sslEngine.setUseClientMode(false); /// 是否使用客户端模式
 //        sslEngine.setNeedClientAuth(false); ////是否需要验证客户端
 
 
 
-//        SelfSignedCertificate cert = new SelfSignedCertificate();
-//        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
-//        SSLEngine engine = context.newEngine(ch.alloc());
-//        engine.setUseClientMode(false);
-//        engine.setNeedClientAuth(false);
-//        pipeline.addLast(new SslHandler(engine));
+        SelfSignedCertificate cert = new SelfSignedCertificate();
+        SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
+        SSLEngine engine = context.newEngine(ch.alloc());
+        engine.setUseClientMode(false);
+        engine.setNeedClientAuth(false);
+//        pipeline.addLast("SslHandler",new SslHandler(engine));
         //websocket协议本身是基于http协议的，所以这边也要使用http解编码器
         pipeline.addLast(new HttpServerCodec());
         //mqtt 协议的编码解码器

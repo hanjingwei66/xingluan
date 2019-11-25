@@ -1,5 +1,6 @@
 package com.shuojie.nettyService;
 
+import com.shuojie.utils.autowiredUtil.SpringUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -28,6 +29,7 @@ public class MyServer {
     private Channel channel;
 
     public ChannelFuture bing(InetSocketAddress address) {
+        WebSocketChannelInitializer webSocketChannelInitializer =(WebSocketChannelInitializer) SpringUtil.getBean("WebSocketChannelInitializer");
         ChannelFuture channelFuture = null;
         try {
             ServerBootstrap b = new ServerBootstrap();

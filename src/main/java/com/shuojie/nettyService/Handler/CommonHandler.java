@@ -21,29 +21,30 @@ import java.util.List;
 
 @Component
 @ChannelHandler.Sharable
-public class CommonHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class CommonHandler extends SimpleChannelInboundHandler<JSONObject> {
     @Autowired
     private PictureListService pictureListService;
     @Autowired
     RestTemplate restTemplate;
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        JSONObject json = JSONObject.parseObject(msg.text());//json字符串转json对象
+    protected void channelRead0(ChannelHandlerContext ctx, JSONObject json) throws Exception {
+        //JSONObject json = JSONObject.parseObject(msg.text());//json字符串转json对象
         String command = json.getString("command");
         ByteBuf buf = ctx.alloc().directBuffer();
-        try {
-            if (!command.substring(0, 6).equals("common")) {
-//                buf.retain();//检查引用计数器是否是 1
-                msg.retain();
-                ctx.fireChannelRead(msg);
-            }
-        } finally {
-//            buf.release();
-        }
+//        try {
+//            if (!command.substring(0, 6).equals("common")) {
+////                buf.retain();//检查引用计数器是否是 1
+//                msg.retain();
+//                ctx.fireChannelRead(msg);
+//            }
+//        } finally {
+////            buf.release();
+//        }
         switch (command) {
             case "common_pictureList"://图例集
                 Integer type = json.getInteger("type");
-                PictureList pictureList = JSONObject.parseObject(msg.text(),PictureList.class);
+                String jsonString =json.toString();
+                PictureList pictureList = JSONObject.parseObject(jsonString,PictureList.class);
                 List<PictureList> pictureLists = pictureListService.selectList(pictureList);
                 Result result=new Result (200,"SUCCESS","common_pictureList",pictureLists);
                 result.setType(type);
