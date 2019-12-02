@@ -295,8 +295,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         for (Channel channel : channels) {
             channel.writeAndFlush(new TextWebSocketFrame("[SERVER] - " + incoming.remoteAddress() + " 离开\n"));
         }
+
         channels.remove(ctx.channel());
         System.out.println("handlerRemoved：" + ctx.channel().id().asLongText());
+        ctx.close();
+        ctx.channel().close();
     }
 
     @Override

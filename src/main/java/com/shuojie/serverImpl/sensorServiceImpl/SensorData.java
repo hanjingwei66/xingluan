@@ -54,4 +54,9 @@ public class SensorData implements SensorSubject {
             observer.update(jizhongqid,jiedianid,time,sensorData,snr);
         }
     }
+
+    @Override
+    public void clearObserver() {
+        observers.clear();
+    }
 }

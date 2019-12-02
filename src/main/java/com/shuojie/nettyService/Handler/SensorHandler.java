@@ -8,8 +8,10 @@ import com.shuojie.mqttClient.Mqttclien;
 import com.shuojie.mqttClient.PubMsg;
 //import com.shuojie.mqttClient.SubMsg;
 import com.shuojie.serverImpl.sensorServiceImpl.DistanceSensorImpl;
+import com.shuojie.serverImpl.sensorServiceImpl.LaserSensorImpl;
 import com.shuojie.serverImpl.sensorServiceImpl.SensorData;
 import com.shuojie.serverImpl.sensorServiceImpl.SensorEventImpl;
+import com.shuojie.service.sensorService.LaserSensorService;
 import com.shuojie.service.sensorService.Observer;
 import com.shuojie.service.sensorService.SensorEventService;
 import com.shuojie.service.sensorService.SensorService;
@@ -46,6 +48,8 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     @Autowired
     private SensorService sensorService;
     @Autowired
+    private LaserSensorService laserSensorService;
+    @Autowired
     private SensorEventService sensorEventService;
     //订阅
     @Autowired
@@ -57,14 +61,17 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
     DistanceSensorImpl distanceSensor;
+    LaserSensorImpl laserSensor;
+    SensorData sensorData;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-
+        sensorData = mqttclien.getPoint();
 //        InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
 //        String ip = inetSocketAddress.getHostName();
 //        System.out.println("收到id为"+ctx.channel().id().asLongText()+"ip为"+ip+"发来的消息1："+msg.text());
         JSONObject json = JSONObject.parseObject(msg.text().toString());//json字符串转json对象
         String command = json.getString("command");
+
         switch (command) {
             case "sensor_check"://检测数量
                 if(LoginCheckUtil.hasLogin(ctx.channel())){
@@ -124,7 +131,7 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 //                }, 100,100);
 
                 break;
-            case "sensor_init":
+            case "sensor_init_distance":
                 //网关ID+设备ID+数据长度+要发送的数据
               //  2595fcd0是网关ID，00015b6c是设备ID，07为数据长度，ff fe为识别码，没实际意义，后面五个数据分别代表
             //激光器是否使用（01开00关）+超声波测距是否使用（01开00关）+十轴是否使用（01开00关）+
@@ -133,26 +140,40 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 byte []bytes4={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
                         0x00,0x01,0x5b,0x15
                         ,0x07, (byte)0xff, (byte) 0xfe,
-                        0x01,0x01,0x01,0x03,0x00};
+                        0x00,0x01,0x01,0x0a,0x00};
+
+                PubMsg.publish(bytes4,"client-id-20","demo/test");
+//                PubMsg.publish(bytes6,"client-id-0","demo/test");
+                break ;
+            case "sensor_init_laser":
                 byte []bytes6={0x25,(byte) 0x95,(byte) 0xfc,(byte) 0xd0,
                         0x00,0x01,0x5a,0x6a
                         ,0x07, (byte)0xff, (byte) 0xfe,
-                        0x01,0x00,0x01,0x01,0x00};
-                PubMsg.publish(bytes4,"client-id-0","demo/test");
-//                PubMsg.publish(bytes6,"client-id-0","demo/test");
-
-
-                break ;
-
+                        0x01,0x00,0x01,0x0a,0x00};
+                PubMsg.publish(bytes6,"client-id-23","demo/test");
+                break;
                 //测距传感器
+
             case "sensor_distance":
-                SensorData sensorData = mqttclien.getPoint();
                 this.distanceSensor=new DistanceSensorImpl(sensorData);
 
                 break;
+                //激光传感器
+            case "sensor_laser":
+                this.laserSensor=new LaserSensorImpl(sensorData);
+                break;
+                //移除测距传感器订阅
             case "sensor_distance_remove":
                  this.distanceSensor.remove();
                     break;
+                //移除激光传感器订阅
+            case "sensor_laser_remove":
+                this.laserSensor.remove();
+                break;
+            case "sensor_clear":
+                sensorData.clearObserver();
+                break;
+                //移除
             case "sensor_sub":
                 mqttclien.mqttTopic="demo/test";
                 mqttclien.start();
@@ -186,10 +207,12 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
                 String sensorEventName = json.getString("sensorEventName");
+                Long sensorId= Long.parseLong(json.getString("sensorId"));
                 sensorEvent.setUserId(userId);
                 sensorEvent.setStartTime(startTime);
                 sensorEvent.setEndTime(endTime);
                 sensorEvent.setSensorEventName(sensorEventName);
+                sensorEvent.setSensorId(sensorId);
                 sensorEventService.insert(sensorEvent);
                 Result result1 = new Result(200, "SUCCESS", "sensor_event_insert");
                 String enventList1 = JSONObject.toJSONString(result1);
@@ -198,7 +221,7 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 //查找传感器事件集合
             case "sensor_findList":
                 //{"command":"sensor_findList","userId":"2"}
-                String userId1 = json.getString("userId");
+                Long userId1 = Long.parseLong(json.getString("userId"));
                 List<SensorEvent> list = sensorEventService.findList(userId1);
                 Result result = new Result(200, "SUCCESS", "sensor_findList", list);
                 String enventList = JSONObject.toJSONString(result);
@@ -211,16 +234,30 @@ public class SensorHandler extends SimpleChannelInboundHandler<TextWebSocketFram
                 String selectEndTime = json.getString("endTime");
                 long currentPage = Long.parseLong( json.getString("currentPage"));
                 long pageSize = Long.parseLong(json.getString("pageSize"));
-                Page page=new Page<ZullProperty>(currentPage,pageSize);
-                Result sensorlist = sensorService.selectPage(page,selectStartTime,selectEndTime);
-                String sesorList = JSONObject.toJSONString(sensorlist);
-                ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
+                Long sensorId1= Long.parseLong(json.getString("sensorId"));
+                if(sensorId1==88853) {
+                    Page page = new Page<ZullProperty>(currentPage, pageSize);
+                    Result sensorlist = sensorService.selectPage(page, selectStartTime, selectEndTime);
+                    String sesorList = JSONObject.toJSONString(sensorlist);
+                    ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
+                }
+                if(sensorId1==88682){
+                    Page page = new Page<LaserSensor>(currentPage, pageSize);
+                    Result sensorlist = laserSensorService.selectPage(page, selectStartTime, selectEndTime);
+                    String sesorList = JSONObject.toJSONString(sensorlist);
+                    ctx.writeAndFlush(new TextWebSocketFrame(sesorList));
+                }
                 break;
         }
 
     }
 
-
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        sensorData.clearObserver();
+        ctx.close();
+        ctx.channel().close();
+    }
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         super.channelRegistered(ctx);

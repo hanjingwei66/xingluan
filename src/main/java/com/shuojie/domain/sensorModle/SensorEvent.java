@@ -10,4 +10,5 @@ public class SensorEvent  {
     private  String endTime;
     private String sensorEventName;
     private String sensorType;
+    private Long sensorId;
 }

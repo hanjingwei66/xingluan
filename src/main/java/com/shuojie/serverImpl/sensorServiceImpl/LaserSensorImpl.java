@@ -1,15 +1,19 @@
 package com.shuojie.serverImpl.sensorServiceImpl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shuojie.domain.sensorModle.LaserSensor;
 import com.shuojie.domain.sensorModle.ZullProperty;
 import com.shuojie.nettyService.Handler.TextWebSocketFrameHandler;
 import com.shuojie.service.sensorService.Observer;
+import com.shuojie.service.sensorService.SensorAsyncService;
 import com.shuojie.service.sensorService.SensorProperty;
 import com.shuojie.service.sensorService.SensorSubject;
 import com.shuojie.utils.autowiredUtil.SpringUtil;
 import com.shuojie.utils.vo.Result;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,14 +32,15 @@ public class LaserSensorImpl implements Observer {
         sensorData.registerObserver(this);
     }
 
-    ZullProperty zullProperty=new ZullProperty();
-    ZullProperty zullPropertyVo=new ZullProperty();
+    LaserSensor LaserSensor=new LaserSensor();
+    LaserSensor LaserSensorVo=new LaserSensor();
     Result result=null;
     @Override
     public void update(int jizhongqid, int jiedianid, int time, byte[] dataBytes,int snr) {
-        if (jiedianid == laserId) {
+        if (jiedianid == 88682) {
             TextWebSocketFrameHandler textWebSocketFrameHandler = (TextWebSocketFrameHandler) SpringUtil.getBean("TextWebSocketFrameHandler");
             SensorProperty sensorProperty = (SensorProperty) SpringUtil.getBean("SensorProperty");
+            SensorAsyncService asyncService = (SensorAsyncService) SpringUtil.getBean("AsyncService");
             this.jizhongqid = jizhongqid;
             this.jiedianid = jiedianid;
             this.time = time;
@@ -62,45 +67,49 @@ public class LaserSensorImpl implements Observer {
 //                        //高度
                 double hight = sensorProperty.computeHight(dataBytes[38], dataBytes[39], dataBytes[40], dataBytes[41]);
 ////                        tt.setSensorData(dataBytes.toString());
-                zullProperty.setJiedianid(jiedianid);
-                zullProperty.setTime(time);
-                zullProperty.setVoltage1(VD00);
-                zullProperty.setVoltage2(VD01);
-                zullProperty.setVoltage3(VD10);
-                zullProperty.setVoltage4(VD11);
-                zullProperty.setXSupersonic(Px);
-                zullProperty.setYSupersonic(Py);
-                zullProperty.setDistance(Distance);
-                zullProperty.setAcceleration(AccelerationList);
-                zullProperty.setAngularVelocity(AngularVelocityList);
-                zullProperty.setAngular(AngularList);
-                zullProperty.setHight(hight);
-                zullProperty.setXAcceleration(AccelerationList[0]);
-                zullProperty.setYAcceleration(AccelerationList[1]);
-                zullProperty.setZAcceleration(AccelerationList[2]);
-                zullProperty.setXAngularVelocity(AngularVelocityList[0]);
-                zullProperty.setYAcceleration(AngularVelocityList[1]);
-                zullProperty.setZAcceleration(AngularVelocityList[2]);
-                zullProperty.setXAngular(AngularList[0]);
-                zullProperty.setYAngular(AngularList[1]);
-                zullProperty.setZAngular(AngularList[2]);
+                LaserSensor.setJiedianid(jiedianid);
+                LaserSensor.setTime(time);
+                LaserSensor.setVoltage1(VD00);
+                LaserSensor.setVoltage2(VD01);
+                LaserSensor.setVoltage3(VD10);
+                LaserSensor.setVoltage4(VD11);
+                LaserSensor.setXSupersonic(Px);
+                LaserSensor.setYSupersonic(Py);
+                LaserSensor.setDistance(Distance);
+                LaserSensor.setAcceleration(AccelerationList);
+                LaserSensor.setAngularVelocity(AngularVelocityList);
+                LaserSensor.setAngular(AngularList);
+                LaserSensor.setHight(hight);
+                LaserSensor.setXAcceleration(AccelerationList[0]);
+                LaserSensor.setYAcceleration(AccelerationList[1]);
+                LaserSensor.setZAcceleration(AccelerationList[2]);
+                LaserSensor.setXAngularVelocity(AngularVelocityList[0]);
+                LaserSensor.setYAcceleration(AngularVelocityList[1]);
+                LaserSensor.setZAcceleration(AngularVelocityList[2]);
+                LaserSensor.setXAngular(AngularList[0]);
+                LaserSensor.setYAngular(AngularList[1]);
+                LaserSensor.setZAngular(AngularList[2]);
 
-                zullPropertyVo.setJiedianid(jiedianid);
-                zullPropertyVo.setTime(time);
-                zullPropertyVo.setVoltage1(VD00);
-                zullPropertyVo.setVoltage2(VD01);
-                zullPropertyVo.setVoltage3(VD10);
-                zullPropertyVo.setVoltage4(VD11);
-                zullPropertyVo.setXSupersonic(Px);
-                zullPropertyVo.setYSupersonic(Py);
-                zullPropertyVo.setDistance(Distance);
-                zullPropertyVo.setAcceleration(AccelerationList);
-                zullPropertyVo.setAngularVelocity(AngularVelocityList);
-                zullPropertyVo.setAngular(AngularList);
-                zullPropertyVo.setHight(hight);
-                result = new Result(200, "success", "sensor_init", zullPropertyVo);
-                String jsonzullProperty = JSONObject.toJSONString(result);
-                textWebSocketFrameHandler.send(jsonzullProperty);
+                LaserSensorVo.setJiedianid(jiedianid);
+                LaserSensorVo.setTime(time);
+                LaserSensorVo.setVoltage1(VD00);
+                LaserSensorVo.setVoltage2(VD01);
+                LaserSensorVo.setVoltage3(VD10);
+                LaserSensorVo.setVoltage4(VD11);
+                LaserSensorVo.setXSupersonic(Px);
+                LaserSensorVo.setYSupersonic(Py);
+                LaserSensorVo.setDistance(Distance);
+                LaserSensorVo.setAcceleration(AccelerationList);
+                LaserSensorVo.setAngularVelocity(AngularVelocityList);
+                LaserSensorVo.setAngular(AngularList);
+                LaserSensorVo.setHight(hight);
+                Date date = new Date();
+                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                LaserSensor.setUserTime(sf.format(date));
+                asyncService.executeAsync(LaserSensor);//异步插入
+                result = new Result(200, "SUCCESS", "sensor_laser", LaserSensorVo);
+                String LaserSensor = JSONObject.toJSONString(result);
+                textWebSocketFrameHandler.send(LaserSensor);
             }
         }
     }

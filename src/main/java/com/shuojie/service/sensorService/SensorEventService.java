@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SensorEventService {
     void insert(SensorEvent sensorEvent);
-    List<SensorEvent> findList(String userId);
+    List<SensorEvent> findList(Long userId);
 }
